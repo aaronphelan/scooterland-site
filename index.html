@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scooterland — a feature film and photographic project, Toronto's West End</title>
+<meta name="description" content="Scooterland is a feature film being made in Toronto's West End. Looking for a young actor to play the lead, and for collaborators.">
+
+<!-- Link previews. Absolute URLs are required — relative paths do not work here.
+     Update the domain if it ends up being anything other than scooterland.ca. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Scooterland">
+<meta property="og:description" content="A feature film and photographic project in Toronto's West End. Looking for a young actor to play the lead.">
+<meta property="og:url" content="https://scooterland.ca/">
+<meta property="og:image" content="https://scooterland.ca/streetcar-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <header class="masthead col">
+    <h1><img class="wordmark" src="scooterland_wm_white.svg" alt="Scooterland"></h1>
+    <p class="kicker">A feature film and photographic project &middot; Toronto's West End</p>
+    <p class="lede">I'm looking for a young actor to play the lead.</p>
+  </header>
+
+  <figure>
+    <!-- PLACEHOLDER: pointing at the 8.7 MB source file so the page looks
+         right locally. Once streetcar-1200.jpg and streetcar-2400.jpg are in
+         this folder, delete the <img> below and uncomment this one. -->
+    <!--
+    <img src="streetcar-1200.jpg"
+         srcset="streetcar-1200.jpg 1200w, streetcar-2400.jpg 2400w"
+         sizes="(max-width: 1100px) 100vw, 1040px"
+         width="1200" height="800" fetchpriority="high"
+         alt="A young boy stands alone on his scooter at the edge of a Toronto sidewalk as a streetcar pulls in. The adults nearby are all turned away from him.">
+    -->
+    <img src="streetcar.png"
+         width="1200" height="800" fetchpriority="high"
+         alt="A young boy stands alone on his scooter at the edge of a Toronto sidewalk as a streetcar pulls in. The adults nearby are all turned away from him.">
+  </figure>
+
+  <main class="col">
+
+    <h2>The film</h2>
+    <p>Scooterland is about Parker, a boy of about four whose behaviour doesn't fit anything the adults around him expect. His parents cycle through daycare, doctors, babysitters and assessment forms, none of which explain him. The film doesn't give Parker a diagnosis — not to avoid the subject, but because that's how it actually goes: the systems are slow, contradictory, and frequently more interested in a category than in the child in front of them. Parker eventually leaves on his scooter, and the film opens outward into an adventure through the neighbourhood, increasingly seen from inside his own sensory experience.</p>
+
+    <h2>The role</h2>
+    <p>Parker is the lead. I'm looking for a child of five or six who can play four — someone comfortable with direction, with repetition, with strangers, and with imaginative play. No particular background is needed, and no experience of neurodivergence is needed or expected. What matters most is a family able to make a real commitment.</p>
+    <p>The commitment is genuine, but gentler than a conventional shoot: short days spread across summer 2027, a unit of two or three people, and a parent present throughout. No child is asked to sustain a feature-length dramatic performance. Compensation is grant-dependent — an honorarium for the child's time, with details set once the production budget is finalised.</p>
+    <p>If this sounds like your family, write below. I'd want to walk anyone interested through all of it properly before anything was agreed.</p>
+
+    <h2>How the film is made</h2>
+    <p>Most of Scooterland is built from 35mm still photographs rather than filmed scenes. Those photographs are the source material the film's moving images are generated from, and they're also finished works in their own right, intended for exhibition. A single strong still needs a fraction of the infrastructure of a motion-picture shot. Whether it can become a credible building block for a moving film is the part of this I most want to find out.</p>
+
+    <h2>Other collaborators</h2>
+    <p>I'm also looking for a cinematographer or photographer, a composer or sound designer, an editor, a producer, and two adult leads to play Parker's parents. Direct experience of this world — as a parent, as a neurodivergent person, or through your work — is a genuine asset, and it's expected to change the screenplay, not just inform the performances. If you don't see yourself in that list but the project interests you, write anyway.</p>
+
+    <h2>Get in touch</h2>
+
+    <div class="form-panel">
+      <!-- Netlify Forms. This does nothing when opened from your desktop as a
+           file — it only works once deployed. Everything else on the page
+           previews normally. -->
+      <form name="scooterland" method="POST" action="/thanks.html"
+            data-netlify="true" data-netlify-honeypot="bot-field">
+
+        <input type="hidden" name="form-name" value="scooterland">
+        <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="area">Where in Toronto you are <span class="optional">(optional)</span></label>
+          <input id="area" name="area" type="text" placeholder="Neighbourhood is plenty">
+        </div>
+
+        <div class="field">
+          <label for="links">Links <span class="optional">(optional)</span></label>
+          <input id="links" name="links" type="text" placeholder="Work, a reel, a site — anything you'd want me to see">
+        </div>
+
+        <div class="field">
+          <label for="message">What brings you to the project, and what do you think you could bring to it?</label>
+          <textarea id="message" name="message" required></textarea>
+          <p class="help">If you're a parent writing about your child, their age and a little about what they're like is all I need for now. Please don't send photos or your child's details at this stage — that comes later, after we've spoken.</p>
+        </div>
+
+        <button type="submit">Send</button>
+
+        <p class="privacy">What you send comes to me and is stored by this site's form host. It isn't shared with anyone, and it isn't used for anything but this project. To have your message deleted, write to <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a>.</p>
+      </form>
+    </div>
+
+  </main>
+
+  <footer class="col">
+    <p>Aaron Phelan, writer-director</p>
+    <p><a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
+  </footer>
+
+</div>
+
+</body>
+</html>
