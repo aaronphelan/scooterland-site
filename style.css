@@ -1,201 +1,248 @@
 /* Scooterland — outreach site
-   Palette lives here and nowhere else. Change --bg and --bg-deep to reshade
-   the whole page.
+   ------------------------------------------------------------------
+   Palette lives here and nowhere else. --bg is the one dial to turn.
 
-   The wordmark is white-only, so the field has to stay dark enough for white
-   text to sit on it. That rules out a pale tan. The warm alternative below is
-   as light as it can go and still clear 6:1 contrast. */
+   NOTE ON THE WORDMARK: the SVG is white. On a light field it would be
+   invisible, so it's flipped to black in CSS (see .wordmark). Change
+   --bg back to something dark and delete that one filter line to go
+   back to the white version.
+   ------------------------------------------------------------------ */
 
 :root {
-  --bg:        #3e4e5c;   /* dusty blue */
-  --bg-deep:   #35434f;   /* form panel, slightly sunk */
-  --ink:       #f2f0ec;   /* warm off-white — leaves the pure-white wordmark brighter */
-  --ink-soft:  rgba(242, 240, 236, 0.72);
-  --ink-faint: rgba(242, 240, 236, 0.45);
-  --rule:      rgba(242, 240, 236, 0.18);
-  --accent:    #c24634;   /* the streetcar */
+  --bg:        #b9bfc4;   /* light cool grey */
+  --ink:       #17191b;   /* near-black */
+  --ink-soft:  rgba(23, 25, 27, 0.62);
+  --rule:      rgba(23, 25, 27, 0.22);
+  --accent:    #c2402c;   /* the streetcar */
 
-  --sans:  system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --font: "Space Grotesk", system-ui, sans-serif;
 }
 
-/* Warm alternative — swap these two in above to try the tan.
-   --bg:      #5c5346;
-   --bg-deep: #524a3e;
-*/
+/* Greyer / darker / lighter, if you want to try them:
+   --bg: #9ea6ad;   literal 50% lighter than the old blue
+   --bg: #d2d6d9;   paler, more paper
+   --bg: #c3c1bc;   warm, drifts toward the tan you mentioned  */
 
 *, *::before, *::after { box-sizing: border-box; }
-
 html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--serif);
+  font-family: var(--font);
+  font-weight: 300;
   font-size: 1.0625rem;
-  line-height: 1.65;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
 }
-
-/* ---------- layout ---------- */
 
 .page {
-  max-width: 1040px;
+  max-width: 1060px;
   margin: 0 auto;
-  padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1.25rem, 5vw, 2.5rem) 4rem;
+  padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 5vw, 2.5rem) 4rem;
 }
 
-/* prose sits narrower than the photo */
-.col {
-  max-width: 40rem;
-  margin-inline: auto;
-}
+/* ---------- small structural type ---------- */
 
-/* ---------- masthead ---------- */
-
-.masthead { margin-bottom: clamp(2rem, 5vw, 3rem); }
-
-h1 { margin: 0; line-height: 0; }
-
-.wordmark {
-  display: block;
-  width: clamp(15rem, 62%, 26rem);
-  height: auto;
-}
-
-.kicker {
-  margin: 1.5rem 0 0;
-  font-family: var(--sans);
-  font-size: 0.8125rem;
-  letter-spacing: 0.11em;
+.tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
 
-.lede {
-  margin: 0.75rem 0 0;
-  font-size: clamp(1.5rem, 4.2vw, 2.125rem);
-  line-height: 1.22;
-  max-width: 20ch;
-  text-wrap: balance;
-}
+/* ---------- masthead ---------- */
 
-/* ---------- photo ---------- */
+.topline { margin: 0 0 clamp(1.25rem, 3vw, 2rem); }
+
+/* ---------- photo + floating wordmark ---------- */
 
 figure {
-  margin: clamp(2rem, 5vw, 3.25rem) 0;
+  position: relative;
+  margin: 0 0 clamp(4rem, 9vw, 6.5rem);
 }
 
 figure img {
   display: block;
   width: 100%;
   height: auto;
-  background: var(--bg-deep);
 }
 
-/* ---------- prose ---------- */
+h1 { margin: 0; line-height: 0; }
+
+.wordmark {
+  position: absolute;
+  bottom: 0;
+  right: 7%;
+  z-index: 2;
+  width: clamp(11rem, 42%, 23rem);
+  height: auto;
+  /* half on the photo, half on the page — then knocked off-axis a touch */
+  transform: translateY(50%) rotate(-1.8deg);
+  filter: invert(1);        /* white SVG -> black. Delete to go back to white. */
+}
+
+/* ---------- lede + hook ---------- */
+
+.lede {
+  margin: 0 0 0.6rem;
+  max-width: 16ch;
+  font-size: clamp(2.15rem, 7vw, 3.75rem);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.hook {
+  margin: 0 0 2.25rem;
+  max-width: 32rem;
+  font-size: 1.125rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- blocks with hanging numbers ---------- */
+
+.block {
+  display: grid;
+  gap: 0 1.75rem;
+  max-width: 38rem;
+  margin-top: clamp(3rem, 7vw, 4.5rem);
+  padding-top: 1.1rem;
+  border-top: 1.5px solid var(--ink);
+}
+
+@media (min-width: 880px) {
+  .block { grid-template-columns: 3rem minmax(0, 38rem); max-width: none; }
+  .block > .num { grid-column: 1; }
+  .block > :not(.num) { grid-column: 2; }
+}
+
+.num {
+  margin: 0 0 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
 
 h2 {
-  margin: clamp(2.5rem, 6vw, 3.5rem) 0 0.75rem;
-  font-family: var(--sans);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--rule);
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.35rem, 3.4vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
 }
 
-p { margin: 0 0 1.1em; }
+p { margin: 0 0 0.95em; }
+p:last-child { margin-bottom: 0; }
 
-a { color: var(--ink); text-decoration-color: var(--ink-faint); text-underline-offset: 0.18em; }
-a:hover { text-decoration-color: var(--accent); }
+.narrow { max-width: 34rem; }
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
+a:hover { color: var(--accent); }
+
+/* ---------- role list ---------- */
+
+.roles { margin: 0 0 1.5rem; padding: 0; list-style: none; }
+
+.roles li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.55rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.roles b {
+  flex: none;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.roles span { color: var(--ink-soft); }
 
 /* ---------- form ---------- */
 
-.form-panel {
-  margin-top: 1.5rem;
-  padding: clamp(1.5rem, 4vw, 2.25rem);
-  background: var(--bg-deep);
-}
+.form-block { margin-top: 0; }
 
-.field { margin-bottom: 1.4rem; }
+.field { margin-bottom: 1.5rem; }
 
 label {
   display: block;
-  margin-bottom: 0.45rem;
-  font-family: var(--sans);
-  font-size: 0.9375rem;
-  line-height: 1.45;
-}
-
-.optional { color: var(--ink-faint); }
-
-.help {
-  margin: 0.4rem 0 0;
-  font-family: var(--sans);
-  font-size: 0.8125rem;
-  line-height: 1.5;
-  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 input, textarea {
   display: block;
   width: 100%;
-  padding: 0.7rem 0.8rem;
-  font: inherit;
-  font-family: var(--sans);
-  font-size: 1rem;          /* 16px minimum — anything smaller makes iOS zoom on focus */
+  max-width: 34rem;
+  padding: 0.7rem 0.85rem;
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 1rem;          /* 16px floor — below this iOS zooms on focus */
+  line-height: 1.5;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--rule);
-  border-radius: 2px;
+  background: transparent;
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
 }
 
-input::placeholder, textarea::placeholder { color: var(--ink-faint); }
+input::placeholder, textarea::placeholder { color: var(--ink-soft); }
 
 input:focus-visible, textarea:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
 }
 
-textarea { min-height: 11rem; resize: vertical; }
+textarea { min-height: 9.5rem; resize: vertical; }
+
+.help {
+  margin: 0.5rem 0 0;
+  max-width: 34rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
 
 button {
-  padding: 0.8rem 2rem;
-  font-family: var(--sans);
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  padding: 0.8rem 2.4rem;
+  font-family: var(--font);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: #fff;
   background: var(--accent);
   border: 0;
-  border-radius: 2px;
+  border-radius: 0;
   cursor: pointer;
 }
 
-button:hover { background: #d04d39; }
-button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+button:hover { background: var(--ink); }
+button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 
 .privacy {
-  margin: 1.25rem 0 0;
-  font-family: var(--sans);
+  margin: 1.1rem 0 0;
+  max-width: 34rem;
   font-size: 0.8125rem;
-  line-height: 1.55;
+  line-height: 1.5;
   color: var(--ink-soft);
 }
 
 /* ---------- footer ---------- */
 
 footer {
-  margin-top: clamp(3rem, 7vw, 4.5rem);
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--rule);
-  font-family: var(--sans);
+  margin-top: clamp(3.5rem, 8vw, 5rem);
+  padding-top: 1.1rem;
+  border-top: 1.5px solid var(--ink);
   font-size: 0.875rem;
-  color: var(--ink-soft);
 }
 
-footer p { margin: 0 0 0.3em; }
+footer p { margin: 0 0 0.25em; }
