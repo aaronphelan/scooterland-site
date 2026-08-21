@@ -1,4 +1,4 @@
-/* Scooterland — outreach site, draft 2
+/* Scooterland — outreach site, draft 3
    ==================================================================
    Concept: a shared institutional threshold. Everything on the page is
    a notice posted to one surface, on a grid the institution drew.
@@ -20,8 +20,10 @@
    COLOUR is two grounds and two warms, assigned by meaning — not a
    ladder counting sections off. Structure separates the sections;
    colour is free to mean something. Shade is the film's world. Day is
-   the institution. Ghost is Parker — one hue, drained, used once. Heat
-   is the invitation. Neither warm is ever a ground.
+   the institution — and as of draft 3 it is Parker's hue too, drained
+   almost to paper, so the page the institution prints on is faintly the
+   colour of his shoes. Ghost is Parker at full strength, used once, as
+   the wordmark. Heat is the invitation. Neither warm is ever a ground.
 
    Ratios below were computed against these exact values. If you change
    a colour, recompute — several pairings are deliberately close to the
@@ -35,9 +37,20 @@
   --shade-edge:#2e4a5e;   /* hairlines on shade */
   --shade-400: #8fabbe;   /* metadata on shade — 6.8:1 on 900, 5.5:1 on 700 */
 
-  --day:       #ede8df;   /* warm paper. NOT grey — the yellow is what
-                             makes the blue read as blue */
-  --day-edge:  #c4bbaa;   /* hairlines on day */
+  /* DAY was #ede8df, a beige taken from August sun on Toronto concrete.
+     It is a good colour and it stays in the repertoire, but it made the
+     institution's ground and the film's ground two unrelated materials.
+     Day is now Parker's hue instead: the same 19deg as the shoes, and so
+     the same hue as the wordmark, lifted to L 91% and pulled back to
+     half saturation. Very faded, barely peach — the ghost drained one
+     step further than the wordmark, until it can hold body text.
+
+     Chosen at that exact lightness because it lands on the beige's own
+     contrast ratios (14.5 / 6.3 / 4.6 vs 14.7 / 6.3 / 4.66), so this is
+     a straight swap with no accessibility regression. Anything darker
+     puts heat-deep as link text under 4.5:1. */
+  --day:       #f4e4dd;   /* body on it — 14.5:1 */
+  --day-edge:  #cfb4a8;   /* hairlines on day */
   --ink:       #12181d;   /* body on day — 14.7:1 */
   --ink-soft:  #4a545c;   /* secondary on day — 6.3:1 */
 
