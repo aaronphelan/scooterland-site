@@ -9,7 +9,7 @@
 <!-- Link previews. Absolute URLs required — relative paths don't work here. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Scooterland">
-<meta property="og:description" content="A film in Toronto's west end. Looking for a kid to play the lead.">
+<meta property="og:description" content="A film in Toronto's west end. We're looking for a kid to play the lead.">
 <meta property="og:url" content="https://scooterland.ca/">
 <meta property="og:image" content="https://scooterland.ca/streetcar-og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -22,83 +22,95 @@
 </head>
 <body>
 
-<div class="page">
+<header class="band band--hero">
+  <div class="inner">
+    <p class="tag">Feature film &nbsp;/&nbsp; Toronto west end &nbsp;/&nbsp; summer 2027</p>
+    <figure>
+      <img src="streetcar-1200.jpg"
+           srcset="streetcar-1200.jpg 1200w, streetcar-2400.jpg 2400w"
+           sizes="(max-width: 1120px) 100vw, 1060px"
+           width="1201" height="800" fetchpriority="high"
+           alt="A small boy stands alone on his scooter at the edge of a Toronto sidewalk as a streetcar pulls in. Every adult nearby is turned away from him.">
+      <h1><img class="wordmark" src="scooterland_wm_white.svg" alt="Scooterland"></h1>
+    </figure>
+  </div>
+</header>
 
-  <p class="tag topline">Feature film &nbsp;/&nbsp; Toronto west end &nbsp;/&nbsp; summer 2027</p>
+<main>
 
-  <figure>
-    <img src="streetcar-1200.jpg"
-         srcset="streetcar-1200.jpg 1200w, streetcar-2400.jpg 2400w"
-         sizes="(max-width: 1100px) 100vw, 1060px"
-         width="1201" height="800" fetchpriority="high"
-         alt="A small boy stands alone on his scooter at the edge of a Toronto sidewalk as a streetcar pulls in. Every adult nearby is turned away from him.">
-    <h1><img class="wordmark" src="scooterland_wm_white.svg" alt="Scooterland"></h1>
-  </figure>
+  <section class="band band--light">
+    <div class="inner">
+      <p class="lede">We're looking for a kid to play the lead.</p>
+      <p class="hook">Plus a few other people. It's all explained below — but if you already know you're interested, just say hi.</p>
 
-  <main>
+      <div class="block">
+        <p class="num">&rarr;</p>
+        <h2>Say hi</h2>
 
-    <p class="lede">I'm looking for a kid to play the lead.</p>
-    <p class="hook">Plus a few other people. It's all explained below — but if you already know you're interested, just say hi.</p>
+        <!-- Netlify Forms. Does nothing when opened as a local file; it only
+             works once deployed. Everything else previews normally. -->
+        <form name="scooterland" method="POST" action="/thanks.html"
+              data-netlify="true" data-netlify-honeypot="bot-field">
 
-    <section class="block form-block">
-      <p class="num">→</p>
-      <h2>Say hi</h2>
+          <input type="hidden" name="form-name" value="scooterland">
+          <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
 
-      <!-- Netlify Forms. Does nothing when opened as a local file; it only
-           works once deployed. Everything else previews normally. -->
-      <form name="scooterland" method="POST" action="/thanks.html"
-            data-netlify="true" data-netlify-honeypot="bot-field">
+          <div class="field">
+            <label for="message">Tell us about yourself</label>
+            <textarea id="message" name="message" required></textarea>
+            <p class="help">Writing about your kid? Their age and what they're like is plenty — no photos or details yet. Got work to show? Drop the links in here.</p>
+          </div>
 
-        <input type="hidden" name="form-name" value="scooterland">
-        <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+          <div class="field">
+            <label for="email">Your email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
 
-        <div class="field">
-          <label for="email">Your email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
-        </div>
+          <button type="submit">Send</button>
 
-        <div class="field">
-          <label for="message">Tell me about yourself</label>
-          <textarea id="message" name="message" required></textarea>
-          <p class="help">Writing about your kid? Their age and what they're like is plenty — no photos or details yet. Got work to show? Drop the links in here.</p>
-        </div>
+          <p class="privacy">This comes straight to us. It isn't shared, it isn't a mailing list, and it isn't used for anything else. Want it deleted? Email <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
 
-        <button type="submit">Send</button>
-
-        <p class="privacy">This comes straight to me. It isn't shared, it isn't a mailing list, and it isn't used for anything else. Want it deleted? Email <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a>.</p>
-      </form>
-    </section>
-
-    <section class="block">
+  <section class="band band--mid">
+    <div class="inner block">
       <p class="num">01</p>
       <h2>What happens</h2>
       <p>Parker is four. He doesn't do what anyone expects him to do — not at daycare, not at the doctor, not at home.</p>
       <p>His parents are trying everything. Daycare, doctors, babysitters, a stack of forms. None of it explains their kid.</p>
       <p>Then one afternoon Parker gets on his scooter and goes.</p>
       <p>The rest of the film goes with him. Alleys, the pool, the hill at the park, strangers, the whole neighbourhood. And the further he gets, the more we see it his way — light, noise, heat, all of it turned up.</p>
-    </section>
+    </div>
+  </section>
 
-    <section class="block">
+  <section class="band band--light">
+    <div class="inner block">
       <p class="num">02</p>
-      <h2>The kid I'm looking for</h2>
+      <h2>The kid we're looking for</h2>
       <p>Five or six, playing four. Takes direction. Doesn't mind doing a thing twice. Fine around strangers. Good at pretending.</p>
       <p>That's the whole list. No acting experience needed. No background of any kind needed.</p>
       <p>The commitment is real, but it's gentler than a normal shoot — short days spread across summer 2027, a crew of two or three, and you there the entire time. Nobody is asking a four-year-old to carry a scene.</p>
-      <p>There's an honorarium for your kid's time. The amount rides on the grant, so I can't put a number on it yet.</p>
-      <p>Sounds like your family? Write to me up top.</p>
-    </section>
+      <p>There's an honorarium for your kid's time. The amount rides on the grant, so we can't put a number on it yet.</p>
+      <p>Sounds like your family? Write to us up top.</p>
+    </div>
+  </section>
 
-    <section class="block">
+  <section class="band band--dark">
+    <div class="inner block">
       <p class="num">03</p>
       <h2>How it gets made</h2>
-      <p>Most of Scooterland is built out of 35mm photographs instead of filmed scenes. I shoot stills in the neighbourhood, and the moving images get generated from those.</p>
+      <p>Most of Scooterland is built out of 35mm photographs instead of filmed scenes. We shoot stills in the neighbourhood, and the moving images get generated from those.</p>
       <p>The photographs aren't only raw material. They're the work too, and they'll be shown as photographs.</p>
-      <p>One good still costs a fraction of what a movie shot costs. Whether a still can really become a piece of a moving film is the thing I most want to find out.</p>
-    </section>
+      <p>One good still costs a fraction of what a movie shot costs. Whether a still can really become a piece of a moving film is the thing we most want to find out.</p>
+    </div>
+  </section>
 
-    <section class="block">
+  <section class="band band--blue">
+    <div class="inner block">
       <p class="num">04</p>
-      <h2>Who else I need</h2>
+      <h2>Who else we need</h2>
       <ul class="roles">
         <li><b>Cinematographer / photographer</b> <span>— the film is photographed, not shot.</span></li>
         <li><b>Composer / sound designer</b> <span>— sound carries most of what's happening in Parker's head.</span></li>
@@ -106,18 +118,19 @@
         <li><b>Producer</b> <span>— small production, real stake, ownership model still open.</span></li>
         <li><b>Nate and Flora</b> <span>— Parker's parents. Two adult leads.</span></li>
       </ul>
-      <p class="narrow">Lived any of this yourself, as a parent or as a neurodivergent person or through your work? That counts for a lot here, and it's expected to change the script.</p>
-      <p class="narrow">Not on the list? Write anyway.</p>
-    </section>
+      <p>Lived any of this yourself, as a parent or as a neurodivergent person or through your work? That counts for a lot here, and it's expected to change the script.</p>
+      <p>Not on the list? Write anyway.</p>
+    </div>
+  </section>
 
-  </main>
+</main>
 
-  <footer>
+<footer class="band band--foot">
+  <div class="inner">
     <p>Aaron Phelan &nbsp;/&nbsp; writer, director</p>
     <p><a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
-  </footer>
-
-</div>
+  </div>
+</footer>
 
 </body>
 </html>
