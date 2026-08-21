@@ -17,10 +17,11 @@
    page-start become the same line, and the rail becomes a one-line
    sticky strip. One variable does the whole responsive move.
 
-   COLOUR is two grounds and one heat, assigned by meaning — not a
+   COLOUR is two grounds and two warms, assigned by meaning — not a
    ladder counting sections off. Structure separates the sections;
    colour is free to mean something. Shade is the film's world. Day is
-   the institution. Heat is Parker, and it is never a ground.
+   the institution. Ghost is Parker — one hue, drained, used once. Heat
+   is the invitation. Neither warm is ever a ground.
 
    Ratios below were computed against these exact values. If you change
    a colour, recompute — several pairings are deliberately close to the
@@ -42,13 +43,28 @@
 
   --paper:     #f2ede3;   /* body on shade — 14.0:1 on 900, 11.3:1 on 700 */
 
-  /* ---- heat: Parker, and nothing else ----------------------------- */
+  /* ---- two warms, and they mean different things ------------------ */
+
+  /* GHOST is Parker. Same hue as the heat below — 19deg, the hue of his
+     shoes — lifted pale but kept saturated. It appears exactly once, as
+     the wordmark, and nowhere else. Two passes to get here: the full
+     vibrancy read as energy, which fought the photograph (the picture is
+     about a child who is lost, and the title was behaving like an event
+     poster); draining it to #dfc5b9 went too far the other way and read
+     as beige, with the emotion gone. This splits the difference — very
+     light, still lit, haunting rather than either loud or dead.
+     8.55:1 on shade-900, far past the 3:1 a large graphic needs. */
+  --ghost:     #f9a887;
+
+  /* HEAT is the invitation — every place the visitor can act. Keeping it
+     vibrant is the point: the call for people should carry energy even
+     when the title does not. */
   --heat:      #d94f1e;   /* rules and fills only — 3.4:1 on day, too
                              low for body text, fine for a 1px line */
   --heat-deep: #b83c14;   /* heat as TEXT on day — 4.66:1. As the button
                              ground, paper on it is 4.87:1 */
   --heat-lit:  #ff7a3d;   /* heat on shade — 6.3:1 on 900, 5.1:1 on 700.
-                             The wordmark. His shoes. */
+                             Status line, rail links, focus, hover. */
 
   /* ---- type ------------------------------------------------------- */
   --human: "Space Grotesk", system-ui, sans-serif;
@@ -84,9 +100,29 @@
      keeps the rail breach, which is the crossing that carries the idea.
      Push --wm-span to 100% and --wm-overhang to ~5vw to get the louder
      version back. */
-  --wm-span:     72%;
+  --wm-span:     80%;
   --wm-breach:   1.8rem;
   --wm-overhang: 0rem;
+
+  /* --wm-rise is how much of the mark sits ABOVE the photo's top edge.
+     It was 50% — the mark centred on the edge — which cut the whole top
+     off on a wide monitor, because the hero's headroom row had collapsed
+     to nothing (see --hero-headroom). A quarter reads as deliberate
+     overlap; a half reads as a rendering fault.
+
+     --hero-headroom guarantees empty shade above the photograph so the
+     picture never touches the top of the browser and the rise always has
+     somewhere to go.
+
+     It MUST scale with the mark, not against it. The mark is --wm-span of
+     the field at a 3.29:1 ratio, so the rise is about
+     0.25 x 0.80 / 3.29 = 6.1% of the field, i.e. ~6.1vw. 7vw clears that
+     at every width with room to spare. A vh- or rem-based value does not
+     work: it stops growing while the mark keeps going, and the top of the
+     wordmark gets guillotined on a wide monitor — which is the bug this
+     replaced. If you raise --wm-span or --wm-rise, raise this too. */
+  --wm-rise:       25%;
+  --hero-headroom: max(3rem, 7vw);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -144,7 +180,7 @@ body {
 }
 
 /* Placement. Every notice is placed onto the shared named lines. */
-.p-hero-photo { grid-column: f4 / page-end; }
+.p-hero-photo { grid-column: f3 / page-end; }
 .p-parker     { grid-column: field-start / f6; }
 .p-note       { grid-column: f6 / page-end; }
 .p-story      { grid-column: f2 / f6; }
@@ -224,7 +260,10 @@ a:focus-visible { outline: 2px solid var(--heat-lit); outline-offset: 3px; }
    affordable because the rail answers what / where / when / how in the
    same first screen. */
 .hero {
-  grid-template-rows: 1fr auto;
+  /* minmax, not 1fr. On a wide monitor the photograph is taller than
+     min-height, so a bare 1fr collapses to zero and the mark loses its
+     headroom. */
+  grid-template-rows: minmax(var(--hero-headroom), 1fr) auto;
   min-height: clamp(30rem, 88vh, 54rem);
   background: var(--shade-900);
 }
@@ -247,10 +286,10 @@ figure { margin: 0; }
   width: calc(var(--wm-span) + var(--wm-breach) + var(--wm-overhang));
   margin: 0 0 0 calc(var(--wm-breach) * -1);
   aspect-ratio: 571.01562 / 173.53568;
-  background-color: var(--heat-lit);
+  background-color: var(--ghost);
   -webkit-mask: url(scooterland_wm_white.svg) no-repeat left center / contain;
           mask: url(scooterland_wm_white.svg) no-repeat left center / contain;
-  transform: translateY(-50%) rotate(-2deg);
+  transform: translateY(calc(var(--wm-rise) * -1)) rotate(-2deg);
   transform-origin: left center;
   pointer-events: none;
 }
@@ -261,7 +300,7 @@ figure { margin: 0; }
   .wordmark {
     background-color: transparent;
     aspect-ratio: auto;
-    color: var(--heat-lit);
+    color: var(--ghost);
     font-family: var(--human);
     font-weight: 300;
     font-size: clamp(2.5rem, 11vw, 8rem);
@@ -542,9 +581,13 @@ button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 @media (max-width: 900px) {
   :root {
     --rail-w: 0px;
-    --wm-span: 100%;
+    /* 100% + an overhang put the mark straight back across the crowd at
+       tablet widths — the same objection that flipping the photo fixed
+       on desktop. 82% keeps it over the streetcar and the dark glass.
+       There is no rail to breach down here, so it just sits left. */
+    --wm-span: 82%;
     --wm-breach: 0rem;
-    --wm-overhang: 7vw;
+    --wm-overhang: 0rem;
   }
 
   .rail {
