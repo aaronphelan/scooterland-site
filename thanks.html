@@ -8,28 +8,73 @@
 <link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="band band--hero">
-  <div class="inner">
-    <p class="tag">Feature film &nbsp;/&nbsp; Toronto west end &nbsp;/&nbsp; summer 2027</p>
+<a class="skip" href="#main">Skip to the notice</a>
+
+<!-- Same rail, same grid, one cell changed. The only difference is the
+     status line: the institution has registered you. -->
+<aside class="rail">
+  <p class="rail-name">Scooterland</p>
+
+  <div class="rail-block">
+    <p>Feature film</p>
+    <p>Toronto west end</p>
+    <p>Summer 2027</p>
   </div>
+
+  <div class="rail-block">
+    <p class="rail-status">Status: received</p>
+    <p>Posted August 2026</p>
+  </div>
+
+  <nav class="rail-block rail-nav" aria-label="Notices">
+    <ul>
+      <li><a href="/#parker"><span class="rail-num">01</span>The kid</a></li>
+      <li><a href="/#film"><span class="rail-num">02</span>What happens</a></li>
+      <li><a href="/#method"><span class="rail-num">03</span>How it's made</a></li>
+      <li><a href="/#people"><span class="rail-num">04</span>Who else</a></li>
+    </ul>
+  </nav>
+
+  <p class="rail-block"><a class="rail-go" href="/">&larr; The project</a></p>
+
+  <div class="rail-strip">
+    <span class="rail-status">Status: received</span>
+    <a class="rail-go" href="/">&larr; The project</a>
+  </div>
+</aside>
+
+<header class="hero hero--flat grid">
+  <h1 class="wordmark"><span class="vh">Scooterland</span></h1>
 </header>
 
-<main class="band band--light">
-  <div class="inner">
-    <p class="lede">Got it. Thanks.</p>
-    <p class="hook">We read everything that comes in and we'll write back. It might take a bit — there's a grant application with an October deadline eating most of our time right now — so silence isn't disinterest.</p>
-    <p class="narrow">Need to add something, or want your note deleted? <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
-    <p class="narrow"><a href="/">&larr; Back to the project</a></p>
-  </div>
+<main id="main">
+  <section class="grid">
+
+    <div class="p-parker ground-shade pad">
+      <div class="notice">
+        <p class="lede lede--breakout">Got it. Thanks.</p>
+      </div>
+    </div>
+
+    <div class="p-note ground-day pad">
+      <div class="notice">
+        <p class="posted">Posted</p>
+        <p class="hook">We read everything that comes in and we'll write back. It might take a bit — there's a grant application with an October deadline eating most of our time right now — so silence isn't disinterest.</p>
+        <p class="small soft">Need to add something, or want your note deleted? <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
+        <p class="small soft"><a href="/">&larr; Back to the project</a></p>
+      </div>
+    </div>
+
+  </section>
 </main>
 
-<footer class="band band--foot">
-  <div class="inner">
+<footer class="grid ground-shade foot">
+  <div class="p-full pad-s">
     <p>Aaron Phelan &nbsp;/&nbsp; writer, director</p>
     <p><a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
   </div>

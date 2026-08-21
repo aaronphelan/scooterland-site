@@ -17,51 +17,105 @@
 <link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="band band--hero">
-  <div class="inner">
-    <p class="tag">Feature film &nbsp;/&nbsp; Toronto west end &nbsp;/&nbsp; summer 2027</p>
-    <figure>
-      <img src="streetcar-1200.jpg"
-           srcset="streetcar-1200.jpg 1200w, streetcar-2400.jpg 2400w"
-           sizes="(max-width: 1120px) 100vw, 1060px"
-           width="1201" height="800" fetchpriority="high"
-           alt="A small boy stands alone on his scooter at the edge of a Toronto sidewalk as a streetcar pulls in. Every adult nearby is turned away from him.">
-      <h1><img class="wordmark" src="scooterland_wm_white.svg" alt="Scooterland"></h1>
-    </figure>
+<a class="skip" href="#main">Skip to the notices</a>
+
+<!-- THE RAIL. The institution's spine: it never leaves, and it is what
+     lets the hero field stay empty — what, where, when and how are all
+     answered here, in the same first screen. -->
+<aside class="rail">
+  <p class="rail-name">Scooterland</p>
+
+  <div class="rail-block">
+    <p>Feature film</p>
+    <p>Toronto west end</p>
+    <p>Summer 2027</p>
   </div>
+
+  <div class="rail-block">
+    <p class="rail-status">Status: looking</p>
+    <p>Posted August 2026</p>
+  </div>
+
+  <nav class="rail-block rail-nav" aria-label="Notices">
+    <ul>
+      <li><a href="#parker"><span class="rail-num">01</span>The kid</a></li>
+      <li><a href="#film"><span class="rail-num">02</span>What happens</a></li>
+      <li><a href="#method"><span class="rail-num">03</span>How it's made</a></li>
+      <li><a href="#people"><span class="rail-num">04</span>Who else</a></li>
+    </ul>
+  </nav>
+
+  <p class="rail-block"><a class="rail-go" href="#note">&rarr; Say hi</a></p>
+
+  <!-- Below 900px the rail collapses to this one line. -->
+  <div class="rail-strip">
+    <span class="rail-status">Status: looking</span>
+    <a class="rail-go" href="#note">&rarr; Say hi</a>
+  </div>
+</aside>
+
+<!-- HERO. Mostly empty on purpose: the space he isn't in. The photo is
+     anchored low and right; the wordmark straddles its top edge, crosses
+     the rail and runs off the right of the viewport. -->
+<header class="hero grid">
+  <figure class="p-hero-photo hero-photo">
+    <img src="streetcar-1200.jpg"
+         srcset="streetcar-1200.jpg 1200w, streetcar-2400.jpg 2400w"
+         sizes="(max-width: 1100px) 100vw, 62vw"
+         width="1201" height="800" fetchpriority="high"
+         alt="A small boy stands alone on his scooter at the edge of a Toronto sidewalk as a streetcar pulls in. Every adult nearby is turned away from him.">
+  </figure>
+  <h1 class="wordmark"><span class="vh">Scooterland</span></h1>
 </header>
 
-<main>
+<main id="main">
 
-  <section class="band band--light">
-    <div class="inner">
-      <p class="lede">We're looking for a kid to play the lead.</p>
-      <p class="hook">Plus a few other people. It's all explained below — but if you already know you're interested, just say hi.</p>
+  <!-- 01 + the form, side by side. The shade panel and the day panel meet
+       on a grid line: the film's world and the institution's response
+       slip, abutting. -->
+  <section class="grid" id="parker">
 
-      <div class="block">
-        <p class="num">&rarr;</p>
-        <h2>Say hi</h2>
+    <div class="p-parker ground-shade pad">
+      <div class="notice">
+        <p class="lede lede--breakout">We're looking for a kid to play the lead.</p>
+        <p class="hook">Plus a few other people. It's all explained below — but if you already know you're interested, just say hi.</p>
+
+        <div class="rule"><span class="num">01</span><h2>The kid we're looking for</h2></div>
+
+        <p>Five or six, playing four. Takes direction. Doesn't mind doing a thing twice. Fine around strangers. Good at pretending.</p>
+        <p>That's the whole list. No acting experience needed. No background of any kind needed.</p>
+        <p>The commitment is real, but it's gentler than a normal shoot — short days spread across summer 2027, a crew of two or three, and you there the entire time. Nobody is asking a four-year-old to carry a scene.</p>
+        <p>There's an honorarium for your kid's time. The amount rides on the grant, so we can't put a number on it yet.</p>
+        <p>Sounds like your family? Write to us up top.</p>
+      </div>
+    </div>
+
+    <div class="p-note ground-day pad" id="note">
+      <div class="notice">
+        <div class="rule"><span class="num">&rarr;</span><h2>Say hi</h2></div>
 
         <!-- Netlify Forms. Does nothing when opened as a local file; it only
-             works once deployed. Everything else previews normally. -->
+             works once deployed. Everything else previews normally.
+             Do not touch the attributes on the form, the hidden form-name
+             or the honeypot — this has never been tested end to end. -->
         <form name="scooterland" method="POST" action="/thanks.html"
               data-netlify="true" data-netlify-honeypot="bot-field">
 
           <input type="hidden" name="form-name" value="scooterland">
           <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
 
-          <div class="field">
+          <div class="field-set">
             <label for="message">Tell us about yourself</label>
             <textarea id="message" name="message" required></textarea>
             <p class="help">Writing about your kid? Their age and what they're like is plenty — no photos or details yet. Got work to show? Drop the links in here.</p>
           </div>
 
-          <div class="field">
+          <div class="field-set">
             <label for="email">Your email</label>
             <input id="email" name="email" type="email" autocomplete="email" required>
           </div>
@@ -72,45 +126,35 @@
         </form>
       </div>
     </div>
+
   </section>
 
-  <section class="band band--mid">
-    <div class="inner block">
-      <p class="num">01</p>
-      <h2>What happens</h2>
+  <!-- 02 + 03 share a row, so they occupy one viewport together. The
+       narrative gets a wider, quieter field; the production note is
+       compact and sits in a smaller register. -->
+  <section class="grid ground-day">
+
+    <div class="p-story pad notice" id="film">
+      <div class="rule"><span class="num">02</span><h2>What happens</h2></div>
       <p>Parker is four. He doesn't do what anyone expects him to do — not at daycare, not at the doctor, not at home.</p>
       <p>His parents are trying everything. Daycare, doctors, babysitters, a stack of forms. None of it explains their kid.</p>
       <p>Then one afternoon Parker gets on his scooter and goes.</p>
       <p>The rest of the film goes with him. Alleys, the pool, the hill at the park, strangers, the whole neighbourhood. And the further he gets, the more we see it his way — light, noise, heat, all of it turned up.</p>
     </div>
-  </section>
 
-  <section class="band band--light">
-    <div class="inner block">
-      <p class="num">02</p>
-      <h2>The kid we're looking for</h2>
-      <p>Five or six, playing four. Takes direction. Doesn't mind doing a thing twice. Fine around strangers. Good at pretending.</p>
-      <p>That's the whole list. No acting experience needed. No background of any kind needed.</p>
-      <p>The commitment is real, but it's gentler than a normal shoot — short days spread across summer 2027, a crew of two or three, and you there the entire time. Nobody is asking a four-year-old to carry a scene.</p>
-      <p>There's an honorarium for your kid's time. The amount rides on the grant, so we can't put a number on it yet.</p>
-      <p>Sounds like your family? Write to us up top.</p>
+    <div class="p-method pad notice" id="method">
+      <div class="rule"><span class="num">03</span><h2>How it gets made</h2></div>
+      <p class="small soft">Most of Scooterland is built out of 35mm photographs instead of filmed scenes. We shoot stills in the neighbourhood, and the moving images get generated from those.</p>
+      <p class="small soft">The photographs aren't only raw material. They're the work too, and they'll be shown as photographs.</p>
+      <p class="small soft">One good still costs a fraction of what a movie shot costs. Whether a still can really become a piece of a moving film is the thing we most want to find out.</p>
     </div>
+
   </section>
 
-  <section class="band band--dark">
-    <div class="inner block">
-      <p class="num">03</p>
-      <h2>How it gets made</h2>
-      <p>Most of Scooterland is built out of 35mm photographs instead of filmed scenes. We shoot stills in the neighbourhood, and the moving images get generated from those.</p>
-      <p>The photographs aren't only raw material. They're the work too, and they'll be shown as photographs.</p>
-      <p>One good still costs a fraction of what a movie shot costs. Whether a still can really become a piece of a moving film is the thing we most want to find out.</p>
-    </div>
-  </section>
-
-  <section class="band band--blue">
-    <div class="inner block">
-      <p class="num">04</p>
-      <h2>Who else we need</h2>
+  <!-- 04. The directory: denser register, ruled rows, two columns. -->
+  <section class="grid ground-shade7" id="people">
+    <div class="p-full pad notice">
+      <div class="rule"><span class="num">04</span><h2>Who else we need</h2></div>
       <ul class="roles">
         <li><b>Cinematographer / photographer</b> <span>— the film is photographed, not shot.</span></li>
         <li><b>Composer / sound designer</b> <span>— sound carries most of what's happening in Parker's head.</span></li>
@@ -118,15 +162,22 @@
         <li><b>Producer</b> <span>— small production, real stake, ownership model still open.</span></li>
         <li><b>Nate and Flora</b> <span>— Parker's parents. Two adult leads.</span></li>
       </ul>
+      <p class="small">Not on the list? Write anyway.</p>
+    </div>
+  </section>
+
+  <!-- The invitation that crosses all the categories above, so it gets
+       its own band rather than sitting at the bottom of the directory. -->
+  <section class="grid ground-day crossing">
+    <div class="p-full pad-s notice">
       <p>Lived any of this yourself, as a parent or as a neurodivergent person or through your work? That counts for a lot here, and it's expected to change the script.</p>
-      <p>Not on the list? Write anyway.</p>
     </div>
   </section>
 
 </main>
 
-<footer class="band band--foot">
-  <div class="inner">
+<footer class="grid ground-shade foot">
+  <div class="p-full pad-s">
     <p>Aaron Phelan &nbsp;/&nbsp; writer, director</p>
     <p><a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
   </div>
