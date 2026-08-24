@@ -1,40 +1,47 @@
-/* Scooterland — outreach site, VARIANT A: "Municipal"
+/* Scooterland — outreach site, VERSION A: Nunito Sans system
    ==================================================================
-   Francois One / Source Sans 3 / IBM Plex Mono.
+   Draft 4. One family: Nunito Sans, 400–1000, plus the locked wordmark.
 
-   Shared with variant B and with draft 3: the grid, the rail as a fixed
-   institutional spine, two grounds plus the peach day, the wordmark
-   violation, the responsive collapse. Those are settled. This file
-   changes exactly two things — the type and the detail system.
+   WHAT CHANGED AND WHY. Draft 3's A/B pair was a real test of detailing
+   and a bad test of type: between the two variants it ran five faces —
+   Francois One, Source Sans 3, IBM Plex Mono, Newsreader, Archivo — and
+   each variant carried three of them. Three voices on a one-page site
+   do not produce hierarchy; they produce the impression that the page
+   was assembled by more than one person. The detailing work survived
+   and is kept almost intact here. The type is rebuilt from zero.
 
-   THE ARGUMENT. Draft 3's third voice was a polished geometric sans:
-   accurate, tasteful, and indistinguishable from a design studio's case
-   study. It was also thin, which made the recruitment headline defer to
-   the photograph when it should be the page's second graphic event.
-   Francois One is a gothic display face: compressed, upright,
-   single-weight, declarative. Against the wordmark's diagonal
-   handwriting it reads as the posted announcement next to the thing
-   somebody wrote on it.
+   THE PROPOSITION OF THIS VERSION. A large family can carry the whole
+   page on its own, if the range is actually used. Nunito Sans runs from
+   400 to 1000, which is a wider span than most families offer, so the
+   distance between a 400 paragraph and a 900 headline is large enough
+   to read as two different kinds of speech rather than as bold text.
 
-   Hierarchy comes from scale, colour and space, because Francois One
-   has one weight. That constraint is useful — it forces the structure
-   to do the work instead of a weight ramp.
+   The registers, and there are only three:
 
-   THE DETAIL SYSTEM is the real change, and it is subtractive.
-   Draft 3 built every heading as [short rule][number][heading][long
-   rule]. That is magazine contents-page furniture. It looked tasteful,
-   carried none of the concept, and because the rules recoloured on
-   hover it announced an interactivity the sections do not have.
+     1. DISPLAY      900, sentence case, tight tracking, large.
+     2. READING      400, sentence case, 17–19px, generous measure.
+     3. ADMIN        600, uppercase, tracked 0.10em, small.
 
-   Rules here obey one law: a structural element divides an actual area
-   or locates information. It never extends to fill space.
+   Register 3 is the one doing the work the monospace used to do. A
+   monospaced face announces administration by costume. Case, weight and
+   tracking state it structurally, and cost nothing.
 
-   So: no flanking hairlines anywhere. Numbers become location codes in
-   a fixed bay, aligned to the same line in every panel. Divisions are
-   ground changes and thick edge-anchored bars — 5px, never a 1px line
-   fading out. Orange is state, invitation and focus only, never a hover
-   flourish. The page keeps its two existing violations (the wordmark
-   crossing the spine, the headline breaking toward it) and adds none.
+   THE RISK, NAMED. Nunito Sans is a rounded humanist sans. Its failure
+   mode is childishness — it is the face of a friendly onboarding flow.
+   Every counter-measure below is deliberate: firm weights and never a
+   light one, negative tracking on display text rather than airy
+   positive tracking, square corners on every control and panel, the
+   navy ground held, no pastels added, no pills, no icons, and sentence
+   case wherever the page addresses a person. If this version fails, it
+   should fail as too generic — not as too cute.
+
+   THE DETAIL SYSTEM is carried over from draft 3 variant A, unchanged
+   except where the typeface forced a change. Its law still holds: a
+   structural element divides an actual area or locates information; it
+   never extends to fill space. No flanking hairlines. Divisions are
+   ground changes and 5px edge-anchored bars. Orange is state,
+   invitation and focus only. The one typographic consequence is the
+   folio, described at THE BAY below.
    ================================================================== */
 
 :root {
@@ -42,12 +49,12 @@
   --shade-900: #14212c;
   --shade-700: #1e3242;
   --shade-edge:#2e4a5e;
-  --shade-400: #8fabbe;
+  --shade-400: #8fabbe;   /* on shade-900 6.8:1, on shade-700 5.5:1 */
 
   --day:       #f4e4dd;   /* Parker's hue, drained. Body on it 14.5:1 */
   --day-edge:  #cfb4a8;
   --ink:       #12181d;
-  --ink-soft:  #4a545c;
+  --ink-soft:  #4a545c;   /* on day 6.3:1 */
 
   --paper:     #f2ede3;
 
@@ -56,32 +63,51 @@
   --heat-deep: #b83c14;   /* heat as text or ground on day */
   --heat-lit:  #ff7a3d;   /* heat on shade */
 
-  /* Folio ink. Large and pale is the point: the number should be
-     architecture you read past, not a badge competing with the heading
-     beside it. */
-  --folio-shade: rgba(143, 171, 190, 0.42);
-  --folio-day:   rgba(74, 84, 92, 0.30);
+  /* Folio ink. Alpha set so the numeral clears 3:1 against its ground —
+     it is set at heading size in ExtraBold, so large-text AA applies and
+     it is genuinely readable, not an ornament pretending to be one. */
+  --folio-shade: rgba(143, 171, 190, 0.66);   /* 3.8:1 on shade-900 and
+                                                 3.3:1 on shade-700 — the
+                                                 04 notice sits on the
+                                                 lighter ground, and 0.58
+                                                 missed 3:1 there. */
+  --folio-day:   rgba(74, 84, 92, 0.70);      /* 3.2:1 on day */
 
-  /* ---- type ------------------------------------------------------- */
-  --display: "Francois One", "Arial Narrow", Impact, sans-serif;
-  --body:    "Source Sans 3", system-ui, -apple-system, sans-serif;
-  --admin:   "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  /* ---- type. One family, three weights that matter. ---------------- */
+  --sans: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* ---- three spatial units, and only three -------------------------
-     Most of draft 3's hairlines were compensating for spacing that did
-     not differ enough to divide anything. Name the intervals and a
-     blank one does the work a rule was doing. */
+  --w-display: 900;
+  --w-strong:  800;
+  --w-name:    700;
+  --w-admin:   600;
+  --w-lead:    500;
+  --w-read:    400;
+
+  /* Uppercase tracking. 0.10em is the smallest value at which Nunito's
+     round caps stop touching; past 0.14em the admin voice starts to
+     look like an aspirational fashion label. */
+  --track-admin: 0.10em;
+
+  /* ---- three spatial units, and only three ------------------------- */
   --sp-s: 0.55rem;                        /* label to its content */
   --sp-m: 1.45rem;                        /* paragraph, directory entry */
   --sp-l: clamp(2.25rem, 4.5vw, 3.5rem);  /* register change in a panel */
 
   /* THE BAY. A fixed structural column at the left of every notice,
      holding the section numeral. Heading and body both start at its
-     right edge, so the number hangs clear and every section's text
-     begins on the same line. This is what replaces the rules: the
-     numbers orient because they align, not because a hairline points at
-     them. */
-  --bay: clamp(2.9rem, 4.6vw, 4.6rem);
+     right edge, so every section's text begins on the same line and the
+     numbers align down the page whatever the panel width.
+
+     Narrower than draft 3's, because the numeral is now smaller. In
+     draft 3 the folio was a large pale Francois One numeral — dark
+     enough to read, big enough to be furniture. In one family that
+     device stops working: a big Nunito numeral beside a Nunito heading
+     is the same voice shouting the least interesting word in the
+     section. So the folio is set at exactly the heading's size and
+     weight and separated from it only by colour. Same face, same size,
+     same weight, one baseline — the alignment is total, and the number
+     is subordinate because it is pale, not because it is small. */
+  --bay: clamp(2.6rem, 4vw, 3.6rem);
 
   /* ---- floor plan. Identical to draft 3. -------------------------- */
   --rail-w: clamp(11rem, 13vw, 13rem);
@@ -123,9 +149,9 @@ body {
                          the body a scroll container */
   background: var(--shade-900);
   color: var(--paper);
-  font-family: var(--body);
-  font-weight: 400;
-  font-size: 1.0625rem;
+  font-family: var(--sans);
+  font-weight: var(--w-read);
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);   /* 17 → 19px */
   line-height: 1.55;
 }
 
@@ -135,12 +161,18 @@ body {
   clip-path: inset(50%); overflow: hidden; white-space: nowrap;
 }
 
+/* ---- the admin register, declared once and reused ----------------- */
+.skip, .rail, label, button, .foot, .posted {
+  font-weight: var(--w-admin);
+  letter-spacing: var(--track-admin);
+  text-transform: uppercase;
+}
+
 .skip {
   position: absolute; left: 0; top: -4rem; z-index: 100;
   padding: 0.7rem 1.2rem;
   background: var(--heat-deep); color: var(--paper);
-  font-family: var(--admin); font-size: 0.75rem; font-weight: 600;
-  letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 0.75rem;
   text-decoration: none;
 }
 .skip:focus { top: 0; }
@@ -169,11 +201,6 @@ body {
 /* THE RAIL — four zones, divided by space and one solid status block  */
 /* ================================================================== */
 
-/* Draft 3 divided the rail with three identical hairlines. Three
-   repetitions of one gesture do not read as structure, they read as a
-   component. Here the zones are separated by interval, and the single
-   thing that genuinely changes state gets the only filled object. */
-
 .rail {
   position: fixed;
   inset: 0 auto 0 0;
@@ -183,20 +210,21 @@ body {
   overflow-y: auto;
   background: var(--shade-700);
   color: var(--shade-400);
-  font-family: var(--admin);
   font-size: 0.6875rem;
-  line-height: 1.55;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  line-height: 1.6;
 }
 
 .rail p, .rail ul { margin: 0; }
 .rail ul { padding: 0; list-style: none; }
 
+/* The one place the display weight appears at small size. It is the
+   masthead of the spine, and the wordmark cannot serve that role — the
+   wordmark is over the photograph and scrolls away. */
 .rail-name {
-  font-family: var(--display);
-  font-size: 1.35rem;
-  letter-spacing: 0.02em;
+  font-size: 1.15rem;
+  font-weight: var(--w-display);
+  letter-spacing: -0.005em;
+  text-transform: none;
   line-height: 1;
   color: var(--paper);
   margin-bottom: 1.9rem !important;
@@ -204,19 +232,17 @@ body {
 
 .rail-block { margin-bottom: 1.9rem !important; }
 
-/* THE STATUS DEVICE. Draft 3 made this an orange word among grey words,
-   which is a colour accent, not a device. The page's most perishable
-   fact deserves an object: a solid bar bled to the rail's outer edge,
-   the only filled shape in the spine. Still a one-word edit later —
-   LOOKING becomes MEETING FAMILIES becomes CAST — and when it closes,
-   this block goes to --shade-edge and stops shouting. */
+/* THE STATUS DEVICE. The page's most perishable fact gets an object: a
+   solid bar bled to the rail's outer edge, the only filled shape in the
+   spine. Still a one-word edit later — LOOKING becomes MEETING FAMILIES
+   becomes CAST — and when it closes, this goes to --shade-edge and
+   stops shouting. */
 .status-block {
   margin: 0 0 0.55rem calc(var(--gutter) * -1) !important;
   padding: 0.5rem 0.9rem 0.45rem var(--gutter);
   background: var(--heat-deep);
   color: var(--paper);          /* 4.87:1 */
-  font-weight: 600;
-  letter-spacing: 0.11em;
+  font-weight: var(--w-strong);
 }
 .status-since { color: var(--shade-400); }
 
@@ -224,12 +250,12 @@ body {
    column of identifiers rather than list markers stuck to the words. */
 .rail-nav a {
   display: grid;
-  grid-template-columns: 1.75em minmax(0, 1fr);
+  grid-template-columns: 1.9em minmax(0, 1fr);
   padding: 0.34rem 0;
   color: var(--paper);
   text-decoration: none;
 }
-.rail-num { color: var(--shade-400); }
+.rail-num { color: var(--shade-400); font-variant-numeric: tabular-nums; }
 .rail a:hover, .rail a:focus-visible { color: var(--heat-lit); }
 .rail a:hover .rail-num { color: var(--heat-lit); }
 .rail-go { display: block; padding: 0.34rem 0; color: var(--heat-lit); text-decoration: none; }
@@ -271,9 +297,9 @@ figure { margin: 0; }
     background-color: transparent;
     aspect-ratio: auto;
     color: var(--ghost);
-    font-family: var(--display);
+    font-weight: var(--w-display);
     font-size: clamp(2.5rem, 11vw, 8rem);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
   .wordmark .vh {
     position: static; width: auto; height: auto;
@@ -287,9 +313,10 @@ figure { margin: 0; }
 
 /* Every notice is a two-column object: identifier, then content. The
    numeral hangs in column one; heading and body both begin at column
-   two, so the text edge is identical in every section and the numbers
-   line up down the page whatever the panel width. That alignment is the
-   orienting device. Nothing points at it. */
+   two. Because folio and heading are now the same face, size, weight
+   and line-height, they share a baseline exactly — no optical nudge,
+   no magic number. That is the whole argument for one family, visible
+   in four characters. */
 
 .notice {
   display: grid;
@@ -301,11 +328,12 @@ figure { margin: 0; }
 .folio {
   grid-column: 1;
   align-self: start;
-  margin: 0.12em 0 0;   /* optical: drops the numeral's cap to the h2's */
-  font-family: var(--display);
-  font-size: clamp(1.9rem, 3.6vw, 3rem);
-  line-height: 0.78;
+  margin: 0;
+  font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+  font-weight: var(--w-strong);
+  line-height: 1.15;
   letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
   color: var(--folio-shade);
 }
 .ground-day .folio { color: var(--folio-day); }
@@ -314,51 +342,58 @@ figure { margin: 0; }
   grid-column: 2;
   align-self: start;
   margin: 0 0 var(--sp-m);
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(1.05rem, 1.7vw, 1.4rem);
-  line-height: 1.05;
-  letter-spacing: 0.015em;   /* Francois One is already condensed. Wide
-                                tracking turns it into faux signage. */
-  text-transform: uppercase;
+  font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+  font-weight: var(--w-strong);
+  line-height: 1.15;
+  letter-spacing: -0.01em;   /* Nunito's round forms open up on their
+                                own; positive tracking here is what
+                                turns the page into a greeting card. */
 }
 
 /* ================================================================== */
 /* TYPE                                                                */
 /* ================================================================== */
 
-/* PUBLIC. The page's second graphic event, and the reason for the
-   typeface change: this sentence now has the density of a posted
-   announcement rather than the elegance of a portfolio headline.
-   Sentence case, always — the recruitment language stays human while
-   the directory system above it is uppercase. */
+/* PUBLIC. The page's second graphic event. At 900 against the wordmark
+   this holds its ground by mass rather than by eccentricity — the
+   opposite bet from draft 3, where a condensed display face competed
+   with the handwriting on the handwriting's own terms. Sentence case,
+   always: the recruitment language stays human while the directory
+   system above it is uppercase. */
 .lede {
   grid-column: 1 / -1;
   margin: 0 0 var(--sp-s);
-  max-width: 13ch;
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(2.9rem, 6.1vw, 6.1rem);
-  line-height: 0.94;
-  letter-spacing: -0.018em;
+  max-width: 11ch;
+  font-size: clamp(2.6rem, 5.4vw, 5.4rem);
+  font-weight: var(--w-display);
+  line-height: 0.98;
+  letter-spacing: -0.032em;   /* Nunito Black sets loose by default.
+                                 Closing it is what makes it read as a
+                                 statement instead of a slogan. */
   text-wrap: balance;
 }
 
-/* VIOLATION 2, kept: the one notice that will not stay in its column.
-   It runs left to the rail and stops — the rail is opaque and fixed, and
+/* VIOLATION, kept: the one notice that will not stay in its column. It
+   runs left to the rail and stops — the rail is opaque and fixed, and
    the wordmark is already the thing that crosses. */
 .lede--breakout { margin-left: calc(var(--gutter) * -0.88); }
 
 .hook {
   grid-column: 1 / -1;
   margin: 0 0 var(--sp-l);
-  max-width: 36ch;
+  max-width: 40ch;
   font-size: 1.125rem;
+  font-weight: var(--w-lead);
   color: var(--shade-400);
 }
 .ground-day .hook { color: var(--ink-soft); }
 
-p { margin: 0 0 var(--sp-m); max-width: 60ch; }
+/* 46ch of Nunito Sans measures ~62 real characters per line, inside
+   the 50–65 target. The CSS `ch` unit is the advance of a zero, which
+   in this family is far wider than an average lowercase letter — 58ch
+   rendered 78 characters, and that was found by counting them on the
+   page, not by trusting the unit. */
+p { margin: 0 0 var(--sp-m); max-width: 46ch; }
 p:last-child { margin-bottom: 0; }
 
 .small { font-size: 0.9375rem; line-height: 1.5; }
@@ -380,26 +415,28 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16e
 
 /* THE CROSSING. A band whose content cuts across all four categories
    above it, so it gets a real top edge — full width, because the thing
-   it divides is the full width. Draft 3 had this at 2px and it was the
-   one rule already doing honest work. */
+   it divides is the full width. */
 .crossing { border-top: 5px solid var(--heat); }
 .crossing p {
-  max-width: 50ch;
-  font-family: var(--display);
-  font-size: clamp(1.3rem, 2.4vw, 1.85rem);
-  line-height: 1.15;
-  letter-spacing: -0.005em;
+  max-width: 42ch;
+  font-size: clamp(1.35rem, 2.3vw, 1.85rem);
+  font-weight: var(--w-strong);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
 /* ================================================================== */
 /* THE ROLES DIRECTORY                                                 */
 /* ================================================================== */
 
-/* Draft 3 gave every entry its own hairline, drifting toward a database
-   table. Five identical rules divide nothing — the entries were already
-   separated by being separate. Name on one line in the display face,
-   description under it, interval between. One column rule survives,
-   because two columns are a real division. */
+/* Name on one line, description under it, interval between. No
+   per-row hairlines — the entries were already separated by being
+   separate. One column rule survives, because two columns are a real
+   division.
+
+   Role names are Bold, not ExtraBold: they sit below the section
+   heading in the hierarchy and above the body, and in a family with
+   this much range that is a legible position rather than a hedge. */
 
 .roles {
   margin: 0 0 var(--sp-l);
@@ -416,15 +453,19 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16e
 
 .roles b {
   display: block;
-  margin-bottom: 0.3rem;
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  line-height: 1.1;
-  letter-spacing: 0.015em;
-  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  font-size: 1.0625rem;
+  font-weight: var(--w-name);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
 }
-.roles span { display: block; font-size: 0.9375rem; line-height: 1.45; color: var(--shade-400); }
+.roles span {
+  display: block;
+  max-width: 46ch;   /* the column is wider than the description wants */
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--shade-400);
+}
 
 /* ================================================================== */
 /* THE FORM — the most administrative object on the page               */
@@ -444,12 +485,10 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16e
 .intake-head h2 {
   display: block;
   margin: 0;
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(1.05rem, 1.7vw, 1.4rem);
-  line-height: 1.05;
-  letter-spacing: 0.015em;
-  text-transform: uppercase;
+  font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+  font-weight: var(--w-strong);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 .field-set { margin-bottom: var(--sp-m); }
@@ -457,11 +496,7 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16e
 label {
   display: block;
   margin-bottom: var(--sp-s);
-  font-family: var(--admin);
   font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
   color: var(--shade-700);
 }
 
@@ -469,8 +504,8 @@ input, textarea {
   display: block;
   width: 100%;
   padding: 0.7rem 0.85rem;
-  font-family: var(--body);
-  font-weight: 400;
+  font-family: var(--sans);
+  font-weight: var(--w-read);
   font-size: 1rem;              /* 16px floor — below this iOS zooms on focus */
   line-height: 1.5;
   color: var(--ink);
@@ -495,11 +530,9 @@ button {
   display: block;
   width: 100%;
   padding: 0.9rem 1rem;
-  font-family: var(--admin);
+  font-family: var(--sans);
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  font-weight: var(--w-strong);
   color: var(--paper);
   background: var(--heat-deep);   /* paper on this is 4.87:1 */
   border: 2px solid var(--heat-deep);
@@ -511,7 +544,7 @@ button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 
 .help, .privacy {
   margin: var(--sp-s) 0 0;
-  max-width: 46ch;
+  max-width: 42ch;
   font-size: 0.8125rem;
   line-height: 1.5;
   color: var(--ink-soft);
@@ -521,11 +554,8 @@ button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 /* The posted state, on the thanks page. */
 .posted {
   display: inline-block;
-  font-family: var(--admin);
   font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  font-weight: var(--w-strong);
   color: var(--paper);
   background: var(--heat-deep);
   padding: 0.5rem 0.8rem;
@@ -537,13 +567,10 @@ button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 /* ================================================================== */
 
 .foot {
-  font-family: var(--admin);
   font-size: 0.6875rem;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
   color: var(--shade-400);
 }
-.foot p { margin: 0 0 0.4em; max-width: none; }
+.foot p { margin: 0 0 0.5em; max-width: none; }
 .foot a { color: var(--paper); }
 
 /* ================================================================== */
@@ -581,7 +608,7 @@ button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
     gap: 0 0.75rem;
     padding: 0.55rem var(--gutter);
     font-size: 0.625rem;
-    letter-spacing: 0.07em;
+    letter-spacing: 0.08em;
     border-bottom: 1px solid var(--shade-edge);
   }
 
@@ -616,7 +643,7 @@ button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 @media (max-width: 640px) {
   .notice { grid-template-columns: minmax(0, 1fr); }
   .notice > *, .folio, .notice h2 { grid-column: 1; }
-  .folio { margin: 0 0 0.1rem; line-height: 1; }
+  .folio { margin: 0 0 0.15rem; line-height: 1; }
 }
 
 @media (min-width: 901px) {

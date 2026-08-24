@@ -1,41 +1,54 @@
-/* Scooterland — outreach site, VARIANT B: "Civic editorial"
+/* Scooterland — outreach site, VERSION B: François One system
    ==================================================================
-   Newsreader / Archivo. No monospace.
+   Draft 4. One face, one weight: François One, plus the locked wordmark.
 
-   Shared with variant A and with draft 3: the grid, the rail as a fixed
-   institutional spine, two grounds plus the peach day, the wordmark
-   violation, the responsive collapse. Those are settled.
+   WHAT CHANGED AND WHY. Draft 3's A/B pair tested detailing well and
+   typography badly — five faces across two variants, three in each.
+   The detail system survived and is carried over almost intact. The
+   type is rebuilt, and this version takes the harder of the two bets.
 
-   THE ARGUMENT, and it is the opposite of A's. A answers the weak
-   typography by making the page louder below the wordmark. B assumes
-   the wordmark already supplies every bit of graphic disorder the page
-   needs, and that stacking a second display face under it just starts a
-   competition. So the wordmark stays the sole act of disorder, and the
-   actual writing gets an editorial voice instead.
+   THE PROPOSITION OF THIS VERSION. François One was the one thing in
+   draft 3 that clearly worked: a gothic display face, compressed and
+   upright, that reads as the posted announcement next to the thing
+   somebody wrote on it by hand. The mistake was surrounding it with a
+   reading face and a monospace to do the jobs it could not do. This
+   version removes the support and changes the page instead.
 
-   Newsreader is a screen-reading serif with an optical-size axis, not a
-   nostalgic book face. It does something no sans on this page can: it
-   makes the recruitment copy read as a letter to a person rather than
-   as marketing. That matters for a page whose entire job is persuading
-   a parent to write back about their child.
+   It has exactly one weight. There is no bold, no light, no italic. So
+   hierarchy is built from the four levers that remain:
 
-   Archivo carries everything institutional — labels, folios, the rail,
-   form fields, role names. The monospace is gone. Draft 3's Space Mono
-   was doing an impression of administration; a grotesque set small and
-   tracked in caps IS administration, and it removes a whole family.
+     SCALE     four steps, and only four — see the ladder below.
+     CASE      sentence case addresses a person; uppercase files a fact.
+     COLOUR    full-strength ink is heading; softened ink is reading.
+     SPACE     the interval before a heading is its real announcement.
 
-     Wordmark  — the child-shaped rupture
-     Newsreader — the story, and the human address
-     Archivo    — the institution, its directions and its machinery
+   THE COPY IS THE DESIGN. A condensed display face cannot carry six
+   paragraphs of explanation, and shrinking it until it fits is the
+   failure this version exists to avoid. So the copy was cut by roughly
+   a third and reshaped: no ordinary paragraph over three displayed
+   lines, most blocks one or two sentences, section numbers and category
+   captions removed entirely. The page is now a sequence of short public
+   notices. That is not a compromise made to accommodate the typeface —
+   it is a genuine argument about what an outreach page owes a visitor,
+   and the typeface is what forced the argument.
 
-   THE DETAIL SYSTEM. Quiet, and deliberately not A's. Large numerals
-   and thick bars would fight Newsreader. Instead every section gets one
-   compact vertical bar — a door jamb, a wall division, an index mark —
-   set against a small Archivo folio line that names the category, with
-   the serif heading below speaking to the reader. Rules exist, but only
-   where a rule behaves like document structure, and never symmetrically
-   flanking a heading: a rule with a heading centred in it is decoration
-   wearing structure's clothes.
+   WHAT WAS CUT is listed for Aaron's printed pass in
+   `outreach/website_redesign_plan.md` §19. Cuts are cuts, not rewrites:
+   whole clauses and sentences were removed, and the surviving words are
+   his. Two places needed a joining word, and both are flagged there.
+
+   NO SYNTHETIC WEIGHTS. `font-synthesis: none` is set on the body and
+   every element that defaults to bold is reset to 400. A browser-faked
+   bold on François One is a smeared outline, and it would silently
+   reintroduce the second voice this version is built to do without.
+
+   THE DETAIL SYSTEM is carried over from draft 3 variant A. Its law
+   still holds: a structural element divides an actual area or locates
+   information; it never extends to fill space. No flanking hairlines.
+   Divisions are ground changes and 5px edge-anchored bars. Orange is
+   state, invitation and focus only. Two devices are deleted here, both
+   because the copy reduction removed their subject: the numbered folios
+   and the bay that aligned them.
    ================================================================== */
 
 :root {
@@ -43,12 +56,12 @@
   --shade-900: #14212c;
   --shade-700: #1e3242;
   --shade-edge:#2e4a5e;
-  --shade-400: #8fabbe;
+  --shade-400: #8fabbe;   /* on shade-900 6.8:1, on shade-700 5.5:1 */
 
   --day:       #f4e4dd;   /* Parker's hue, drained. Body on it 14.5:1 */
   --day-edge:  #cfb4a8;
   --ink:       #12181d;
-  --ink-soft:  #4a545c;
+  --ink-soft:  #4a545c;   /* on day 6.3:1 */
 
   --paper:     #f2ede3;
 
@@ -57,21 +70,32 @@
   --heat-deep: #b83c14;   /* heat as text or ground on day */
   --heat-lit:  #ff7a3d;   /* heat on shade */
 
-  /* ---- type ------------------------------------------------------- */
-  --serif:  "Newsreader", Georgia, "Times New Roman", serif;
-  --sans:   "Archivo", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  /* ---- type. One face. --------------------------------------------- */
+  /* The fallbacks exist for a failed webfont load and nothing else.
+     Arial Narrow is the closest widely-installed condensed grotesque;
+     if it is reached, the page is broken and should look it. */
+  --display: "Francois One", "Arial Narrow", Impact, sans-serif;
 
-  /* ---- three spatial units, and only three ------------------------ */
-  --sp-s: 0.5rem;
-  --sp-m: 1.35rem;
-  --sp-l: clamp(2.25rem, 4.5vw, 3.25rem);
+  /* THE LADDER. Four steps and no more. With one weight, an extra step
+     does not read as a new level — it reads as a mistake in the last
+     one. The gaps are deliberately wide: roughly 3.5×, 1.35× and 1.35×
+     at desktop, so no two steps can be confused at a glance. */
+  --fs-lede:      clamp(3rem, 6.6vw, 6.6rem);
+  --fs-head:      clamp(1.7rem, 2.8vw, 2.3rem);
+  --fs-statement: clamp(1.3rem, 2.1vw, 1.7rem);
+  --fs-read:      clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);   /* 18 → 20px */
 
-  /* THE MARKER. One compact vertical bar per section. Not a line across
-     the section — a bar attached to where the section begins. */
-  --marker-w: 3px;
-  --marker-h: 1.55em;
+  /* Uppercase tracking. Higher than a normal sans would need: François
+     One's caps are narrow and close-set, and below about 0.11em small
+     uppercase runs stop resolving into words. */
+  --track-admin: 0.12em;
 
-  /* ---- floor plan. Identical to draft 3. -------------------------- */
+  /* ---- three spatial units, and only three ------------------------- */
+  --sp-s: 0.55rem;                        /* label to its content */
+  --sp-m: 1.45rem;                        /* paragraph, directory entry */
+  --sp-l: clamp(2.25rem, 4.5vw, 3.5rem);  /* register change in a panel */
+
+  /* ---- floor plan. Identical to draft 3 and to version A. ---------- */
   --rail-w: clamp(11rem, 13vw, 13rem);
   --gutter: clamp(1.25rem, 3.2vw, 2.75rem);
 
@@ -107,16 +131,30 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  overflow-x: clip;
+  overflow-x: clip;   /* catches the wordmark overhang; hidden would make
+                         the body a scroll container */
   background: var(--shade-900);
   color: var(--paper);
-  font-family: var(--serif);
-  font-optical-sizing: auto;
+  font-family: var(--display);
   font-weight: 400;
-  font-size: 1.1875rem;   /* a serif needs more size than a sans to hold
-                             the same apparent reading weight on screen */
-  line-height: 1.6;
+  font-size: var(--fs-read);
+  line-height: 1.5;
+
+  /* READING CONTROLS for a condensed face used as body text. François
+     One sets tight and dark; a little tracking and noticeably more word
+     space is what keeps a line from reading as one long word. Both
+     values are small enough to be invisible and large enough to matter. */
+  letter-spacing: 0.008em;
+  word-spacing: 0.06em;
+
+  /* No faked weights, anywhere, ever. */
+  font-synthesis: none;
+  font-synthesis-weight: none;
+  font-synthesis-style: none;
 }
+
+/* Everything the browser would otherwise embolden. */
+h1, h2, h3, b, strong, button, label, th { font-weight: 400; }
 
 .vh {
   position: absolute; width: 1px; height: 1px;
@@ -124,12 +162,18 @@ body {
   clip-path: inset(50%); overflow: hidden; white-space: nowrap;
 }
 
+/* ---- the admin register: case and tracking, since weight is fixed -- */
+.skip, .rail, label, button, .foot, .posted, .roles b {
+  text-transform: uppercase;
+  letter-spacing: var(--track-admin);
+  word-spacing: normal;
+}
+
 .skip {
   position: absolute; left: 0; top: -4rem; z-index: 100;
   padding: 0.7rem 1.2rem;
   background: var(--heat-deep); color: var(--paper);
-  font-family: var(--sans); font-size: 0.75rem; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: 0.8125rem;
   text-decoration: none;
 }
 .skip:focus { top: 0; }
@@ -155,97 +199,61 @@ body {
 .pad-s { padding: clamp(2rem, 4vw, 3.25rem) var(--gutter); }
 
 /* ================================================================== */
-/* THE RAIL — a colophon, not a control panel                          */
+/* THE RAIL — four zones, divided by space and one solid status block  */
 /* ================================================================== */
-
-/* Archivo for the institutional categories; Newsreader for the one line
-   that describes a lived condition rather than a filed fact. That is
-   the whole system in miniature — category in the sans, condition in
-   the serif. */
 
 .rail {
   position: fixed;
   inset: 0 auto 0 0;
   z-index: 20;
   width: var(--rail-w);
-  padding: var(--gutter) 0.9rem var(--gutter) var(--gutter);
+  padding: var(--gutter) 0 var(--gutter) var(--gutter);
   overflow-y: auto;
   background: var(--shade-700);
   color: var(--shade-400);
-  font-family: var(--sans);
-  font-size: 0.6875rem;
-  font-weight: 400;
+  font-size: 0.75rem;   /* larger than version A's 0.6875: a condensed
+                           face at the same size reads a size smaller */
   line-height: 1.6;
-  letter-spacing: 0.06em;
-
-  /* THE STATUS STRIP. Not a badge. The rail's outer edge is orange for
-     exactly as long as the project is open, and goes to --shade-edge
-     when it closes. A quiet, permanent, honest indicator that costs no
-     space and makes no noise. */
-  border-right: 3px solid var(--heat);
 }
 
 .rail p, .rail ul { margin: 0; }
 .rail ul { padding: 0; list-style: none; }
 
 .rail-name {
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--paper);
-  margin-bottom: 1.5rem !important;
-}
-
-/* Archivo label, set small and tracked. This is the one rule in the
-   rail, and it sits under a metadata header, which is where a rule
-   behaves like document structure. */
-.rail-label {
-  display: block;
-  margin-bottom: 0.45rem;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid var(--shade-edge);
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--shade-400);
-}
-
-.rail-block { margin-bottom: 1.7rem !important; }
-
-/* The lived condition, in the serif. */
-.rail-condition {
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  font-weight: 400;
-  line-height: 1.15;
+  font-size: 1.35rem;
   letter-spacing: 0;
-  color: var(--heat-lit);
+  text-transform: none;
+  word-spacing: normal;
+  line-height: 1;
+  color: var(--paper);
+  margin-bottom: 1.9rem !important;
 }
-.rail-since { margin-top: 0.35rem !important; font-size: 0.6875rem; letter-spacing: 0.07em; }
 
+.rail-block { margin-bottom: 1.9rem !important; }
+
+/* THE STATUS DEVICE. With one weight there is no bold to promote a word
+   with, which makes the filled bar do more work here than in version A —
+   it is the only way the rail can raise its voice at all. Still a
+   one-word edit later: LOOKING becomes MEETING FAMILIES becomes CAST,
+   and when it closes, this goes to --shade-edge and stops shouting. */
+.status-block {
+  margin: 0 0 0.55rem calc(var(--gutter) * -1) !important;
+  padding: 0.5rem 0.9rem 0.45rem var(--gutter);
+  background: var(--heat-deep);
+  color: var(--paper);          /* 4.87:1 */
+}
+.status-since { color: var(--shade-400); }
+
+/* Unnumbered. Four notices do not need identifiers to be found, and the
+   numbers were the first thing the copy reduction made redundant. */
 .rail-nav a {
-  display: grid;
-  grid-template-columns: 1.9em minmax(0, 1fr);
-  padding: 0.32rem 0;
+  display: block;
+  padding: 0.34rem 0;
   color: var(--paper);
   text-decoration: none;
 }
-.rail-num { color: var(--shade-400); font-variant-numeric: tabular-nums; }
 .rail a:hover, .rail a:focus-visible { color: var(--heat-lit); }
-.rail a:hover .rail-num { color: var(--heat-lit); }
-
-.rail-go {
-  display: inline-block;
-  padding: 0.32rem 0;
-  color: var(--heat-lit);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-}
+.rail-go { display: block; padding: 0.34rem 0; color: var(--heat-lit); text-decoration: none; }
 
 .rail a:focus-visible, a:focus-visible { outline: 2px solid var(--heat-lit); outline-offset: 3px; }
 
@@ -284,9 +292,8 @@ figure { margin: 0; }
     background-color: transparent;
     aspect-ratio: auto;
     color: var(--ghost);
-    font-family: var(--serif);
     font-size: clamp(2.5rem, 11vw, 8rem);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
   .wordmark .vh {
     position: static; width: auto; height: auto;
@@ -295,137 +302,122 @@ figure { margin: 0; }
 }
 
 /* ================================================================== */
-/* THE FOLIO — category above, address below                           */
+/* TYPE — the four-step ladder                                         */
 /* ================================================================== */
 
-/* The identifier names the category in the institution's voice; the
-   heading beneath it speaks to the person. That is a real hierarchy,
-   where draft 3's number-plus-heading-plus-rules was one continuous
-   ornament. The bar is the only graphic mark, and it does not stretch:
-   it attaches to where the section starts. */
+/* A block, not a grid: version A's bay held the section numeral, and
+   there is no numeral here. Text begins at the panel's own left edge. */
+.notice { display: block; }
 
-.folio {
-  display: flex;
-  align-items: center;
-  gap: 0 0.65rem;
-  margin: 0 0 0.5rem;
-  font-family: var(--sans);
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.17em;
-  text-transform: uppercase;
-  color: var(--shade-400);
-}
-.ground-day .folio { color: var(--ink-soft); }
-
-.folio::before {
-  content: "";
-  flex: 0 0 var(--marker-w);
-  height: var(--marker-h);
-  background: var(--shade-400);
-}
-.ground-day .folio::before { background: var(--ink-soft); }
-
-/* Orange marker for the sections that invite rather than inform. Colour
-   here is doing the same job it does everywhere else on the page. */
-.folio--invite { color: var(--heat-lit); }
-.folio--invite::before { background: var(--heat-lit); }
-.ground-day .folio--invite { color: var(--heat-deep); }
-.ground-day .folio--invite::before { background: var(--heat); }
-
-h2 {
-  margin: 0 0 var(--sp-m);
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: clamp(1.45rem, 2.3vw, 1.95rem);
-  line-height: 1.12;
-  letter-spacing: -0.012em;
-}
-
-/* ================================================================== */
-/* TYPE                                                                */
-/* ================================================================== */
-
-/* PUBLIC. Not a punchy advertising headline — the opening sentence of a
-   letter, at room scale. Newsreader at large optical size, medium
-   weight, tight leading, short measure. */
+/* STEP 1 — PUBLIC. The page's second graphic event. Sentence case,
+   because the recruitment language addresses a person; the directory
+   system above it is uppercase, and that difference is most of the
+   hierarchy on this page. */
 .lede {
   margin: 0 0 var(--sp-s);
-  max-width: 12ch;
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: clamp(2.7rem, 5.6vw, 5.4rem);
-  line-height: 1.0;
-  letter-spacing: -0.028em;
+  max-width: 13ch;
+  font-size: var(--fs-lede);
+  line-height: 0.94;
+  letter-spacing: -0.005em;   /* François One is already condensed.
+                                 Tracking it either way turns it into
+                                 faux signage. */
+  word-spacing: normal;
+  color: inherit;
   text-wrap: balance;
 }
 
-/* VIOLATION 2, kept. */
+/* VIOLATION, kept: the one notice that will not stay in its column. It
+   runs left to the rail and stops — the rail is opaque and fixed, and
+   the wordmark is already the thing that crosses. */
 .lede--breakout { margin-left: calc(var(--gutter) * -0.88); }
 
 .hook {
   margin: 0 0 var(--sp-l);
-  max-width: 34ch;
-  font-size: 1.1875rem;
-  color: var(--shade-400);
+  max-width: 36ch;
 }
-.ground-day .hook { color: var(--ink-soft); }
 
-p { margin: 0 0 var(--sp-m); max-width: 62ch; }
+/* STEP 2 — HEADING. Sentence case, full-strength ink, and a large
+   interval above it. The interval is the announcement; there is no rule
+   and no numeral to make one. */
+h2 {
+  margin: 0 0 var(--sp-m);
+  font-size: var(--fs-head);
+  line-height: 1.1;
+  letter-spacing: 0;
+  word-spacing: normal;
+  color: inherit;
+}
+
+/* STEP 3 — STATEMENT. One raised line per notice, on the sentence that
+   notice exists to deliver: the reassurance a nervous parent is reading
+   for, and the turn the film actually starts at. Sections that are
+   purely informational do not get one, and should not — a device used
+   everywhere is a texture, not an emphasis. */
+.statement {
+  margin: var(--sp-l) 0;
+  max-width: 26ch;
+  font-size: var(--fs-statement);
+  line-height: 1.25;
+  color: inherit;
+}
+
+/* STEP 4 — READING. Softened ink, so the step down from a heading is a
+   change in voice and not only in size. 44ch of a condensed face is a
+   genuinely short line, which is the point: it is what makes François
+   One survive being read. */
+/* 37ch of François One measures ~47 real characters per line, at the
+   top of the 38–48 target. A condensed face makes the CSS `ch` unit
+   badly misleading — 44ch rendered 58 characters. Counted on the page. */
+p { margin: 0 0 var(--sp-m); max-width: 37ch; }
 p:last-child { margin-bottom: 0; }
 
-.small { font-size: 1.0625rem; line-height: 1.55; }
-.ground-day .soft { color: var(--ink-soft); }
+/* :where() zeroes the specificity of the ground selectors, so the three
+   full-strength classes below win on a plain class alone. Written as
+   ordinary `.ground-shade p` these rules outrank `.lede`, and the
+   headline silently renders in the reading colour — which it did, until
+   this was caught by rendering the page rather than reading the file. */
+:where(.ground-shade, .ground-shade7) p { color: var(--shade-400); }
+:where(.ground-day) p                   { color: var(--ink-soft); }
+.lede, .statement, .crossing p          { color: inherit; }
+
+.small { font-size: 1rem; }
 
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
 .ground-day a:hover { color: var(--heat-deep); }
 .ground-shade a:hover, .ground-shade7 a:hover { color: var(--heat-lit); }
 
 /* ================================================================== */
-/* THE CROSSING — the single italic on the page                        */
+/* DIVISIONS — thick, anchored, and rare                               */
 /* ================================================================== */
 
-/* One italic, used once, where the page stops describing the film and
-   addresses the reader's own life. Used anywhere else it would become
-   an editorial mannerism, which is exactly the failure mode a serif
-   invites. The top rule is asymmetrical by being the full width of a
-   band whose content genuinely crosses every category above it. */
-.crossing { border-top: 2px solid var(--heat); }
+/* THE INVITATION EDGE. The form panel carries a solid 5px heat edge on
+   the side where it meets the film's world. It marks a real boundary
+   between two grounds, and it is orange because what lies on the other
+   side of it is the invitation. The only vertical rule on the page. */
+.p-note { border-left: 5px solid var(--heat); }
+
+/* THE CROSSING. A band whose content cuts across all four notices above
+   it, so it gets a real top edge — full width, because the thing it
+   divides is the full width. */
+.crossing { border-top: 5px solid var(--heat); }
 .crossing p {
-  max-width: 46ch;
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  max-width: 34ch;
+  font-size: var(--fs-statement);
+  line-height: 1.25;
 }
 
 /* ================================================================== */
-/* THE ROLES DIRECTORY — an editorial directory, not a table           */
+/* THE ROLES DIRECTORY                                                 */
 /* ================================================================== */
 
-/* Draft 3 ruled every row, which was database styling. Archivo for the
-   role, Newsreader for what it is, space between entries, no rules at
-   all. The oversized 04 occupies the empty side of the section — the
-   only place on this page where a numeral is allowed to be large, and
-   it earns it by filling a hole rather than labelling a heading. */
+/* Name on one line, description under it, interval between. No per-row
+   hairlines — the entries were already separated by being separate.
+   One column rule survives, because two columns are a real division.
 
-.directory {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0 clamp(2rem, 5vw, 4rem);
-}
-
-.directory-mark {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(6rem, 13vw, 12rem);
-  line-height: 0.8;
-  letter-spacing: -0.04em;
-  color: var(--shade-edge);
-  margin: 0;
-  user-select: none;
-}
+   Role names go uppercase. It is the only lever left: they cannot be
+   bolder than the description, and making them larger would put them
+   level with the section heading. Uppercase files them as labels, which
+   is what they are. */
 
 .roles {
   margin: 0 0 var(--sp-l);
@@ -433,6 +425,7 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16e
   list-style: none;
   columns: 2;
   column-gap: clamp(2rem, 5vw, 4rem);
+  column-rule: 1px solid var(--shade-edge);
   max-width: 64rem;
 }
 
@@ -441,39 +434,36 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16e
 
 .roles b {
   display: block;
-  margin-bottom: 0.25rem;
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: 0.8125rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
   line-height: 1.3;
+  color: var(--paper);
 }
-.roles span { display: block; font-size: 1.0625rem; line-height: 1.5; color: var(--shade-400); }
+.roles span { display: block; font-size: 1rem; line-height: 1.45; color: var(--shade-400); }
 
 /* ================================================================== */
-/* THE FORM — administrative request, human reassurance                */
+/* THE FORM — the most administrative object on the page               */
 /* ================================================================== */
 
-/* The central tension, made literal: an Archivo label asks, and the
-   Newsreader help text underneath reassures. The form gets one
-   containing rule rather than emphasis on each individual box. */
+/* The copy inside it is the warmest on the site. Letting the container
+   be the coldest thing here is what makes that land. So: a heat bar
+   binding the heading to the form's own left edge instead of suspending
+   it between two rules, and a button that is part of the form's
+   structure rather than floating beneath it. */
 
-.intake {
-  padding: clamp(1.4rem, 2.6vw, 2rem);
-  border: 1px solid var(--day-edge);
+.intake-head {
+  margin: 0 0 var(--sp-l);
+  padding-top: var(--sp-s);
+  border-top: 5px solid var(--heat);
 }
+.intake-head h2 { margin: 0; }
 
 .field-set { margin-bottom: var(--sp-m); }
 
 label {
   display: block;
   margin-bottom: var(--sp-s);
-  font-family: var(--sans);
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  font-size: 0.8125rem;
   color: var(--shade-700);
 }
 
@@ -481,13 +471,16 @@ input, textarea {
   display: block;
   width: 100%;
   padding: 0.7rem 0.85rem;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
-  font-size: 1rem;              /* 16px floor — below this iOS zooms on focus */
+  font-size: 1.0625rem;         /* over the 16px floor — below it iOS
+                                   zooms the page on focus */
   line-height: 1.5;
+  letter-spacing: 0.008em;
+  word-spacing: 0.06em;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid var(--ink);
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid var(--ink);
   border-radius: 0;
 }
 
@@ -499,25 +492,28 @@ input:focus-visible, textarea:focus-visible {
   background: #fff;
 }
 
+/* Attached, not floating: full field width, flush against the input
+   above it, sharing its edge. */
+.send-wrap { margin-top: calc((var(--sp-m) + 2px) * -1); margin-bottom: var(--sp-m); }
+
 button {
-  padding: 0.8rem 2.4rem;
-  font-family: var(--sans);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  display: block;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-family: var(--display);
+  font-size: 0.875rem;
   color: var(--paper);
   background: var(--heat-deep);   /* paper on this is 4.87:1 */
-  border: 0;
+  border: 2px solid var(--heat-deep);
   border-radius: 0;
   cursor: pointer;
 }
-button:hover { background: var(--ink); }
+button:hover { background: var(--ink); border-color: var(--ink); }
 button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 
 .help, .privacy {
   margin: var(--sp-s) 0 0;
-  max-width: 46ch;
+  max-width: 34ch;
   font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--ink-soft);
@@ -526,61 +522,35 @@ button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 
 /* The posted state, on the thanks page. */
 .posted {
-  display: flex;
-  align-items: center;
-  gap: 0 0.65rem;
-  font-family: var(--sans);
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.17em;
-  text-transform: uppercase;
-  color: var(--heat-deep);
+  display: inline-block;
+  font-size: 0.8125rem;
+  color: var(--paper);
+  background: var(--heat-deep);
+  padding: 0.5rem 0.8rem;
   margin: 0 0 var(--sp-m);
 }
-.posted::before {
-  content: "";
-  flex: 0 0 var(--marker-w);
-  height: var(--marker-h);
-  background: var(--heat);
-}
 
 /* ================================================================== */
-/* FOOTER — one rule, where a rule belongs                             */
+/* FOOTER                                                              */
 /* ================================================================== */
 
-.foot {
-  font-family: var(--sans);
-  font-size: 0.6875rem;
-  letter-spacing: 0.09em;
-  color: var(--shade-400);
-  border-top: 1px solid var(--shade-edge);
-}
-.foot p { margin: 0 0 0.4em; max-width: none; }
+.foot { font-size: 0.75rem; }
+.foot p { margin: 0 0 0.5em; max-width: none; }
 .foot a { color: var(--paper); }
 
 /* ================================================================== */
-/* REFLOW — identical breakpoints to draft 3                           */
+/* REFLOW — identical breakpoints to draft 3 and to version A          */
 /* ================================================================== */
-
-/* The directory splits its oversized numeral off to one side only when
-   there is a side to put it on. */
-@media (min-width: 62rem) {
-  .directory { grid-template-columns: minmax(0, 1fr) clamp(7rem, 14vw, 14rem); }
-  .directory-body { grid-column: 1; }
-  .directory-mark { grid-column: 2; grid-row: 1; justify-self: end; align-self: end; }
-  .roles { columns: 2; }
-}
 
 @media (max-width: 1100px) {
   .p-parker, .p-note, .p-story, .p-method, .p-hero-photo {
     grid-column: field-start / page-end;
   }
+  .roles { columns: 1; column-rule: none; }
   .lede--breakout { margin-left: 0; }
-}
-
-@media (max-width: 61.999rem) {
-  .roles { columns: 1; }
-  .directory-mark { display: none; }
+  /* The invitation edge turns with the stack: the two grounds now meet
+     horizontally, so the marked boundary does too. */
+  .p-note { border-left: 0; border-top: 5px solid var(--heat); }
 }
 
 @media (max-width: 900px) {
@@ -602,16 +572,13 @@ button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
     align-items: center;
     gap: 0 0.75rem;
     padding: 0.55rem var(--gutter);
-    font-size: 0.625rem;
-    letter-spacing: 0.06em;
-    /* The status strip turns with the rail: still the edge furthest
-       from the page, still orange only while the project is open. */
-    border-right: 0;
-    border-bottom: 3px solid var(--heat);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--shade-edge);
   }
 
   .rail-block, .rail-nav { display: none; }
-  .rail-name { margin-bottom: 0 !important; flex: 0 0 auto; }
+  .rail-name { margin-bottom: 0 !important; font-size: 1.1rem; flex: 0 0 auto; }
   .rail-strip {
     display: flex !important;
     align-items: center;
@@ -621,7 +588,10 @@ button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
     min-width: 0;
   }
   .rail-strip > * { white-space: nowrap; }
-  .rail-strip .rail-condition { font-size: 0.9375rem; }
+  .rail-strip .status-block {
+    margin: 0 !important;
+    padding: 0.25rem 0.5rem;
+  }
   .rail a { padding: 0; }
 
   .hero {
