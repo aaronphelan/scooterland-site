@@ -1,0 +1,1012 @@
+/* Scooterland — outreach site, VERSION D: Covik Sans system
+   ==================================================================
+   Draft 6. One face: Covik Sans, plus the drawn wordmark.
+
+   ------------------------------------------------------------------
+   READ THIS FIRST — TWO FACTS THAT DECIDE WHETHER D CAN SHIP
+   ------------------------------------------------------------------
+
+   1. THE INSTALLED FONT IS A DEMO, AND IT HAS 66 GLYPHS.
+      Read out of the ten .otf files in the user font folder, not
+      assumed: space, comma, full stop, 0-9, A-Z, a-z, NBSP. That is
+      the entire character set.
+
+      It does not contain the apostrophe. It does not contain the
+      question mark, the colon, the hyphen, the em dash, the slash,
+      the at sign, the angle brackets or the square brackets.
+
+      This page's visible copy uses 37 characters Covik cannot draw:
+
+           '   x12      apostrophe   doesn't, we're, Parker's, it's
+           ?   x6       question mark
+           —   x4       em dash
+           -   x4       hyphen       four-year-old, 4:2:0 style rules
+           /   x3       slash        cinematographer / photographer
+           :   x2       colon        STATUS: LOOKING
+           @   x2       at sign      hello@scooterland.ca
+           [ ] x2       brackets     title only, never rendered
+
+      Every one of them is painted by a second face. That is not a
+      choice made here, it is arithmetic. Version C caught exactly this
+      defect on ONE character — B's arrow, silently rendered in a
+      fallback monospace — and treated it as serious enough to change
+      the markup for. D has the same defect thirty-seven times over and
+      it cannot be fixed in CSS.
+
+      So the second face is declared, loaded and named rather than left
+      to the platform: Inter, below. Chosen because its punctuation is
+      as close to neutral as a drawn face gets, and because punctuation
+      is the one class of glyph that can change face inside a word
+      without the reader catching it. It is a mitigation, not a fix.
+
+      IF THE FULL COVIK SANS IS LICENSED, delete the Inter link in
+      d.html, delete the --punct rule below, and D becomes a true
+      one-face page with no other change to markup or stylesheet. That
+      is the whole cost of the upgrade, and it is why the fallback is
+      isolated into one custom property instead of being spread through
+      the file.
+
+   2. COVIK SANS IS NOT MONOSPACED.
+      Aaron's brief describes it as a monospaced font. The installed
+      files are proportional — 49 distinct advance widths across 66
+      glyphs in Regular, 62 in Black Italic. A monospace has one.
+
+      This matters because it is the whole reason D is not just C in a
+      different face. C's arithmetic — 46ch is 46 characters, 12ch
+      breaks the lede after CASTING A — depends on the cell being real.
+      Here `ch` is the advance of zero again and lies about the average
+      character, exactly as it did in B. Every measure in this file is
+      therefore counted on the rendered page, not calculated.
+
+      There IS a Covik Sans Mono, a separate family from the same
+      foundry. It is not what is installed. If that is the font Aaron
+      meant, D should be rebuilt against it and the ladder below is the
+      wrong ladder.
+
+   ------------------------------------------------------------------
+   WHAT THIS VERSION IS
+   ------------------------------------------------------------------
+
+   B's copy, C's structure, and a new answer to the question all four
+   versions are asking: how does this page stop looking like a
+   film-production recruitment site?
+
+     A  said: use one humanist face across a huge weight range.
+     B  said: it is a posted public notice. Signage.
+     C  said: it is typed, not designed. A note put up by a person.
+     D  says: it is a page about a four-year-old, and it is allowed to
+              have a face that knows that.
+
+   Covik Sans is a warm, slightly irregular humanist sans that behaves
+   like two different fonts depending on how hard you push it. At 400
+   and reading size it is quiet and entirely ordinary — you would not
+   pick it out of a paragraph. At 700 and 900, and at scale, the
+   drawing shows: the bowls go soft and lopsided, the terminals cut at
+   angles that do not match each other, the whole thing starts to look
+   hand-cut rather than drafted.
+
+   That is Aaron's observation and it is correct, and it is the single
+   organising idea of this version: WEIGHT IS THE ONLY LEVER. Not case,
+   not colour, not scale on its own. The page is one face travelling
+   from invisible to loud, and every level of the hierarchy is a
+   position on that journey.
+
+   CASE GOES BACK TO SENTENCE, AND THIS IS THE MAIN DEPARTURE FROM C.
+   C put the lede and every heading in caps and it was the best thing
+   in that version, because a monospace is the one classification where
+   caps set themselves. Covik is the opposite case. Everything
+   idiosyncratic about it lives in the lowercase — the descenders, the
+   double-storey a, the way the r and the y are drawn — and setting it
+   in caps throws away the entire reason to have chosen it. Caps here
+   would be a generic bold sans. The rail and the form labels stay
+   uppercase, because those file facts rather than address a person and
+   that boundary is inherited from C intact.
+
+   THE WORDMARK IS THE DRAWN SVG, as in A, B and C. D was first built
+   with the name set in Covik Black — Aaron asked for that, then looked
+   at it and kept the drawing. The reasoning on both sides, and what
+   reinstating it costs the top of the ladder, is under WORDMARK below.
+
+   TWO PHOTOGRAPHS ARE NEW. The story and method notices no longer
+   share a row as two text columns. Each has its own row, half copy and
+   half photograph, alternating sides. Argued under PANEL FIGURES.
+
+   INHERITED UNCHANGED from C, and through C and B from draft 3: the
+   grid, the rail's four zones, the palette, the two grounds, the
+   breakpoints, and the detail law — a structural element divides a
+   real area or locates information, and never extends to fill space.
+   No flanking hairlines. Divisions are ground changes and 5px
+   edge-anchored bars. Orange is state, invitation and focus only.
+   ================================================================== */
+
+/* ================================================================== */
+/* THE FACE — local only, and honest about it                          */
+/* ================================================================== */
+
+/* Covik Sans Demo installs as FOUR separate families, the old
+   four-styles-per-family convention: "Covik Sans Demo" holds Regular /
+   Bold / Italic / Bold Italic, and Medium, Semibold and Black each get
+   a family of their own. Addressing those four names directly through
+   the stylesheet would put family-switching into every rule.
+
+   These @font-face blocks collapse all of it into one family, "Covik
+   Sans", with a real 400-900 weight axis. src is local() only — the
+   files are not copied into the repo and nothing is served. Both the
+   full name and the PostScript name are listed because platforms match
+   on different ones.
+
+   unicode-range is not load-bearing here; it is documentation. It
+   states the 66 glyphs the face actually has, so the fallback to
+   --punct is explicit in the code rather than a surprise at render. */
+
+@font-face {
+  font-family: "Covik Sans";
+  src: local("Covik Sans Demo"), local("CovikSansDemo-Regular");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0020, U+002C, U+002E, U+0030-0039, U+0041-005A, U+0061-007A, U+00A0;
+}
+@font-face {
+  font-family: "Covik Sans";
+  src: local("Covik Sans Demo Italic"), local("CovikSansDemo-Italic");
+  font-weight: 400; font-style: italic; font-display: swap;
+  unicode-range: U+0020, U+002C, U+002E, U+0030-0039, U+0041-005A, U+0061-007A, U+00A0;
+}
+@font-face {
+  font-family: "Covik Sans";
+  src: local("Covik Sans Demo Medium"), local("CovikSansDemo-Medium");
+  font-weight: 500; font-style: normal; font-display: swap;
+  unicode-range: U+0020, U+002C, U+002E, U+0030-0039, U+0041-005A, U+0061-007A, U+00A0;
+}
+@font-face {
+  font-family: "Covik Sans";
+  src: local("Covik Sans Demo Semibold"), local("CovikSansDemo-Semibold");
+  font-weight: 600; font-style: normal; font-display: swap;
+  unicode-range: U+0020, U+002C, U+002E, U+0030-0039, U+0041-005A, U+0061-007A, U+00A0;
+}
+@font-face {
+  font-family: "Covik Sans";
+  src: local("Covik Sans Demo Bold"), local("CovikSansDemo-Bold");
+  font-weight: 700; font-style: normal; font-display: swap;
+  unicode-range: U+0020, U+002C, U+002E, U+0030-0039, U+0041-005A, U+0061-007A, U+00A0;
+}
+@font-face {
+  font-family: "Covik Sans";
+  src: local("Covik Sans Demo Black"), local("CovikSansDemo-Black");
+  font-weight: 900; font-style: normal; font-display: swap;
+  unicode-range: U+0020, U+002C, U+002E, U+0030-0039, U+0041-005A, U+0061-007A, U+00A0;
+}
+
+:root {
+  /* ---- grounds. Unchanged from C, B and A. The palette is settled. - */
+  --shade-900: #14212c;
+  --shade-700: #1e3242;
+  --shade-edge:#2e4a5e;
+  --shade-400: #8fabbe;   /* on shade-900 6.8:1, on shade-700 5.5:1 */
+
+  --day:       #f4e4dd;   /* Parker's hue, drained. Body on it 14.5:1 */
+  --day-edge:  #cfb4a8;
+  --ink:       #12181d;
+  --ink-soft:  #4a545c;   /* on day 6.3:1 */
+
+  --paper:     #f2ede3;
+
+  --ghost:     #f9a887;   /* the wordmark, once */
+  --heat:      #d94f1e;
+  --heat-deep: #b83c14;   /* heat as text or ground on day */
+  --heat-lit:  #ff7a3d;   /* heat on shade */
+
+  /* ---- type -------------------------------------------------------- */
+  /* THE PUNCTUATION FACE. Everything Covik cannot draw lands here, and
+     the whole compromise is isolated in this one property so that
+     licensing the full family is a two-line deletion. Inter is a
+     neutral grotesque with plainly drawn marks and no opinion of its
+     own — a tapered wedge apostrophe, an unremarkable question mark —
+     which is exactly what is wanted from a face that is only ever seen
+     one glyph at a time inside somebody else's word.
+
+     It is also the whole-page fallback if Covik is absent, which it
+     will be on every machine but Aaron's. That is deliberate: a
+     stranger opening d.html gets a competent page in Inter rather than
+     a broken one, and Aaron gets D. */
+  --punct: Inter, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --sans:  "Covik Sans", var(--punct);
+
+  /* THE LADDER. C's four steps and C's sizes, held almost exactly:
+     Covik at 400 sets to a similar colour and a similar width as Plex
+     Mono did once the mono cell is out of the way, and the ladder was
+     already tuned to this page's panels. What changes is not the sizes
+     but what carries the difference between them — see WEIGHT below.
+
+     The lede stays at C's reduced 4.4rem ceiling. That reduction was
+     Aaron's, on its own merits, and nothing about a proportional face
+     argues for putting it back. */
+  --fs-lede:      clamp(2.1rem, 4.6vw, 4.4rem);
+  --fs-head:      clamp(1.4rem, 2.1vw, 1.8rem);
+  --fs-statement: clamp(1.15rem, 1.75vw, 1.45rem);
+  --fs-read:      clamp(1rem, 0.95rem + 0.28vw, 1.125rem);
+
+  /* Uppercase tracking, back up to B's 0.12em from C's 0.07em. C could
+     use a small value because a monospace pre-separates its caps by the
+     cell. Covik does not: its caps have uneven widths and unequal
+     sidebearings, and at 11px they close up into a block without real
+     tracking under them. Counted on the page, not inherited. */
+  --track-admin: 0.12em;
+
+  /* ---- three spatial units, and only three ------------------------- */
+  --sp-s: 0.55rem;                        /* label to its content */
+  --sp-m: 1.5rem;                         /* between C's 1.6 and B's 1.45:
+                                             a proportional face gives the
+                                             eye width variation to steer
+                                             by, so the paragraph gap does
+                                             not have to clear the line box
+                                             as hard as a monospace did */
+  --sp-l: clamp(2.25rem, 4.5vw, 3.5rem);  /* register change in a panel */
+
+  /* ---- floor plan. Identical to C, to B, to A, and to draft 3. ----- */
+  --rail-w: clamp(11rem, 13vw, 13rem);
+  --gutter: clamp(1.25rem, 3.2vw, 2.75rem);
+
+  --cols:
+    [page-start] var(--rail-w)
+    [rail-end field-start] minmax(0, 1fr)
+    [f2] minmax(0, 1fr)
+    [f3] minmax(0, 1fr)
+    [f4] minmax(0, 1fr)
+    [f5] minmax(0, 1fr)
+    [f6] minmax(0, 1fr)
+    [f7] minmax(0, 1fr)
+    [f8] minmax(0, 1fr)
+    [field-end page-end];
+
+  /* The wordmark's geometry, identical to C, B and draft 3. The mark is
+     the one element all four versions genuinely share. */
+  --wm-span:     80%;
+  --wm-breach:   1.8rem;
+  --wm-overhang: 0rem;
+  --wm-rise:     25%;
+  --hero-headroom: max(3rem, 7vw);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;   /* catches the wordmark overhang; hidden would make
+                         the body a scroll container */
+  background: var(--shade-900);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--fs-read);
+
+  /* 1.55. C needed 1.6 because a monospace line has no width variation
+     to guide the return sweep. Covik has plenty. Below about 1.5 the
+     descenders — which are long in this face, and are half of what
+     makes it worth using — start colliding with the ascenders under
+     them, so this is a floor, not a preference. */
+  line-height: 1.55;
+
+  letter-spacing: normal;
+  word-spacing: normal;
+
+  /* Load-bearing again, unlike in C. Only five of Covik's ten installed
+     styles are mapped above, so a synthesised 800 or a slanted-roman
+     italic is a real possibility here and both would be visibly wrong
+     next to the drawn ones. */
+  font-synthesis: none;
+  font-synthesis-weight: none;
+  font-synthesis-style: none;
+}
+
+/* Reset the browser's defaults so weight is only ever set on purpose. */
+h1, h2, h3, b, strong, button, label, th { font-weight: 400; }
+
+.vh {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+}
+
+/* ================================================================== */
+/* WEIGHT — the only lever, and the whole version                      */
+/* ================================================================== */
+
+/*   400  every sentence addressed to a person. Invisible on purpose.
+     500  the rail, form labels, the button. Admin, small, uppercase —
+          needs a half step to hold at 11px without the tracking
+          hollowing it out.
+     600  section headings and role names. The first weight at which
+          the drawing starts to show.
+     700  the lede. Loud, and now the top of the page.
+
+   The rule the ladder encodes: 600 and above is the project speaking
+   about itself; 400 is the project speaking to you. That is the same
+   boundary C drew with case, redrawn with weight, because case is the
+   wrong lever for this face and weight is the right one.
+
+   900 IS CURRENTLY UNUSED, and that is a live decision rather than an
+   oversight. It was the wordmark's weight and the wordmark's alone;
+   with the drawn mark reinstated, nothing on the page is set in Covik
+   Black — which is a real loss, because Black at scale is where this
+   face's character is most visible and it is what Aaron liked about it
+   in the first place.
+
+   The obvious home for it is the lede. The only reason that was
+   rejected in the first build no longer holds: Black at 4.4rem was
+   ruled out because it duplicated the *typeset* wordmark's weight four
+   inches below the wordmark and gave the page two logos. Against a
+   drawn mark there is no duplication left to avoid. It is a one-word
+   change — `font-weight` on `.lede` — deliberately left at 700 because
+   Aaron asked for the wordmark back, not for the lede to get louder.
+   The 900 @font-face is kept declared so the change stays one word.
+
+   STILL REJECTED. 500 for body: it is a genuinely different colour on
+   the page, not a nudge, and it makes ordinary sentences look
+   emphatic. Italic beyond the two .statement lines: Covik's italic is
+   drawn rather than slanted and becomes a texture if it repeats. */
+
+/* ---- the uppercase register ---------------------------------------- */
+/* Inherited from C, minus the lede and the headings. Those went back to
+   sentence case — the argument is in the header block. What is left is
+   only the things that file a fact or name a part. */
+.skip, .rail, label, button, .foot, .posted {
+  text-transform: uppercase;
+  letter-spacing: var(--track-admin);
+  font-weight: 500;
+}
+
+.skip {
+  position: absolute; left: 0; top: -4rem; z-index: 100;
+  padding: 0.7rem 1.2rem;
+  background: var(--heat-deep); color: var(--paper);
+  font-size: 0.75rem;
+}
+.skip:focus { top: 0; }
+a.skip { text-decoration: none; }
+
+/* ================================================================== */
+/* THE GRID — C's grid, plus two figure panels                         */
+/* ================================================================== */
+
+.grid { display: grid; grid-template-columns: var(--cols); column-gap: 0; }
+
+.p-hero-photo { grid-column: f3 / page-end; }
+.p-parker     { grid-column: field-start / f6; }
+.p-note       { grid-column: f6 / page-end; }
+.p-full       { grid-column: field-start / page-end; }
+
+/* THE TWO IMAGE ROWS. C ran story and method as two text columns in one
+   row, 4 fractions and 3. They are now two rows of four and four:
+   copy on one side, photograph on the other, sides alternating.
+
+   Even halves rather than C's uneven split, and that is on purpose. An
+   uneven split says one of the two is the subordinate. Here the
+   photograph is not illustrating the paragraph next to it — the alley
+   IS the geography argument, and the camera IS the production method —
+   so neither half subordinates the other and the grid should not claim
+   otherwise. */
+.p-story      { grid-column: field-start / f5; }
+.p-story-fig  { grid-column: f5 / page-end; }
+.p-method-fig { grid-column: field-start / f5; }
+.p-method     { grid-column: f5 / page-end; }
+
+.ground-shade  { background: var(--shade-900); color: var(--paper); }
+.ground-shade7 { background: var(--shade-700); color: var(--paper); }
+.ground-day    { background: var(--day);       color: var(--ink);   }
+
+.pad   { padding: clamp(2.75rem, 6vw, 5rem) var(--gutter); }
+.pad-s { padding: clamp(2rem, 4vw, 3.25rem) var(--gutter); }
+
+/* ================================================================== */
+/* PANEL FIGURES — the two new photographs                             */
+/* ================================================================== */
+
+/* The photograph fills its grid area exactly: no margin, no frame, no
+   caption, flush to the page edge on the outer side and flush to the
+   copy on the inner. This is the detail law applied to pictures — the
+   image divides a real area rather than floating inside one — and it is
+   also the difference between a page that allocates the viewport and a
+   page that places content on a background, which is the failure the
+   whole redesign started from.
+
+   The consequence is that the photograph's height is set by the
+   paragraph beside it and the crop moves with the viewport. That is
+   acceptable for both of these frames and was checked at render rather
+   than assumed:
+
+     city     4:3, and the subject is a diagonal running corner to
+              corner — alley bottom right, skyline top left. Any centre
+              crop keeps both ends of it. object-position stays centre.
+     novalux  3:2, and the camera sits just left of centre with the
+              face behind it. A centre crop cuts the near hand. Held at
+              42% so the crop takes the blurred street on the right,
+              which is the half with nothing in it.
+
+   min-height stops either from collapsing to a strip when the copy
+   beside it is short, which the method notice is — four sentences. */
+
+.panel-fig {
+  margin: 0;
+  min-height: clamp(18rem, 34vw, 32rem);
+  overflow: hidden;
+  background: var(--shade-900);   /* under the image while it loads, so a
+                                     lazy figure is never a white hole */
+}
+.panel-fig img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+}
+.p-story-fig  img { object-position: 50% 50%; }
+.p-method-fig img { object-position: 42% 50%; }
+
+/* ================================================================== */
+/* THE RAIL — four zones, divided by space and one solid status block  */
+/* ================================================================== */
+
+.rail {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 20;
+  width: var(--rail-w);
+  padding: var(--gutter) 0 var(--gutter) var(--gutter);
+  overflow-y: auto;
+  background: var(--shade-700);
+  color: var(--shade-400);
+  /* 0.6875rem, as C. Covik is narrower than Plex Mono per character but
+     needs 0.12em of tracking rather than 0.07em, and the two roughly
+     cancel: POSTED AUGUST 2026 still just fits one line in 164px of
+     content width. Counted on the page. */
+  font-size: 0.6875rem;
+  line-height: 1.7;
+}
+
+.rail p, .rail ul { margin: 0; }
+.rail ul { padding: 0; list-style: none; }
+
+/* The one thing in the rail that is not uppercase. It is the project's
+   name, not a field label.
+
+   As in A, B and C, this sits under a drawn wordmark, so the two are
+   different objects — one lettered, one typed — and the running head
+   reads as a caption to the masthead rather than a smaller copy of it.
+   The typeset build of D lost that distinction and had to flag it; the
+   drawn mark hands it back for free.
+
+   700 rather than C's 400. C set the rail name in the same weight as
+   the rail's facts and let colour do the separating. Here weight is the
+   lever the whole page runs on, and the project's own name is not a
+   fact in a list. */
+.rail-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-transform: none;
+  line-height: 1;
+  color: var(--paper);
+  margin-bottom: 1.9rem !important;
+}
+
+.rail-block { margin-bottom: 1.9rem !important; }
+
+/* The rail's four zones, separated the way the rest of the page is:
+   500 is what you can act on, 400 is what you are being told. */
+.rail-block p              { font-weight: 400; }
+.rail-block p.status-block { font-weight: 500; }
+
+/* THE STATUS DEVICE. Carried over intact. Still a one-word edit later:
+   LOOKING becomes MEETING FAMILIES becomes CAST, and when it closes,
+   this goes to --shade-edge and stops shouting.
+
+   Note for the record: the colon in STATUS: LOOKING is one of the two
+   colons on the page that Covik cannot draw. It is set in Inter. At
+   11px it is a dot over a dot and nobody will see it, which is the
+   best case for a fallback glyph and not an argument that the fallback
+   is fine. */
+.status-block {
+  margin: 0 0 0.55rem calc(var(--gutter) * -1) !important;
+  padding: 0.5rem 0.9rem 0.45rem var(--gutter);
+  background: var(--heat-deep);
+  color: var(--paper);          /* 4.87:1 */
+}
+.status-since { color: var(--shade-400); }
+
+.rail-nav a {
+  display: block;
+  padding: 0.3rem 0;
+  color: var(--paper);
+  text-decoration: none;
+}
+.rail a:hover, .rail a:focus-visible { color: var(--heat-lit); }
+
+/* THE ARROW IS GONE, and this is D's one deviation from C's markup.
+
+   B set this as `&rarr;`, which Plex Mono did not contain and Chrome
+   silently painted in a fallback — the defect C was built to fix. C
+   replaced it with `->`, two characters that ARE in a monospace and
+   look like an arrow on a typed page.
+
+   Covik contains neither. Not the arrow, not the hyphen, not the angle
+   bracket. `->` here would be two fallback glyphs sitting side by side
+   at the one place on the rail where the eye is meant to go, which is
+   the worst possible location for the defect.
+
+   So the affordance is carried by colour and an underline instead, and
+   the words are Aaron's words untouched. This is the same call C made
+   for the same reason, and like C's it is the only character changed
+   anywhere in D's markup. */
+.rail-go {
+  display: block;
+  padding: 0.3rem 0;
+  color: var(--heat-lit);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.rail a:focus-visible, a:focus-visible { outline: 2px solid var(--heat-lit); outline-offset: 3px; }
+
+/* ================================================================== */
+/* WORDMARK — type, not SVG                                            */
+/* ================================================================== */
+
+/* THE DRAWN MARK STAYS. D was first built with the name set in Covik
+   Sans Black — Aaron asked for it, it was the version's centrepiece, and
+   the argument for it was that five drafts had run a hand-lettered mark
+   over a page set in something else and the seam always showed. Set in
+   the page's own face, identity and page became one object.
+
+   He looked at it and kept the drawing. That answers the question D was
+   really asking, and it answers it the right way round: the trade was
+   never whether Covik is a good face, it was whether the identity
+   survives becoming typography. It does not, quite. A settable wordmark
+   is a wordmark anyone can set, and the drawn one is the only thing on
+   this site no stylesheet can reproduce.
+
+   So this block is C's, unchanged, down to the mask geometry and the
+   rotation. Reinstated rather than rewritten: the mark is the one
+   element the four versions genuinely share, and it should not quietly
+   drift in D.
+
+   WHAT IT COSTS, RECORDED HONESTLY. The seam is back. A hand-lettered
+   mark over Covik is a softer collision than it was over François One's
+   signage or Plex Mono's typewriter — Covik is a warm, slightly
+   irregular face and the wordmark is warm and irregular too, so they
+   are at least arguing in the same direction. Question 1 of the spec
+   still has to be judged on the rendered hero, and it is D's weak point
+   again rather than its strong one.
+
+   IT ALSO TOPS THE LADDER OFF. 900 was the wordmark's weight and the
+   wordmark's alone. With the drawing back, nothing on the page is set
+   in Covik Black, and the ladder runs 400 to 700. See WEIGHT above —
+   the 900 face is still declared, because the lede could take it and
+   that is now a one-word change rather than a redesign. */
+.hero {
+  grid-template-rows: minmax(var(--hero-headroom), 1fr) auto;
+  min-height: clamp(30rem, 88vh, 54rem);
+  background: var(--shade-900);
+}
+
+figure { margin: 0; }
+.hero-photo { grid-row: 2; align-self: end; }
+.hero-photo img { display: block; width: 100%; height: auto; }
+
+.wordmark {
+  grid-row: 2;
+  grid-column: field-start / page-end;
+  align-self: start;
+  z-index: 30;
+  width: calc(var(--wm-span) + var(--wm-breach) + var(--wm-overhang));
+  margin: 0 0 0 calc(var(--wm-breach) * -1);
+  aspect-ratio: 571.01562 / 173.53568;
+  background-color: var(--ghost);
+  -webkit-mask: url(scooterland_wm_white.svg) no-repeat left center / contain;
+          mask: url(scooterland_wm_white.svg) no-repeat left center / contain;
+  transform: translateY(calc(var(--wm-rise) * -1)) rotate(-2deg);
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+/* Text fallback for a browser without mask support. The size is D's own
+   rather than C's: Covik is proportional and much narrower per character
+   than Plex Mono, so C's 7vw ceiling set a wordmark that looked
+   undersized next to the photograph. It is a broken state either way —
+   this only keeps it legible and roughly the right size. */
+@supports not ((-webkit-mask-image: url(a.svg)) or (mask-image: url(a.svg))) {
+  .wordmark {
+    background-color: transparent;
+    aspect-ratio: auto;
+    width: auto;
+    color: var(--ghost);
+    font-weight: 900;
+    font-size: clamp(2.25rem, 9vw, 7rem);
+    letter-spacing: -0.045em;
+    line-height: 0.9;
+  }
+  .wordmark .vh {
+    position: static; width: auto; height: auto;
+    margin: 0; clip-path: none; overflow: visible;
+  }
+}
+
+/* ================================================================== */
+/* TYPE — the four-step ladder                                         */
+/* ================================================================== */
+
+.notice { display: block; }
+
+/* STEP 1 — PUBLIC. Sentence case at 700, where C had caps at 600.
+
+   The measure is the reason this works. `max-width: 12ch` was exact in
+   C and is a guess here — 12 zeroes is not 12 average characters in a
+   proportional face — so it is set in em against the counted line
+   instead: 8.5em holds "Casting a" and drops "young lead." beneath it,
+   which is the two-bar stack the panel wants. Three lines at this size
+   in a proportional face reads as a paragraph rather than a headline,
+   which is the opposite of what happened in C, where three stacked
+   monospaced bars had more presence than two.
+
+   700 AND NOT 900, and this is now an open question rather than a
+   settled one. In the typeset build 900 was ruled out flatly: it was
+   the wordmark's own weight, four inches below the wordmark, and the
+   page grew two logos. With the drawn mark reinstated that objection is
+   gone, 900 is otherwise unused, and Covik Black at 66px is the single
+   best argument for this typeface.
+
+   Left at 700 because the brief was to restore the wordmark, not to
+   make the lede louder. Changing this one value is the whole change.
+   See WEIGHT above. */
+.lede {
+  margin: 0 0 var(--sp-m);
+  max-width: 8.5em;
+  font-weight: 700;
+  font-size: var(--fs-lede);
+  line-height: 1.0;
+  letter-spacing: -0.03em;   /* same problem as the wordmark, smaller
+                                dose: the sidebearings are drawn for
+                                18px and this is 70px */
+  color: inherit;
+  text-wrap: balance;
+}
+
+/* VIOLATION, kept from B and C: the one notice that will not stay in
+   its column. It runs left to the rail and stops — the rail is opaque
+   and fixed, and the wordmark is already the thing that crosses. */
+.lede--breakout { margin-left: calc(var(--gutter) * -0.88); }
+
+.hook {
+  margin: 0 0 var(--sp-l);
+  max-width: 22em;   /* counted: 44 characters at reading size */
+}
+
+/* STEP 2 — HEADING. 600 sentence case, 1.24x the statement below it.
+
+   In C this pair was separated by four things at once — caps against
+   sentence case, 600 against 400, roman against italic, and scale. D
+   gives up the case difference, so the remaining three have to carry
+   it, and 600 against 400-italic at this ratio does carry it. 1.8rem
+   rather than C's 1.7 because a proportional face at the same size
+   occupies visibly less room, and the heading was reading small
+   against the panel once the mono cell was gone.
+
+   600, not 700: 700 is the lede's weight, and a heading that matches
+   the lede flattens the top two steps of the ladder into one. */
+h2 {
+  margin: 0 0 var(--sp-m);
+  font-weight: 600;
+  font-size: var(--fs-head);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: inherit;
+  text-wrap: balance;
+}
+
+/* STEP 3 — STATEMENT. One raised line per notice, on the sentence that
+   notice exists to deliver: the reassurance a nervous parent is reading
+   for, and the turn the film actually starts at.
+
+   Covik's italic is drawn rather than slanted — it is genuinely a
+   different set of letters, narrower and with a different a — so
+   against a page of upright roman it reads as an aside in someone's own
+   voice. Which is what both of these lines are. Two of them, and no
+   more: it is strong enough to become a texture on a third. */
+.statement {
+  margin: var(--sp-l) 0;
+  max-width: 16em;   /* counted: 34 characters */
+  font-size: var(--fs-statement);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.35;
+  color: inherit;
+}
+
+/* STEP 4 — READING. 400, softened ink, so the step down from a heading
+   is a change in voice and not only in size.
+
+   21em, and the route to that number is the point. C could write 46ch
+   and get 46 characters because its cell was real. Here `ch` is the
+   advance of zero, which in Covik is WIDER than the average lowercase
+   letter, and the first build of this file guessed 41.5em from it and
+   rendered 59-64 characters a line — far outside the spec's 38-48 band
+   and the worst defect in the version.
+
+   The real figure, counted on the rendered page: Covik sets about
+   0.46em per character at 18px, so 46 characters is 21em. That is what
+   this is. Renders 46-50 across the panels, and every other measure in
+   this file was re-derived the same way after the same mistake. */
+p { margin: 0 0 var(--sp-m); max-width: 21em; }
+p:last-child { margin-bottom: 0; }
+
+/* :where() zeroes the specificity of the ground selectors, so the three
+   full-strength classes below win on a plain class alone. Written as
+   ordinary `.ground-shade p` these rules outrank `.lede`, and the
+   headline silently renders in the reading colour. */
+:where(.ground-shade, .ground-shade7) p { color: var(--shade-400); }
+:where(.ground-day) p                   { color: var(--ink-soft); }
+.lede, .statement, .crossing p          { color: inherit; }
+
+.small { font-size: 0.9375rem; }
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
+.ground-day a:hover { color: var(--heat-deep); }
+.ground-shade a:hover, .ground-shade7 a:hover { color: var(--heat-lit); }
+
+/* ================================================================== */
+/* DIVISIONS — thick, anchored, and rare                               */
+/* ================================================================== */
+
+/* THE INVITATION EDGE. The form panel carries a solid 5px heat edge on
+   the side where it meets the film's world. It marks a real boundary
+   between two grounds, and it is orange because what lies on the other
+   side of it is the invitation. The only vertical rule on the page. */
+.p-note { border-left: 5px solid var(--heat); }
+
+/* THE CROSSING. A band whose content cuts across all four notices above
+   it, so it gets a real top edge — full width, because the thing it
+   divides is the full width. Roman, not italic: it is an instruction
+   about who should write, not an aside. */
+.crossing { border-top: 5px solid var(--heat); }
+.crossing p {
+  max-width: 24em;   /* counted: 52 characters at 23.2px */
+  font-size: var(--fs-statement);
+  line-height: 1.4;
+}
+
+/* ================================================================== */
+/* THE ROLES DIRECTORY                                                 */
+/* ================================================================== */
+
+/* Name on one line, description under it, interval between. No per-row
+   hairlines — the entries were already separated by being separate.
+   One column rule survives, because two columns are a real division.
+
+   The names go to 600 rather than to uppercase. In B and C they were
+   caps because caps was the lever those versions used for "names a part
+   rather than addresses a person"; here that class is expressed in
+   weight, and these belong to it. Sentence case also keeps the slash in
+   "Cinematographer / photographer" from sitting between two blocks of
+   capitals, where a fallback glyph is at its most visible. */
+
+.roles {
+  margin: 0 0 var(--sp-l);
+  padding: 0;
+  list-style: none;
+  columns: 2;
+  column-gap: clamp(2rem, 5vw, 4rem);
+  column-rule: 1px solid var(--shade-edge);
+  max-width: 64rem;
+}
+
+.roles li { break-inside: avoid; margin-bottom: var(--sp-l); }
+.roles li:last-child { margin-bottom: 0; }
+
+.roles b {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  font-size: 1rem;   /* back up from C's 0.9375: sentence case at a
+                        proportional width fits the longest of the five
+                        on one line with room, where mono caps did not */
+  line-height: 1.3;
+  color: var(--paper);
+}
+.roles span { display: block; font-size: 0.9375rem; line-height: 1.55; color: var(--shade-400); }
+
+/* ================================================================== */
+/* THE FORM — the most administrative object on the page               */
+/* ================================================================== */
+
+/* The copy inside it is the warmest on the site. Letting the container
+   be the coldest thing here is what makes that land.
+
+   Detailing unchanged from B and C: a heat bar binding the heading to
+   the form's own left edge instead of suspending it between two rules,
+   and a button that is part of the form's structure rather than
+   floating beneath it. */
+
+.intake-head {
+  margin: 0 0 var(--sp-l);
+  padding-top: var(--sp-s);
+  border-top: 5px solid var(--heat);
+}
+.intake-head h2 { margin: 0; }
+
+.field-set { margin-bottom: var(--sp-m); }
+
+label {
+  display: block;
+  margin-bottom: var(--sp-s);
+  font-size: 0.75rem;
+  color: var(--shade-700);
+}
+
+input, textarea {
+  display: block;
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 1.0625rem;         /* over the 16px floor — below it iOS
+                                   zooms the page on focus */
+  line-height: 1.55;
+  letter-spacing: normal;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid var(--ink);
+  border-radius: 0;
+}
+
+/* What a visitor types into this box will contain apostrophes and
+   question marks, and those will be Inter against Covik in the one
+   place on the site where somebody is looking closely at their own
+   words. Nothing here can fix that. It is the clearest single argument
+   for licensing the full family before this version ships. */
+textarea { min-height: 10rem; resize: vertical; }
+
+input:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--heat);
+  outline-offset: 2px;
+  background: #fff;
+}
+
+/* Attached, not floating: full field width, flush against the input
+   above it, sharing its edge. */
+.send-wrap { margin-top: calc((var(--sp-m) + 2px) * -1); margin-bottom: var(--sp-m); }
+
+button {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--paper);
+  background: var(--heat-deep);   /* paper on this is 4.87:1 */
+  border: 2px solid var(--heat-deep);
+  border-radius: 0;
+  cursor: pointer;
+}
+button:hover { background: var(--ink); border-color: var(--ink); }
+button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+.help, .privacy {
+  margin: var(--sp-s) 0 0;
+  /* 23em, not the 26 first tried. Covik's average advance is not constant
+     across the ladder — at 14px it renders about 0.44em per character
+     against 0.46em at 18px, so a measure that is correct in the body is
+     too wide here. Counted at both sizes on the page. */
+  max-width: 23em;   /* counted: 52 characters at 14px */
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.privacy { margin-top: var(--sp-m); }
+
+/* The posted state, on the thanks page. */
+.posted {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--paper);
+  background: var(--heat-deep);
+  padding: 0.5rem 0.8rem;
+  margin: 0 0 var(--sp-m);
+}
+
+/* ================================================================== */
+/* FOOTER                                                              */
+/* ================================================================== */
+
+.foot { font-size: 0.6875rem; }
+.foot p { margin: 0 0 0.6em; max-width: none; }
+.foot a { color: var(--paper); }
+
+/* ================================================================== */
+/* REFLOW — identical breakpoints to C, to B, to A, and to draft 3     */
+/* ================================================================== */
+
+@media (max-width: 1100px) {
+  .p-parker, .p-note, .p-story, .p-method, .p-hero-photo,
+  .p-story-fig, .p-method-fig {
+    grid-column: field-start / page-end;
+  }
+  .roles { columns: 1; column-rule: none; }
+  .lede--breakout { margin-left: 0; }
+  /* The invitation edge turns with the stack: the two grounds now meet
+     horizontally, so the marked boundary does too. */
+  .p-note { border-left: 0; border-top: 5px solid var(--heat); }
+
+  /* Stacked, the photographs no longer have a paragraph beside them to
+     set their height, and a full-bleed 4:3 frame at this width eats a
+     whole screen before the copy under it is reached. Fixed ratio
+     instead, wider than either original, which crops both toward their
+     centres — the alley keeps its diagonal, the camera keeps the lens. */
+  .panel-fig { min-height: 0; aspect-ratio: 16 / 9; }
+  .panel-fig img { min-height: 0; }
+
+  /* The figure leads its section on the method row and follows it on
+     the story row. Stacked, both should lead: the photograph is the
+     faster read and it is what carries somebody down the page. */
+  .p-story-fig { order: -1; }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --rail-w: 0px;
+    --wm-span: 82%;
+    --wm-breach: 0rem;
+    --wm-overhang: 0rem;
+  }
+
+  .rail {
+    position: sticky;
+    inset: 0 0 auto 0;
+    z-index: 40;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 0 0.75rem;
+    padding: 0.55rem var(--gutter);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--shade-edge);
+  }
+
+  .rail-block, .rail-nav { display: none; }
+  .rail-name { margin-bottom: 0 !important; font-size: 1rem; flex: 0 0 auto; }
+  .rail-strip {
+    display: flex !important;
+    align-items: center;
+    gap: 0 0.7rem;
+    margin-left: auto;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  .rail-strip > * { white-space: nowrap; }
+  .rail-strip .status-block {
+    margin: 0 !important;
+    padding: 0.25rem 0.5rem;
+  }
+  .rail a { padding: 0; }
+
+  .hero {
+    min-height: 58vh;
+    padding-block-start: clamp(3.5rem, 18vw, 9rem);
+  }
+  .p-full { grid-column: page-start / page-end; }
+
+}
+
+@media (min-width: 901px) {
+  .rail-strip { display: none; }
+}

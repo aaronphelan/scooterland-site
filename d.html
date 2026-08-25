@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scooterland — a film in Toronto's west end [Version D — Covik Sans]</title>
+<meta name="description" content="A feature film shooting in Toronto's west end. Casting a young lead, and looking for a few other people.">
+<meta name="robots" content="noindex">
+
+<!-- Link previews. Absolute URLs required — relative paths don't work here. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Scooterland">
+<meta property="og:description" content="A film in Toronto's west end. We're casting a young lead.">
+<meta property="og:url" content="https://scooterland.ca/">
+<meta property="og:image" content="https://scooterland.ca/streetcar-og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- COVIK SANS IS NOT LOADED FROM A CDN. It is an installed desktop font,
+     picked up by local() in d.css. It renders on Aaron's machine and
+     nowhere else. Inter is loaded for one job only: the ten punctuation
+     marks the Covik demo does not contain. Both facts are argued at the
+     top of d.css, and neither is a detail — see READ THIS FIRST. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="d.css">
+<style id="gl-design-system-variables">
+:root { --shade-900: #14212c; --shade-700: #1e3242; --shade-edge: #2e4a5e; --shade-400: #8fabbe; --day: #f4e4dd; --day-edge: #cfb4a8; --ink: #12181d; --ink-soft: #4a545c; --paper: #f2ede3; --ghost: #f9a887; --heat: #d94f1e; --heat-deep: #b83c14; --heat-lit: #ff7a3d; --punct: Inter, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; --sans: "Covik Sans", var(--punct); --fs-lede: clamp(2.1rem, 4.6vw, 4.4rem); --fs-head: clamp(1.4rem, 2.1vw, 1.8rem); --fs-statement: clamp(1.15rem, 1.75vw, 1.45rem); --fs-read: clamp(1rem, 0.95rem + 0.28vw, 1.125rem); --track-admin: 0.12em; --sp-s: 0.55rem; --sp-m: 1.5rem; --sp-l: clamp(2.25rem, 4.5vw, 3.5rem); --rail-w: clamp(11rem, 13vw, 13rem); --gutter: clamp(1.25rem, 3.2vw, 2.75rem); --cols: [page-start] var(--rail-w)
+    [rail-end field-start] minmax(0, 1fr)
+    [f2] minmax(0, 1fr)
+    [f3] minmax(0, 1fr)
+    [f4] minmax(0, 1fr)
+    [f5] minmax(0, 1fr)
+    [f6] minmax(0, 1fr)
+    [f7] minmax(0, 1fr)
+    [f8] minmax(0, 1fr)
+    [field-end page-end]; --wm-span: 80%; --wm-breach: 1.8rem; --wm-overhang: 0rem; --wm-rise: 25%; --hero-headroom: max(3rem, 7vw); }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the notices</a>
+
+<!-- THE RAIL. Four zones — identity, status, directory, action — as in
+     A, B and C. Unchanged except that the arrow is gone: see .rail-go
+     in d.css. -->
+<aside class="rail">
+  <p class="rail-name">Scooterland</p>
+
+  <div class="rail-block">
+    <p>Feature film</p>
+    <p>Toronto west end</p>
+    <p>Summer 2027</p>
+  </div>
+
+  <div class="rail-block">
+    <p class="status-block">Status: looking</p>
+    <p class="status-since">Posted August 2026</p>
+  </div>
+
+  <nav class="rail-block rail-nav" aria-label="Notices">
+    <ul>
+      <li><a href="#parker">The child</a></li>
+      <li><a href="#film">What happens</a></li>
+      <li><a href="#method">How it's made</a></li>
+      <li><a href="#people">Who else</a></li>
+    </ul>
+  </nav>
+
+  <p class="rail-block"><a class="rail-go" href="#note">Say hi</a></p>
+
+  <!-- Below 900px the rail collapses to this one line. -->
+  <div class="rail-strip">
+    <span class="status-block">Looking</span>
+    <a class="rail-go" href="#note">Say hi</a>
+  </div>
+</aside>
+
+<!-- HERO. The wordmark is the drawn SVG, as it is in A, B and C.
+     D was first built with the name set in Covik Sans Black; Aaron looked
+     at it and chose to keep the hand-lettered mark. See WORDMARK in
+     d.css for what that decides and what it costs the type ladder. -->
+<header class="hero grid">
+  <figure class="p-hero-photo hero-photo">
+    <img src="streetcar-1200.jpg"
+         srcset="streetcar-1200.jpg 1200w, streetcar-2400.jpg 2400w"
+         sizes="(max-width: 1100px) 100vw, 72vw"
+         width="1201" height="800" fetchpriority="high"
+         alt="A small boy stands alone on his scooter at the edge of a Toronto sidewalk as a streetcar pulls in. Every adult nearby is turned away from him.">
+  </figure>
+  <h1 class="wordmark"><span class="vh">Scooterland</span></h1>
+</header>
+
+<div class="notice">
+        
+        <p class="hook">Casting a young lead.</p>
+
+        <h2>The child we're looking for</h2>
+
+        <p>Five or six, playing four. Takes direction. Fine around strangers. Good at pretending.</p>
+        <p>That's the whole list. No acting experience needed.</p>
+        <p>Short days across summer 2027. A crew of two or three. You there the whole time.</p>
+        <p class="statement">Nobody is asking a four-year-old to carry a scene.</p>
+        <p>We shoot 35mm stills with a small handheld camera. No film, no video, no sound.</p>
+        <p>There's an honorarium. The amount rides on funding.</p>
+        <p>Sounds like your family? Say hi.</p>
+      </div><main id="main">
+
+  <!-- Notice one, and the form. The boundary between the two grounds is a
+       5px heat edge on the form panel, because the invitation is what is
+       behind it. -->
+  <section class="grid" id="parker">
+
+    <div class="p-parker ground-shade pad">
+      
+    </div>
+
+    <div class="p-note ground-day pad" id="note">
+      <!-- The form's heading is bound to the form's own left edge by the
+           bar above it. -->
+      <div class="intake-head"><h2>Say hi</h2></div>
+
+      <!-- Netlify Forms. Does nothing when opened as a local file; it only
+           works once deployed. Everything else previews normally.
+           Do not touch the attributes on the form, the hidden form-name
+           or the honeypot — this has never been tested end to end. -->
+      <form name="scooterland" method="POST" action="/thanks.html"
+            data-netlify="true" data-netlify-honeypot="bot-field">
+
+        <input type="hidden" name="form-name" value="scooterland">
+        <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+
+        <div class="field-set">
+          <label for="message">Tell us about yourself</label>
+          <textarea id="message" name="message" required></textarea>
+          <p class="help">Writing about your young one? Their age and what they're like is plenty. No photos yet. Work to show? Drop the links in here.</p>
+        </div>
+
+        <div class="field-set">
+          <label for="email">Your email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+
+        <div class="send-wrap">
+          <button type="submit">Send</button>
+        </div>
+
+        <p class="privacy">This comes straight to us. Not shared, not a mailing list, not used for anything else. Want it deleted? Email <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a>.</p>
+      </form>
+    </div>
+
+  </section>
+
+  <!-- NOTICE TWO — WHAT HAPPENS, and the alley.
+       In A, B and C this notice shared a row with the method notice, two
+       text columns side by side. It now has its own row and the alley
+       photograph takes the other half. The reason is in the picture: this
+       is the paragraph about Parker leaving and the city he crosses, and
+       the photograph is that city — the west end alley network, the
+       skyline behind it, the light going. It is the geography argument the
+       copy makes in one line and cannot show. -->
+  <section class="grid ground-day" id="film">
+
+    <div class="p-story pad">
+      <div class="notice">
+        <h2>What happens</h2>
+        <p>Parker is four. He doesn't do what anyone expects — not at daycare, not at the doctor, not at home.</p>
+        <p>His parents are trying everything. None of it explains their son.</p>
+        <p class="statement">Then one afternoon Parker gets on his scooter and goes.</p>
+        <p>The rest of the film goes with him. Alleys, the pool, the hill at the park, strangers. The further he gets, the more we see it his way.</p>
+      </div>
+    </div>
+
+    <figure class="p-story-fig panel-fig">
+      <img src="city-1200.jpg"
+           srcset="city-1200.jpg 1200w, city-2400.jpg 2400w"
+           sizes="(max-width: 1100px) 100vw, 45vw"
+           width="1200" height="895" loading="lazy" decoding="async"
+           alt="A west end Toronto back alley at dusk. Garages, hydro poles and lit streetlamps run away downhill between fences and overgrown yards, and the downtown skyline with the CN Tower stands above the treeline beyond.">
+    </figure>
+
+  </section>
+
+  <!-- NOTICE THREE — HOW IT GETS MADE, and the camera.
+       Same move, mirrored: the photograph takes the left half so the two
+       image rows alternate rather than stacking down one edge. This notice
+       is the whole production method in four sentences, and every one of
+       them is about the object in the picture. A small handheld 35mm
+       camera held to the eye on a street is not an illustration of the
+       method — it is the method, and it is also what a crew of two or
+       three actually looks like. -->
+  <section class="grid ground-shade7" id="method">
+
+    <figure class="p-method-fig panel-fig">
+      <img src="novalux-1200.jpg"
+           srcset="novalux-1200.jpg 1200w, novalux-1536.jpg 1536w"
+           sizes="(max-width: 1100px) 100vw, 45vw"
+           width="1200" height="800" loading="lazy" decoding="async"
+           alt="Someone on a busy street holds a small 35mm rangefinder camera up to their eye, both hands around the body and its 35mm lens filling the centre of the frame.">
+    </figure>
+
+    <div class="p-method pad">
+      <div class="notice">
+        <h2>How it gets made</h2>
+        <p>Most of Scooterland is built out of 35mm photographs instead of filmed scenes.</p>
+        <p>The moving images get generated from those stills.</p>
+        <p>The photographs are the work too. They'll be shown as photographs.</p>
+        <p>Whether a still can really become a piece of a moving film is what we most want to find out.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Four. Role name on its own line, description under it, interval
+       between. Ground moved from shade-700 to shade-900, because the
+       method row above it now holds shade-700 and two identical grounds
+       touching is not a division. -->
+  <section class="grid ground-shade" id="people">
+    <div class="p-full pad">
+      <div class="notice">
+        <h2>Who else we need</h2>
+        <ul class="roles">
+          <li><b>Cinematographer / photographer</b><span>The film is photographed, not shot.</span></li>
+          <li><b>Composer / sound designer</b><span>Sound carries Parker's experience.</span></li>
+          <li><b>Editor</b><span>The cut and the movement get decided at once.</span></li>
+          <li><b>Producer</b><span>Small production, real stake, ownership open.</span></li>
+          <li><b>Nate and Flora</b><span>Parker's parents. Two adult leads.</span></li>
+        </ul>
+        <p class="small">Not on the list? Write anyway.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The invitation that crosses all four notices above, so it gets a
+       real top edge and its own band. -->
+  <section class="grid ground-day crossing">
+    <div class="p-full pad-s">
+      <p>Lived any of this yourself — as a parent, as a neurodivergent person, through your work? It counts for a lot here, and it's expected to change the script.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="grid ground-shade foot">
+  <div class="p-full pad-s">
+    <p>Aaron Phelan &nbsp;/&nbsp; writer, director</p>
+    <p><a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
