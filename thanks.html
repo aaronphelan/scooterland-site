@@ -5,80 +5,80 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Thanks — Scooterland</title>
 <meta name="robots" content="noindex">
-<link rel="icon" href="favicon.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<a class="skip" href="#main">Skip to the notice</a>
+<!-- Where the form lands. Rebuilt 2026-08-26 when version F became the site:
+     this page had been carrying draft 3's markup against draft 3's stylesheet,
+     and promoting F to style.css would have left it a pile of unstyled text.
 
-<!-- Same rail, same grid, one cell changed. The only difference is the
-     status line: the institution has registered you. -->
-<aside class="rail">
-  <p class="rail-name">Scooterland</p>
+     Same photograph, same wordmark, same rail, one short frame and the
+     sign-off — the reel runs out almost as soon as it starts, which is the
+     right length for a page nobody stays on. The copy is draft 3's, unchanged
+     apart from the section nav, which pointed at anchors (#parker, #film,
+     #method, #people) that no longer exist in F.
 
-  <div class="rail-block">
-    <p>Feature film</p>
-    <p>Toronto west end</p>
-    <p>Summer 2027</p>
-  </div>
+     No arrow on the back link: Nerko One is a handwriting face with a small
+     glyph set, and draft 3's &larr; would have been painted by a fallback. -->
 
-  <div class="rail-block">
-    <p class="rail-status">Status: received</p>
-    <p>Posted August 2026</p>
-  </div>
+<div class="bg" role="img" aria-label="A child on a scooter beside a Toronto streetcar"></div>
+<div class="scrim" aria-hidden="true"></div>
 
-  <nav class="rail-block rail-nav" aria-label="Notices">
-    <ul>
-      <li><a href="/#parker"><span class="rail-num">01</span>The child</a></li>
-      <li><a href="/#film"><span class="rail-num">02</span>What happens</a></li>
-      <li><a href="/#method"><span class="rail-num">03</span>How it's made</a></li>
-      <li><a href="/#people"><span class="rail-num">04</span>Who else</a></li>
-    </ul>
-  </nav>
-
-  <p class="rail-block"><a class="rail-go" href="/">&larr; The project</a></p>
-
-  <div class="rail-strip">
-    <span class="rail-status">Status: received</span>
-    <a class="rail-go" href="/">&larr; The project</a>
-  </div>
-</aside>
-
-<header class="hero hero--flat grid">
-  <h1 class="wordmark"><span class="vh">Scooterland</span></h1>
+<header class="hero">
+  <h1 class="wordmark"><img src="scooterland_wm_film.svg" alt="Scooterland" width="571" height="174"></h1>
 </header>
 
-<main id="main">
-  <section class="grid">
+<div class="reel">
+  <div class="sprockets" aria-hidden="true"></div>
 
-    <div class="p-parker ground-shade pad">
-      <div class="notice">
-        <p class="lede lede--breakout">Got it. Thanks.</p>
+  <section class="band band-film">
+    <div class="inner">
+      <div class="col-text">
+        <h2>Got it. Thanks.</h2>
+        <p>We read everything that comes in and we'll write back. It might take a bit — there's a grant application with an October deadline eating most of our time right now — so silence isn't disinterest.</p>
+        <p class="privacy">Need to add something, or want your note deleted? <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
       </div>
     </div>
-
-    <div class="p-note ground-day pad">
-      <div class="notice">
-        <p class="posted">Posted</p>
-        <p class="hook">We read everything that comes in and we'll write back. It might take a bit — there's a grant application with an October deadline eating most of our time right now — so silence isn't disinterest.</p>
-        <p class="small soft">Need to add something, or want your note deleted? <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
-        <p class="small soft"><a href="/">&larr; Back to the project</a></p>
-      </div>
-    </div>
-
   </section>
-</main>
 
-<footer class="grid ground-shade foot">
-  <div class="p-full pad-s">
-    <p>Aaron Phelan &nbsp;/&nbsp; writer, director</p>
-    <p><a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
-  </div>
-</footer>
+  <section class="band band-navy band-close">
+    <div class="inner inner-narrow centred">
+      <p><a href="/">Back to the project</a></p>
+      <p class="sign">Aaron Phelan / writer, director<br>
+        <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
+    </div>
+  </section>
+
+</div>
+
+<div class="tail" aria-hidden="true"></div>
+
+<script>
+/* Same veil as index.html: thin at rest so the photograph is clean under the
+   wordmark, thickening across the first screen of scroll. This page is short
+   enough that it may never thicken, which is fine — both its panels are
+   opaque. With JS off the CSS default is already the readable value. */
+(function () {
+  var root = document.documentElement;
+  var thin = 0.28, full = 0.72, pending = false;
+  function set() {
+    pending = false;
+    var t = Math.min(1, window.scrollY / Math.max(1, window.innerHeight * 0.8));
+    root.style.setProperty('--scrim', (thin + (full - thin) * t).toFixed(3));
+  }
+  function onScroll() {
+    if (!pending) { pending = true; requestAnimationFrame(set); }
+  }
+  set();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+})();
+</script>
 
 </body>
 </html>

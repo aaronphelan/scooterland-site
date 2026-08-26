@@ -3,107 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scooterland — a film in Toronto's west end</title>
-<meta name="description" content="A feature film shooting in Toronto's west end. Casting a young lead, and looking for a few other people.">
+<title>Scooterland — casting a young lead</title>
+<meta name="description" content="Scooterland is casting a young lead. A Toronto film built out of 35mm photographs.">
 
-<!-- Link previews. Absolute URLs required — relative paths don't work here. -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Scooterland">
-<meta property="og:description" content="A film in Toronto's west end. We're casting a young lead.">
-<meta property="og:url" content="https://scooterland.ca/">
-<meta property="og:image" content="https://scooterland.ca/streetcar-og.jpg">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<a class="skip" href="#main">Skip to the notices</a>
+<!-- The site. Version F of the drafts, promoted to index.html on 2026-08-26
+     when Aaron picked it; A–E and the draft 3 pair are in bu/web_versions/.
 
-<!-- THE RAIL. The institution's spine: it never leaves, and it is what
-     lets the hero field stay empty — what, where, when and how are all
-     answered here, in the same first screen. -->
-<aside class="rail">
-  <p class="rail-name">Scooterland</p>
+     One fixed photograph with a strip of frames running down it:
+     peach panels in navy ink alternating with open panels that are nothing
+     but the picture, in peach ink. The panels stop short of both
+     edges and a sprocket rail runs down the right-hand margin. Below 900px
+     the panels go edge to edge and the rail goes away. Reasoning is in
+     style.css.
 
-  <div class="rail-block">
-    <p>Feature film</p>
-    <p>Toronto west end</p>
-    <p>Summer 2027</p>
-  </div>
+     COPY. Everything below is outreach/site_copy_short.md, swapped in whole on
+     2026-08-26. Aaron edits that file by hand; this page is slots for it. If
+     the words here and there disagree, that file is right and this one is
+     stale. -->
 
-  <div class="rail-block">
-    <p class="rail-status">Status: looking</p>
-    <p>Posted August 2026</p>
-  </div>
+<div class="bg" role="img" aria-label="A child on a scooter beside a Toronto streetcar"></div>
+<div class="scrim" aria-hidden="true"></div>
 
-  <nav class="rail-block rail-nav" aria-label="Notices">
-    <ul>
-      <li><a href="#parker"><span class="rail-num">01</span>The child</a></li>
-      <li><a href="#film"><span class="rail-num">02</span>What happens</a></li>
-      <li><a href="#method"><span class="rail-num">03</span>How it's made</a></li>
-      <li><a href="#people"><span class="rail-num">04</span>Who else</a></li>
-    </ul>
-  </nav>
-
-  <p class="rail-block"><a class="rail-go" href="#note">&rarr; Say hi</a></p>
-
-  <!-- Below 900px the rail collapses to this one line. -->
-  <div class="rail-strip">
-    <span class="rail-status">Status: looking</span>
-    <a class="rail-go" href="#note">&rarr; Say hi</a>
-  </div>
-</aside>
-
-<!-- HERO. Mostly empty on purpose: the space he isn't in. The photo is
-     anchored low and right; the wordmark straddles its top edge, crosses
-     the rail and runs off the right of the viewport. -->
-<header class="hero grid">
-  <figure class="p-hero-photo hero-photo">
-    <img src="streetcar-1200.jpg"
-         srcset="streetcar-1200.jpg 1200w, streetcar-2400.jpg 2400w"
-         sizes="(max-width: 1100px) 100vw, 72vw"
-         width="1201" height="800" fetchpriority="high"
-         alt="A small boy stands alone on his scooter at the edge of a Toronto sidewalk as a streetcar pulls in. Every adult nearby is turned away from him.">
-  </figure>
-  <h1 class="wordmark"><span class="vh">Scooterland</span></h1>
+<header class="hero">
+  <h1 class="wordmark"><img src="scooterland_wm_film.svg" alt="Scooterland" width="571" height="174"></h1>
 </header>
 
-<main id="main">
+<div class="reel">
+  <div class="sprockets" aria-hidden="true"></div>
 
-  <!-- 01 + the form, side by side. The shade panel and the day panel meet
-       on a grid line: the film's world and the institution's response
-       slip, abutting. -->
-  <section class="grid" id="parker">
-
-    <div class="p-parker ground-shade pad">
-      <div class="notice">
-        <p class="lede lede--breakout">Casting a young lead.</p>
-        <p class="hook">Plus a few other people. It's all explained below — but if you already know you're interested, just say hi.</p>
-
-        <div class="rule"><span class="num">01</span><h2>The child we're looking for</h2></div>
-
-        <p>Five or six, playing four. Takes direction. Doesn't mind doing a thing twice. Fine around strangers. Good at pretending.</p>
-        <p>That's the whole list. No acting experience needed. No background of any kind needed.</p>
-        <p>The commitment is real, but it's gentler than a normal shoot — short days spread across summer 2027, a crew of two or three, and you there the entire time. Nobody is asking a four-year-old to carry a scene.</p>
-        <p>We are actually shooting 35mm still photographs with a small handheld camera. No film, no video, no sound.</p>
-        <p>There's an honorarium for your child's time. The amount rides on funding, so we can't put a number on it yet.</p>
-        <p>Sounds like your family? Write to us up top.</p>
+  <!-- 1. Casting. Film panel, copy left. "35mm stills" jumps down to the
+       method panel, which is where that sentence gets answered. -->
+  <section class="band band-film">
+    <div class="inner">
+      <div class="col-text">
+        <h2>CASTING A YOUNG LEAD.</h2>
+        <p>The child we're looking for is five or six, playing four. Takes direction. Fine around new people. Good at pretending. That's the whole list.</p>
+        <p class="shout">NO ACTING EXPERIENCE NEEDED.</p>
+        <p>Short days across Summer 2027. A crew of two or three. You there the whole time.</p>
+        <p class="shout">NOBODY IS ASKING A FOUR-YEAR-OLD TO CARRY A SCENE.</p>
+        <p>We shoot <a href="#method">35mm stills</a> with a small handheld camera. No film, no video, no sound.</p>
+        <p>There's an honorarium. The amount rides on funding.</p>
+        <p>Sounds fun and doable for your family? <a href="#sayhi">Say hi.</a></p>
       </div>
     </div>
+  </section>
 
-    <div class="p-note ground-day pad" id="note">
-      <div class="notice">
-        <div class="rule"><span class="num">&rarr;</span><h2>Say hi</h2></div>
+  <!-- 2. The form. Open panel: no fill, the photograph behind it, form pushed
+       right and the left half left to the picture. -->
+  <section class="band band-open" id="sayhi">
+    <div class="inner inner-split">
+      <div class="col-art" aria-hidden="true"></div>
+      <div class="col-text">
+        <h2>Say hi</h2>
 
-        <!-- Netlify Forms. Does nothing when opened as a local file; it only
-             works once deployed. Everything else previews normally.
-             Do not touch the attributes on the form, the hidden form-name
-             or the honeypot — this has never been tested end to end. -->
+        <!-- Netlify Forms, carried over from version B unchanged. Does nothing
+             when the file is opened locally; it only works once deployed.
+             Leave the attributes, the hidden form-name and the honeypot alone —
+             this has never been tested end to end. -->
         <form name="scooterland" method="POST" action="/thanks.html"
               data-netlify="true" data-netlify-honeypot="bot-field">
 
@@ -112,8 +75,8 @@
 
           <div class="field-set">
             <label for="message">Tell us about yourself</label>
-            <textarea id="message" name="message" required></textarea>
-            <p class="help">Writing about your young one? Their age and what they're like is plenty — no photos or details yet. Got work to show? Drop the links in here.</p>
+            <textarea id="message" name="message" rows="6" required></textarea>
+            <p class="help">Writing about your young one? Their age and what they're like is plenty. No photos yet. Work to show? Drop the links in here.</p>
           </div>
 
           <div class="field-set">
@@ -123,66 +86,112 @@
 
           <button type="submit">Send</button>
 
-          <p class="privacy">This comes straight to us. It isn't shared, it isn't a mailing list, and it isn't used for anything else. Want it deleted? Email <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a>.</p>
+          <p class="privacy">This comes straight to us. Not shared, not a mailing list, not used for anything else.</p>
         </form>
       </div>
     </div>
-
   </section>
 
-  <!-- 02 + 03 share a row, so they occupy one viewport together. The
-       narrative gets a wider, quieter field; the production note is
-       compact and sits in a smaller register. -->
-  <section class="grid ground-day">
-
-    <div class="p-story pad notice" id="film">
-      <div class="rule"><span class="num">02</span><h2>What happens</h2></div>
-      <p>Parker is four. He doesn't do what anyone expects him to do — not at daycare, not at the doctor, not at home.</p>
-      <p>His parents are trying everything. Daycare, doctors, babysitters, a stack of forms. None of it explains their son.</p>
-      <p>Then one afternoon Parker gets on his scooter and goes.</p>
-      <p>The rest of the film goes with him. Alleys, the pool, the hill at the park, strangers, the whole neighbourhood. And the further he gets, the more we see it his way — light, noise, heat, all of it turned up.</p>
-    </div>
-
-    <div class="p-method pad notice" id="method">
-      <div class="rule"><span class="num">03</span><h2>How it gets made</h2></div>
-      <p class="small soft">Most of Scooterland is built out of 35mm photographs instead of filmed scenes. We shoot stills around the neighbourhood — posed frames with actors — and the moving images get generated from those.</p>
-      <p class="small soft">The photographs aren't only raw material. They're the work too, and they'll be shown as photographs.</p>
-      <p class="small soft">One good still costs a fraction of what a movie shot costs. Whether a still can really become a piece of a moving film is the thing we most want to find out.</p>
-    </div>
-
-  </section>
-
-  <!-- 04. The directory: denser register, ruled rows, two columns. -->
-  <section class="grid ground-shade7" id="people">
-    <div class="p-full pad notice">
-      <div class="rule"><span class="num">04</span><h2>Who else we need</h2></div>
-      <ul class="roles">
-        <li><b>Cinematographer / photographer</b> <span>— the film is photographed, not shot.</span></li>
-        <li><b>Composer / sound designer</b> <span>— sound plays a special role in Parker's experience; it elevates all the other senses.</span></li>
-        <li><b>Editor</b> <span>— a new way of working, where the cut and the movement get decided at the same time.</span></li>
-        <li><b>Producer</b> <span>— small production, real stake, ownership model still open.</span></li>
-        <li><b>Nate and Flora</b> <span>— Parker's parents. Two adult leads.</span></li>
-      </ul>
-      <p class="small">Not on the list? Write anyway.</p>
+  <!-- 3. The story. Peach panel, copy left, scooter centred in the right half. -->
+  <section class="band band-film">
+    <div class="inner inner-split inner-swap">
+      <div class="col-text">
+        <h2>THE STORY</h2>
+        <p>Parker is four. He doesn't do what anyone expects — not at daycare, not at home.</p>
+        <p>His parents are trying everything, assessments, doctors, tests. None of it explains their son.</p>
+        <p>Then one afternoon Parker gets on his scooter and goes.</p>
+        <p>The rest of the film goes with him. Alleys, the pool, skateboarders, strangers. The further he gets, the more we see things his way.</p>
+      </div>
+      <div class="col-art">
+        <img class="art art-scooter" src="scooter_navy.svg" alt="" width="150" height="224">
+      </div>
     </div>
   </section>
 
-  <!-- The invitation that crosses all the categories above, so it gets
-       its own band rather than sitting at the bottom of the directory. -->
-  <section class="grid ground-day crossing">
-    <div class="p-full pad-s notice">
-      <p>Lived any of this yourself, as a parent or as a neurodivergent person or through your work? That counts for a lot here, and it's expected to change the script.</p>
+  <!-- 4. Method. Open panel, camera in peach on the picture. Target of the
+       "35mm stills" link in panel 1. -->
+  <section class="band band-open" id="method">
+    <div class="inner inner-split">
+      <div class="col-art">
+        <img class="art art-camera" src="camera_peach.svg" alt="" width="189" height="138">
+      </div>
+      <div class="col-text">
+        <h2>How it gets made</h2>
+        <p>Most of Scooterland is built out of 35mm photographs instead of filmed scenes.</p>
+        <p>The moving images get generated from those stills.</p>
+        <p>The photographs are the work too, intended for art exhibitions.</p>
+        <p>Whether a still can really become a piece of a moving film is a big question for us.</p>
+      </div>
     </div>
   </section>
 
-</main>
+  <!-- 5. Who else. Film panel; the roles are boxed as end credits. -->
+  <section class="band band-film">
+    <div class="inner inner-narrow">
+      <h2 class="centred">Who else we need</h2>
 
-<footer class="grid ground-shade foot">
-  <div class="p-full pad-s">
-    <p>Aaron Phelan &nbsp;/&nbsp; writer, director</p>
-    <p><a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
-  </div>
-</footer>
+      <ol class="credits">
+        <li>
+          <span class="credit-role">Cinematographer / Photographer</span>
+          <span class="credit-note">The film is photographed, not shot.</span>
+        </li>
+        <li>
+          <span class="credit-role">Composer / Sound Designer</span>
+          <span class="credit-note">Sound carries Parker's experience. Portrays his senses.</span>
+        </li>
+        <li>
+          <span class="credit-role">Editor</span>
+          <span class="credit-note">The cut and footage creation happen in parallel.</span>
+        </li>
+        <li>
+          <span class="credit-role">Producer</span>
+          <span class="credit-note">Small production, real stake, ownership open.</span>
+        </li>
+        <li>
+          <span class="credit-role">Nate and Floria</span>
+          <span class="credit-note">Parker's parents. Two adult leads.</span>
+        </li>
+      </ol>
+
+      <p class="shout centred"><a href="#sayhi">NOT ON THE LIST? WRITE ANYWAY.</a></p>
+    </div>
+  </section>
+
+  <!-- 6. Closing. Solid navy, centred: the reel ends on a black frame. -->
+  <section class="band band-navy band-close">
+    <div class="inner inner-narrow centred">
+      <p>Lived any of this yourself — as a parent, as a neurodivergent person, through your work? It counts for a lot here.</p>
+      <p class="sign">Aaron Phelan / writer, director<br>
+        <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
+    </div>
+  </section>
+
+</div>
+
+<div class="tail" aria-hidden="true"></div>
+
+<script>
+/* The only script on the page. The photograph is clearest at rest, so the
+   veil over it starts thin and thickens across the first screen of scroll,
+   reaching the value the peach copy needs to be readable over the picture.
+   The film panels are opaque and unaffected. If this never runs, the CSS
+   default is already that readable value. */
+(function () {
+  var root = document.documentElement;
+  var thin = 0.28, full = 0.72, pending = false;
+  function set() {
+    pending = false;
+    var t = Math.min(1, window.scrollY / Math.max(1, window.innerHeight * 0.8));
+    root.style.setProperty('--scrim', (thin + (full - thin) * t).toFixed(3));
+  }
+  function onScroll() {
+    if (!pending) { pending = true; requestAnimationFrame(set); }
+  }
+  set();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+})();
+</script>
 
 </body>
 </html>
