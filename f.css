@@ -1,0 +1,393 @@
+/* Scooterland — version F
+   ============================================================================
+   Version E banded. E was one column of peach over a fixed photograph; F keeps
+   the fixed photograph and the peach, and cuts the page into full-bleed rows
+   that alternate between two states:
+
+     band-photo   the photograph shows through, ink is peach
+     band-peach   solid peach fills the row, ink is navy
+
+   Because the photograph is fixed and the peach rows are opaque, scrolling
+   reads as peach panels sliding over a still picture rather than as a page
+   moving. That is the whole idea of the version.
+
+   Wide rows split in two, text one side and one of Aaron's drawings the other,
+   sides alternating down the page. Narrow collapses to a single column and the
+   alternation survives as colour alone.
+
+   Type is the Gridlover scale Aaron supplied: 20px root on a 12px baseline,
+   Nerko One, factor 1.5 (1 -> 1.333 -> 2 -> 3 -> 4.5 -> 6.75).
+
+   NOTE ON WEIGHT: Nerko One ships a single weight — there is no bold to give
+   the credits or the headings. Every hierarchy below is made from size, caps,
+   letter-spacing and rules instead. A weighted companion would need a second
+   family, which is Aaron's call.
+   ========================================================================== */
+
+:root {
+  --peach:  #f9a887;   /* the wordmark colour settled in draft 2 (--ghost) */
+  --navy:   #16283c;   /* ink on peach. 7.6:1 against --peach, measured */
+  --dark:   #0b1119;   /* the veil over the photograph */
+
+  /* Scrim strength, for the photograph rows only. The script in f.html rides
+     this from 0.28 at rest to 0.72 once the copy is on screen. This default is
+     the readable end, so the page works with no JS at all. */
+  --scrim: 0.72;
+
+  /* Heading multiplier, applied to h1-h3 only. The 1.333em emphasis steps are
+     left out of it: shrunk on a phone they fall below the body copy. */
+  --hs: 1;
+}
+
+/* ---- the grid ---------------------------------------------------------- */
+
+html, .root {
+  font-size: 20px;
+  line-height: 12px;      /* the baseline unit, per Gridlover */
+}
+
+body, .article {
+  font-family: "Nerko One", "Comic Sans MS", cursive;
+  font-size: 1em;
+  line-height: 1.2em;
+  margin: 0;
+  color: var(--peach);
+  background: var(--dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- the fixed photograph and its veil --------------------------------- */
+
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url("streetcar-2400.jpg");
+  background-position: 62% center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 900px) {
+  .bg { background-image: url("streetcar-1200.jpg"); }
+}
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--dark);
+  opacity: var(--scrim);
+  transition: opacity 120ms linear;
+}
+
+/* ---- hero: wordmark at mid-frame --------------------------------------- */
+
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5vw;
+  box-sizing: border-box;
+}
+
+.wordmark {
+  margin: 0;
+  width: min(78vw, 44rem);
+}
+
+.wordmark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- the bands ---------------------------------------------------------- */
+
+.band {
+  padding: 5.4em 0;          /* 108px, nine baselines */
+}
+
+.band-photo {
+  color: var(--peach);
+}
+
+.band-peach {
+  background: var(--peach);
+  color: var(--navy);
+}
+
+.band-close {
+  padding-bottom: 9em;
+}
+
+.inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 2.4rem;
+  box-sizing: border-box;
+}
+
+.inner-narrow {
+  max-width: 34rem;
+}
+
+/* Split rows. The text side is the wider of the two.
+
+   The drawings sit on the PEACH rows only. Both were tried on a photograph row
+   first, as in Aaron’s sketch, and the peach scooter landed squarely on top of
+   the real child and his real scooter — the two collided, and because the
+   photograph is fixed while the rows scroll, the collision moves with the
+   window width and cannot be dodged by nudging the art. So the photograph rows
+   keep their far half empty, which is where the child stands in the picture,
+   and the drawings take the opaque rows where nothing is behind them. */
+.inner-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 3.6rem;
+  align-items: center;
+}
+
+.inner-split .col-text {
+  max-width: 30rem;          /* measure, independent of how wide the column gets */
+}
+
+/* Flipped rows put the drawing first. Done with grid order rather than
+   direction so the reading order in the markup stays text-then-art. */
+.inner-flip .col-text { grid-column: 2; }
+.inner-flip .col-art  { grid-column: 1; grid-row: 1; }
+
+.col-art {
+  display: flex;
+  justify-content: center;
+}
+
+.art {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+/* The drawings are outlines with open interiors, so on a photograph row the
+   picture shows through the scooter itself. Sized by height, since one is
+   portrait and one landscape. */
+.art-scooter { height: 26rem; }
+.art-camera  { width: min(100%, 26rem); }
+
+/* ---- headings ----------------------------------------------------------
+   Gridlover's steps are h1 6.75em, h2 4.5em, h3 3em, h4 2em, h5 1.333em.
+   Section heads take the 3em step, not 4.5em: at this measure 4.5em put
+   "CASTING A YOUNG LEAD." on three lines and the row read as a poster with
+   copy attached. h1 keeps 6.75em; the only h1 is the wordmark image.
+   ---------------------------------------------------------------------- */
+
+h1, .h1 {
+  font-size: calc(6.75em * var(--hs));
+  line-height: 1.06666667em;
+  margin-top: 0.08888889em;
+  margin-bottom: 0.17777778em;
+}
+
+h2, .h2 {
+  font-size: calc(3em * var(--hs));
+  line-height: 1.2em;            /* 72px, six baselines */
+  margin-top: 0;
+  margin-bottom: 0.4em;
+  font-weight: normal;           /* one weight in the family; fake none */
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.2em;          /* 24px, two baselines */
+}
+
+/* The lines the copy sets in bold. No bold exists, so emphasis is a step up
+   the same scale. */
+.shout {
+  font-size: 1.33333333em;
+  line-height: 1.35em;
+  margin-bottom: 0.9em;
+}
+
+.centred { text-align: center; }
+
+/* ---- the credits --------------------------------------------------------
+   Aaron asked for the roles to read as end credits rather than as a list with
+   arrows. The arrows are gone. The block is boxed in peach — a rule box on the
+   photograph row, so the picture still shows inside it — and every entry is
+   centred: role in letterspaced caps, the line about it beneath in sentence
+   case, hairlines between. Centring and the rules are doing the work a second
+   font weight would normally do.
+   ---------------------------------------------------------------------- */
+
+.credits {
+  list-style: none;
+  margin: 0 0 2.4em;
+  padding: 2.4em 1.6em 1.8em;
+  border: 2px solid var(--peach);
+  text-align: center;
+}
+
+.credits li + li {
+  border-top: 1px solid rgba(249, 168, 135, 0.4);
+  padding-top: 1.2em;
+}
+
+.credits li {
+  margin-bottom: 1.2em;
+}
+
+.credit-role {
+  display: block;
+  font-size: 1.33333333em;
+  line-height: 1.35em;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.credit-note {
+  display: block;
+  font-size: 0.9em;
+  line-height: 1.33333333em;
+  opacity: 0.9;
+}
+
+/* ---- links -------------------------------------------------------------- */
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover { text-decoration-thickness: 2px; }
+
+a:focus-visible,
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--peach);
+  color: var(--navy);
+}
+
+/* ---- the form, on peach ------------------------------------------------- */
+
+form { margin: 0; }
+
+.field-set { margin-bottom: 1.8em; }
+
+label {
+  display: block;
+  font-size: 1.33333333em;
+  line-height: 1.35em;
+  margin-bottom: 0.3em;
+}
+
+/* The fields are the one place Nerko One is dropped. It is a single-weight
+   handwriting face; a paragraph typed into it by someone describing their
+   child is hard to read back. Labels, help and button stay in Nerko One. */
+textarea,
+input[type="email"] {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.42);
+  border: 2px solid var(--navy);
+  border-radius: 0;
+  padding: 0.6em 0.7em;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+textarea { resize: vertical; }
+
+textarea::placeholder,
+input::placeholder { color: rgba(22, 40, 60, 0.55); }
+
+.help {
+  font-size: 0.9em;
+  line-height: 1.33333333em;
+  margin: 0.6em 0 0;
+  opacity: 0.8;
+}
+
+/* The one solid navy mass on the page, inside the one solid peach row. */
+button[type="submit"] {
+  font-family: inherit;
+  font-size: 1.33333333em;
+  line-height: 1.35em;
+  color: var(--peach);
+  background: var(--navy);
+  border: 2px solid var(--navy);
+  border-radius: 0;
+  padding: 0.3em 1.4em;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover { background: #23405f; border-color: #23405f; }
+
+.privacy {
+  font-size: 0.9em;
+  line-height: 1.33333333em;
+  margin: 1.6em 0 0;
+  opacity: 0.8;
+}
+
+/* ---- sign-off ----------------------------------------------------------- */
+
+.sign { margin-top: 2.4em; }
+
+/* ---- narrow ------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  :root { --hs: 0.66; }          /* 3em section heads become 40px, not 60px */
+
+  .band { padding: 3.6em 0; }
+  .band-close { padding-bottom: 6em; }
+
+  .inner { padding: 0 1.2rem; }
+
+  /* One column. The art follows its text, and the flip is neutralised so the
+     order down the page stays text, then drawing. */
+  .inner-split {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+  .inner-split .col-text { max-width: none; }
+  .inner-flip .col-text,
+  .inner-flip .col-art { grid-column: 1; }
+  .inner-flip .col-art { grid-row: auto; }
+
+  .art-scooter { height: 18rem; }
+  .art-camera  { width: min(100%, 18rem); }
+
+  /* An empty art column would otherwise open a 2.4rem gap under the casting
+     copy for no reason. */
+  .col-art:empty { display: none; }
+
+  .wordmark { width: 86vw; }
+
+  /* Cover on a tall narrow window samples a thin vertical slice of the
+     photograph. At 62% the child sits half off the right edge, so the crop
+     moves right to keep him in the frame the wordmark rests on. */
+  .bg { background-position: 74% center; }
+
+  .credits { padding: 1.8em 1.2em 1.2em; }
+  /* Letterspaced caps at 26.7px break a long role across three lines on a
+     phone. One step down, and looser tracking traded for fewer breaks. */
+  .credit-role { font-size: 1.1em; letter-spacing: 0.06em; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
