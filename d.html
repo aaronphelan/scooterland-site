@@ -92,8 +92,22 @@
   <h1 class="wordmark"><span class="vh">Scooterland</span></h1>
 </header>
 
-<div class="notice">
-        
+<main id="main">
+
+  <!-- THE CHILD NOTICE, moved by hand out of the .p-parker cell below so
+       that it sits directly under the hero. Kept there.
+
+       It needed a section around it. A bare <div class="notice"> is not a
+       layout: .notice only sets display:block. Without a .grid parent the
+       div starts at page-start, and page-start is the first grid track —
+       the one the fixed rail occupies — so the whole notice was running
+       underneath the rail. field-start is where content clears it, and
+       only a grid child can be placed there. .pad supplies the gutters,
+       .ground-shade the panel. Same three-part shape as every other
+       notice on the page. -->
+  <section class="grid ground-shade" id="parker">
+    <div class="p-parker pad">
+      <div class="notice">
         <p class="hook">Casting a young lead.</p>
 
         <h2>The child we're looking for</h2>
@@ -105,16 +119,14 @@
         <p>We shoot 35mm stills with a small handheld camera. No film, no video, no sound.</p>
         <p>There's an honorarium. The amount rides on funding.</p>
         <p>Sounds like your family? Say hi.</p>
-      </div><main id="main">
+      </div>
+    </div>
+  </section>
 
   <!-- Notice one, and the form. The boundary between the two grounds is a
        5px heat edge on the form panel, because the invitation is what is
        behind it. -->
-  <section class="grid" id="parker">
-
-    <div class="p-parker ground-shade pad">
-      
-    </div>
+  <section class="grid">
 
     <div class="p-note ground-day pad" id="note">
       <!-- The form's heading is bound to the form's own left edge by the
