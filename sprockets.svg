@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 110" width="110" height="110">
+  <!-- One tile of the sprocket rail: a bar of peach with a rounded
+       perforation punched through it by the even odd fill rule, so whatever
+       is behind the rail shows through the hole. Repeated down the reel by
+       f.css. Hole 84 by 64 on a 110 wide bar, with a 46 gap to the next one.
+       Regenerate if the peach changes. NB: no double hyphens anywhere in
+       this comment; XML forbids them and the whole file silently fails to
+       parse, painting nothing. -->
+  <path fill="#edc0ad" fill-rule="evenodd"
+        d="M0 0 H110 V110 H0 Z
+           M29 23 H81 A16 16 0 0 1 97 39 V71 A16 16 0 0 1 81 87 H29 A16 16 0 0 1 13 71 V39 A16 16 0 0 1 29 23 Z"/>
+</svg>

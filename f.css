@@ -1,40 +1,57 @@
 /* Scooterland — version F
    ============================================================================
-   Version E banded. E was one column of peach over a fixed photograph; F keeps
-   the fixed photograph and the peach, and cuts the page into full-bleed rows
-   that alternate between two states:
+   A strip of film. One photograph, fixed, running the whole height of the
+   page; over it a stack of frames that alternate between two states:
 
-     band-photo   the photograph shows through, ink is peach
-     band-peach   solid peach fills the row, ink is navy
+     band-film    a solid peach panel, ink navy
+     band-open    nothing but the photograph, ink peach
 
-   Because the photograph is fixed and the peach rows are opaque, scrolling
-   reads as peach panels sliding over a still picture rather than as a page
-   moving. That is the whole idea of the version.
+   The panels do not reach the edges of the window. The photograph shows down
+   both sides, and a sprocket rail runs the full length of the right-hand
+   margin, hard against the panel edges — a bar of peach with rounded holes
+   punched through it. The sprockets are evenly spaced down
+   the whole page and deliberately unrelated to where panels begin and end,
+   the way perforations ignore frame lines on real film.
 
-   Wide rows split in two, text one side and one of Aaron's drawings the other,
-   sides alternating down the page. Narrow collapses to a single column and the
-   alternation survives as colour alone.
+   Below 900px all of that collapses: panels go edge to edge, the rail
+   disappears, and the page is a single column again.
 
-   Type is the Gridlover scale Aaron supplied: 20px root on a 12px baseline,
+   COLOUR. One peach, doing every job.
+     --peach  #edc0ad  panels, ink, drawings, sprockets, wordmark. Arrived at
+                       in two moves: the midpoint of the draft 2 wordmark
+                       #f9a887 (too sweet as a large flat field) and the
+                       desaturated #d8b7a8 that briefly replaced it (too dead
+                       as ink), then lifted a fifth of the way to white.
+                       Measured: 9.1:1 under navy as a panel, and 5.3:1 as ink
+                       over the veiled photograph at its brightest hundredth
+                       of a percent, so body copy clears AA anywhere.
+     --navy   #16283c  ink on the panels.
+
+   TYPE is the Gridlover scale Aaron supplied: 20px root on a 12px baseline,
    Nerko One, factor 1.5 (1 -> 1.333 -> 2 -> 3 -> 4.5 -> 6.75).
 
-   NOTE ON WEIGHT: Nerko One ships a single weight — there is no bold to give
-   the credits or the headings. Every hierarchy below is made from size, caps,
-   letter-spacing and rules instead. A weighted companion would need a second
-   family, which is Aaron's call.
+   NOTE ON WEIGHT: Nerko One ships a single weight. There is no bold to give
+   the headings or the credits, so every hierarchy here is size, caps,
+   letter-spacing and rules. A weighted companion means a second family.
    ========================================================================== */
 
 :root {
-  --peach:  #f9a887;   /* the wordmark colour settled in draft 2 (--ghost) */
-  --navy:   #16283c;   /* ink on peach. 7.6:1 against --peach, measured */
+  --peach:  #edc0ad;
+  --navy:   #16283c;
   --dark:   #0b1119;   /* the veil over the photograph */
 
-  /* Scrim strength, for the photograph rows only. The script in f.html rides
-     this from 0.28 at rest to 0.72 once the copy is on screen. This default is
-     the readable end, so the page works with no JS at all. */
+  /* Scrim strength, which matters on the open panels only. The script in
+     f.html rides it from 0.28 at rest to 0.72 once the copy is on screen.
+     This default is the readable end, so the page works with no JS at all. */
   --scrim: 0.72;
 
-  /* Heading multiplier, applied to h1-h3 only. The 1.333em emphasis steps are
+  /* The margin the photograph shows through, and the width of the sprocket
+     rail, which is attached to the right edge of every panel with no gap
+     between them. Perforations belong to the film, not beside it. */
+  --edge: 3vw;
+  --rail-w: 5.5rem;
+
+  /* Heading multiplier, applied to h1-h2 only. The 1.333em emphasis steps are
      left out of it: shrunk on a phone they fall below the body copy. */
   --hs: 1;
 }
@@ -81,11 +98,15 @@ body, .article {
   transition: opacity 120ms linear;
 }
 
-/* ---- hero: wordmark at mid-frame --------------------------------------- */
+/* ---- hero --------------------------------------------------------------
+   Shorter than a full screen on purpose: the first panel breaks the bottom
+   edge, so the page reads as a strip of frames before anyone scrolls, and
+   less empty picture elapses before the copy starts.
+   ---------------------------------------------------------------------- */
 
 .hero {
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: 74vh;
+  min-height: 74svh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,82 +125,131 @@ body, .article {
   height: auto;
 }
 
-/* ---- the bands ---------------------------------------------------------- */
+/* ---- the reel and its sprockets ----------------------------------------
+   The rail is one tile repeated down the whole reel: a bar of peach with a
+   rounded rectangle punched out of it by fill-rule, so what shows through the
+   hole is the photograph. Tile 110 square, perforation 84 by 64. If the
+   peach ever changes, sprockets.svg has to be regenerated to match — the
+   fill is baked into that file.
+   ---------------------------------------------------------------------- */
+
+.reel {
+  position: relative;
+  /* The strip has a maximum width of its own. Past about this, panels stop
+     reading as frames and become slabs: at 2560 the copy sat in a 600px
+     column inside a 2400px field of base. Capped, the photograph simply
+     shows wider down both sides, which is what a strip of film on a light
+     table looks like anyway. */
+  max-width: 84rem;
+  margin: 0 auto;
+}
+
+.sprockets {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: var(--edge);
+  width: var(--rail-w);
+  background: url("sprockets.svg") repeat-y left top;
+  background-size: 100% auto;
+  pointer-events: none;
+}
+
+/* ---- the panels --------------------------------------------------------- */
 
 .band {
-  padding: 5.4em 0;          /* 108px, nine baselines */
+  margin-left: var(--edge);
+  margin-right: calc(var(--edge) + var(--rail-w));
+  padding: 4.8em 0;          /* 96px, eight baselines */
 }
 
-.band-photo {
-  color: var(--peach);
-}
-
-.band-peach {
+.band-film {
   background: var(--peach);
   color: var(--navy);
 }
 
+.band-open {
+  color: var(--peach);
+}
+
+/* The end of the reel: solid navy, peach ink. The photograph stops here
+   rather than running out under the sign-off. */
+.band-navy {
+  background: var(--navy);
+  color: var(--peach);
+}
+
 .band-close {
-  padding-bottom: 9em;
+  padding: 3.6em 0;
+}
+
+/* Below the reel: no panel, no rail, just the photograph. The strip has to
+   end somewhere visible, so it ends here, with more than one sprocket and one
+   gap of clear picture under it. */
+.tail {
+  height: 7rem;
 }
 
 .inner {
-  max-width: 68rem;
+  max-width: 64rem;
   margin: 0 auto;
-  padding: 0 2.4rem;
+  padding: 0 2.8rem;
   box-sizing: border-box;
 }
 
-.inner-narrow {
-  max-width: 34rem;
-}
+.inner-narrow { max-width: 34rem; }
 
-/* Split rows. The text side is the wider of the two.
+.col-text { max-width: 30rem; }
 
-   The drawings sit on the PEACH rows only. Both were tried on a photograph row
-   first, as in Aaron’s sketch, and the peach scooter landed squarely on top of
-   the real child and his real scooter — the two collided, and because the
-   photograph is fixed while the rows scroll, the collision moves with the
-   window width and cannot be dodged by nudging the art. So the photograph rows
-   keep their far half empty, which is where the child stands in the picture,
-   and the drawings take the opaque rows where nothing is behind them. */
+/* Split panels: drawing one side, copy the other.
+
+   Both drawings sit on the LEFT of their panel, over the streetcar, which is
+   the dark half of the photograph. The right half is where the child stands,
+   and a peach line drawing placed there lands on top of him — tried, and the
+   two collided; because the photograph is fixed while the panels scroll, that
+   collision moves with the window width and cannot be nudged out of the way.
+   So the drawings take the dark side and the copy takes the light one. */
 .inner-split {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: 3.6rem;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 3.2rem;
   align-items: center;
 }
 
-.inner-split .col-text {
-  max-width: 30rem;          /* measure, independent of how wide the column gets */
-}
+.inner-split .col-art  { grid-column: 1; grid-row: 1; }
+.inner-split .col-text { grid-column: 2; }
 
-/* Flipped rows put the drawing first. Done with grid order rather than
-   direction so the reading order in the markup stays text-then-art. */
-.inner-flip .col-text { grid-column: 2; }
-.inner-flip .col-art  { grid-column: 1; grid-row: 1; }
+/* The other hand: copy flush left, drawing in the right column but aligned to
+   the start of that column rather than centred in it or pushed to the panel
+   edge, so it hangs off the same invisible line the copy hangs off. */
+.inner-swap { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
+.inner-swap .col-text { grid-column: 1; }
+.inner-swap .col-art  { grid-column: 2; grid-row: 1; justify-content: flex-start; }
+
+/* The form panel hangs its drawing from the top rather than centring it, so
+   the scooter stands at the head of the panel. */
+.inner-top { align-items: start; }
 
 .col-art {
   display: flex;
   justify-content: center;
 }
 
-.art {
-  display: block;
-  width: auto;
-  height: auto;
-}
+.art { display: block; }
 
-/* The drawings are outlines with open interiors, so on a photograph row the
-   picture shows through the scooter itself. Sized by height, since one is
-   portrait and one landscape. */
-.art-scooter { height: 26rem; }
-.art-camera  { width: min(100%, 26rem); }
+/* The drawings are outlines with open interiors, so the photograph shows
+   through the camera itself. Sized on one axis, with the other explicitly
+   auto: the img elements carry width and height attributes, and setting only
+   one side in CSS leaves the other at the attribute value, which squashes the
+   box. The SVG then letterboxes itself inside it and quietly renders small.
+   Both axes are stated here for that reason. */
+.art-scooter { height: 16.8rem; width: auto; }
+.art-camera  { width: min(100%, 18.2rem); height: auto; }
 
 /* ---- headings ----------------------------------------------------------
    Gridlover's steps are h1 6.75em, h2 4.5em, h3 3em, h4 2em, h5 1.333em.
    Section heads take the 3em step, not 4.5em: at this measure 4.5em put
-   "CASTING A YOUNG LEAD." on three lines and the row read as a poster with
+   "CASTING A YOUNG LEAD." on three lines and the panel read as a poster with
    copy attached. h1 keeps 6.75em; the only h1 is the wordmark image.
    ---------------------------------------------------------------------- */
 
@@ -214,30 +284,21 @@ p {
 .centred { text-align: center; }
 
 /* ---- the credits --------------------------------------------------------
-   Aaron asked for the roles to read as end credits rather than as a list with
-   arrows. The arrows are gone. The block is boxed in peach — a rule box on the
-   photograph row, so the picture still shows inside it — and every entry is
-   centred: role in letterspaced caps, the line about it beneath in sentence
-   case, hairlines between. Centring and the rules are doing the work a second
-   font weight would normally do.
+   The roles read as end credits: boxed, centred, role in letterspaced caps
+   over its line, and no arrows. No rules between entries — the space does
+   that work, and hairlines turned the block back into a table.
    ---------------------------------------------------------------------- */
 
 .credits {
   list-style: none;
   margin: 0 0 2.4em;
-  padding: 2.4em 1.6em 1.8em;
-  border: 2px solid var(--peach);
+  padding: 2.4em 1.6em;
+  border: 2px solid var(--navy);
   text-align: center;
 }
 
-.credits li + li {
-  border-top: 1px solid rgba(249, 168, 135, 0.4);
-  padding-top: 1.2em;
-}
-
-.credits li {
-  margin-bottom: 1.2em;
-}
+.credits li { margin-bottom: 1.8em; }
+.credits li:last-child { margin-bottom: 0; }
 
 .credit-role {
   display: block;
@@ -276,7 +337,12 @@ a:focus-visible,
   color: var(--navy);
 }
 
-/* ---- the form, on peach ------------------------------------------------- */
+/* ---- the form, on the open panel ---------------------------------------
+   Version E’s form, which Aaron picked: the fields are cut out of the
+   photograph rather than laid on top of it. Dark translucent panes with a
+   peach edge, peach ink inside, and a peach button sized to its own words
+   instead of stretched across the column.
+   ---------------------------------------------------------------------- */
 
 form { margin: 0; }
 
@@ -298,82 +364,93 @@ input[type="email"] {
   width: 100%;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-size: 0.9em;
-  line-height: 1.5;
-  color: var(--navy);
-  background: rgba(255, 255, 255, 0.42);
-  border: 2px solid var(--navy);
+  font-size: 0.85em;             /* 17px — over the 16px floor, below which
+                                    iOS zooms the page on focus */
+  line-height: 1.55;
+  color: var(--peach);
+  background: rgba(11, 17, 25, 0.55);
+  border: 2px solid var(--peach);
   border-radius: 0;
   padding: 0.6em 0.7em;
   -webkit-appearance: none;
   appearance: none;
 }
 
-textarea { resize: vertical; }
+textarea { min-height: 9rem; resize: vertical; }
 
 textarea::placeholder,
-input::placeholder { color: rgba(22, 40, 60, 0.55); }
+input::placeholder { color: rgba(233, 176, 152, 0.55); }
 
 .help {
   font-size: 0.9em;
   line-height: 1.33333333em;
   margin: 0.6em 0 0;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* The one solid navy mass on the page, inside the one solid peach row. */
+/* The one solid peach mass on the open panels. */
 button[type="submit"] {
   font-family: inherit;
   font-size: 1.33333333em;
   line-height: 1.35em;
-  color: var(--peach);
-  background: var(--navy);
-  border: 2px solid var(--navy);
+  color: var(--navy);
+  background: var(--peach);
+  border: 2px solid var(--peach);
   border-radius: 0;
   padding: 0.3em 1.4em;
   cursor: pointer;
 }
 
-button[type="submit"]:hover { background: #23405f; border-color: #23405f; }
+button[type="submit"]:hover { background: #f6c3ad; border-color: #f6c3ad; }
 
 .privacy {
   font-size: 0.9em;
   line-height: 1.33333333em;
   margin: 1.6em 0 0;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 /* ---- sign-off ----------------------------------------------------------- */
 
 .sign { margin-top: 2.4em; }
 
-/* ---- narrow ------------------------------------------------------------- */
+/* ---- narrow -------------------------------------------------------------
+   The frames become the whole window: no margins, no rail, one column. A
+   sprocket rail at phone width would eat a tenth of the measure to decorate
+   a page nobody is reading as a filmstrip anyway.
+   ---------------------------------------------------------------------- */
 
 @media (max-width: 900px) {
-  :root { --hs: 0.66; }          /* 3em section heads become 40px, not 60px */
+  :root {
+    --hs: 0.66;                  /* 3em section heads become 40px, not 60px */
+    --edge: 0px;
+    --rail-w: 0px;
+  }
+
+  .sprockets { display: none; }
 
   .band { padding: 3.6em 0; }
-  .band-close { padding-bottom: 6em; }
+  .band-close { padding: 2.8em 0; }
+  .tail { height: 5rem; }
 
-  .inner { padding: 0 1.2rem; }
+  .inner { padding: 0 1.4rem; }
+  .col-text { max-width: none; }
 
-  /* One column. The art follows its text, and the flip is neutralised so the
-     order down the page stays text, then drawing. */
+  /* One column, in DOM order, so each drawing heads its own panel. */
   .inner-split {
     grid-template-columns: 1fr;
     gap: 2.4rem;
   }
-  .inner-split .col-text { max-width: none; }
-  .inner-flip .col-text,
-  .inner-flip .col-art { grid-column: 1; }
-  .inner-flip .col-art { grid-row: auto; }
+  .inner-split .col-art,
+  .inner-split .col-text { grid-column: 1; }
+  .inner-split .col-art { grid-row: auto; }
 
-  .art-scooter { height: 18rem; }
-  .art-camera  { width: min(100%, 18rem); }
+  /* Left, not centred: at phone width the fixed photograph puts the child
+     right of centre, and a centred drawing sits on top of him. */
+  .col-art { justify-content: flex-start; }
 
-  /* An empty art column would otherwise open a 2.4rem gap under the casting
-     copy for no reason. */
-  .col-art:empty { display: none; }
+  .art-scooter { height: 10.5rem; width: auto; }
+  .art-camera  { width: min(100%, 10.5rem); height: auto; }
 
   .wordmark { width: 86vw; }
 
@@ -382,7 +459,7 @@ button[type="submit"]:hover { background: #23405f; border-color: #23405f; }
      moves right to keep him in the frame the wordmark rests on. */
   .bg { background-position: 74% center; }
 
-  .credits { padding: 1.8em 1.2em 1.2em; }
+  .credits { padding: 1.8em 1.2em; }
   /* Letterspaced caps at 26.7px break a long role across three lines on a
      phone. One step down, and looser tracking traded for fewer breaks. */
   .credit-role { font-size: 1.1em; letter-spacing: 0.06em; }
