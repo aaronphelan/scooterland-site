@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scooterland — casting a young lead</title>
+<meta name="description" content="Scooterland is casting a young lead. A Toronto film built out of 35mm photographs.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="e.css">
+</head>
+<body>
+
+<!-- Version E. One fixed photograph, everything else scrolls over it.
+     The image never moves; the wordmark sits mid-frame at rest and then
+     travels up with the copy. Reasoning is in e.css. -->
+
+<div class="bg" role="img" aria-label="A child on a scooter beside a Toronto streetcar"></div>
+<div class="scrim" aria-hidden="true"></div>
+
+<header class="hero">
+  <h1 class="wordmark"><img src="scooterland_wm_peach.svg" alt="Scooterland" width="571" height="174"></h1>
+</header>
+
+<main class="page">
+
+  <section class="block">
+    <h2>CASTING A YOUNG LEAD.</h2>
+    <p>The child we're looking for is five or six, playing four. Takes direction. Fine around new people. Good at pretending. That's the whole list.</p>
+    <p class="shout">NO ACTING EXPERIENCE NEEDED.</p>
+    <p>Short days across Summer 2027. A crew of two or three. You there the whole time.</p>
+    <p>Nobody is asking a four-year-old to carry a scene.</p>
+    <p>We shoot 35mm stills with a small handheld camera. No film, no video, no sound.</p>
+    <p>There's an honorarium. The amount rides on funding.</p>
+    <p>Sounds fun and doable for your family? <a href="#sayhi">Say hi.</a></p>
+  </section>
+
+  <section class="block" id="sayhi">
+    <h2>Say hi</h2>
+
+    <!-- Netlify Forms, carried over from version B unchanged. Does nothing
+         when the file is opened locally; it only works once deployed.
+         Leave the attributes, the hidden form-name and the honeypot alone —
+         this has never been tested end to end. -->
+    <form name="scooterland" method="POST" action="/thanks.html"
+          data-netlify="true" data-netlify-honeypot="bot-field">
+
+      <input type="hidden" name="form-name" value="scooterland">
+      <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+
+      <div class="field-set">
+        <label for="message">Tell us about yourself</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+        <p class="help">Writing about your young one? Their age and what they're like is plenty. No photos yet. Work to show? Drop the links in here.</p>
+      </div>
+
+      <div class="field-set">
+        <label for="email">Your email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+      </div>
+
+      <button type="submit">Send</button>
+
+      <p class="privacy">This comes straight to us. Not shared, not a mailing list, not used for anything else. Want it deleted? Email <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a>.</p>
+    </form>
+  </section>
+
+  <section class="block">
+    <h2>THE STORY</h2>
+    <p>Parker is four. He doesn't do what anyone expects — not at daycare, not at the doctor, not at home.</p>
+    <p>His parents are trying everything. None of it explains their son.</p>
+    <p>Then one afternoon Parker gets on his scooter and goes.</p>
+    <p>The rest of the film goes with him. Alleys, the pool, the hill at the park, strangers. The further he gets, the more we see it his way.</p>
+  </section>
+
+  <section class="block">
+    <h2>How it gets made</h2>
+    <p>Most of Scooterland is built out of 35mm photographs instead of filmed scenes.</p>
+    <p>The moving images get generated from those stills.</p>
+    <p>The photographs are the work too, intended for gallery exhibitions.</p>
+    <p>Whether a still can really become a piece of a moving film is what we most want to find out.</p>
+  </section>
+
+  <section class="block">
+    <h2>Who else we need</h2>
+
+    <ul class="roles">
+      <li>
+        <h3>CINEMATOGRAPHER / PHOTOGRAPHER</h3>
+        <p class="role-note">The film is photographed, not shot.</p>
+      </li>
+      <li>
+        <h3>COMPOSER / SOUND DESIGNER</h3>
+        <p class="role-note">Sound carries Parker's experience.</p>
+      </li>
+      <li>
+        <h3>EDITOR</h3>
+        <p class="role-note">The cut and the movement get decided at once.</p>
+      </li>
+      <li>
+        <h3>PRODUCER</h3>
+        <p class="role-note">Small production, real stake, ownership open.</p>
+      </li>
+      <li>
+        <h3>NATE AND FLORIA</h3>
+        <p class="role-note">Parker's parents. Two adult leads.</p>
+      </li>
+    </ul>
+
+    <p class="shout"><a href="#sayhi">NOT ON THE LIST? WRITE ANYWAY.</a></p>
+  </section>
+
+  <section class="block">
+    <p>Lived any of this yourself — as a parent, as a neurodivergent person, through your work? It counts for a lot here.</p>
+  </section>
+
+  <footer class="block sign">
+    <p>Aaron Phelan / writer, director</p>
+    <p><a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
+  </footer>
+
+</main>
+
+<script>
+/* The only script on the page. The photograph is clearest at rest, so the
+   veil over it starts thin and thickens across the first screen of scroll,
+   reaching the value the body copy actually needs to be readable. If this
+   never runs, the CSS default is already that readable value. */
+(function () {
+  var root = document.documentElement;
+  var thin = 0.28, full = 0.72, pending = false;
+  function set() {
+    pending = false;
+    var t = Math.min(1, window.scrollY / Math.max(1, window.innerHeight * 0.8));
+    root.style.setProperty('--scrim', (thin + (full - thin) * t).toFixed(3));
+  }
+  function onScroll() {
+    if (!pending) { pending = true; requestAnimationFrame(set); }
+  }
+  set();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+})();
+</script>
+
+</body>
+</html>
