@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="g.css">
 </head>
 <body>
 
@@ -31,12 +31,21 @@
 <div class="bg" role="img" aria-label="A child on a scooter beside a Toronto streetcar"></div>
 <div class="scrim" aria-hidden="true"></div>
 
-<header class="hero">
-  <h1 class="wordmark"><img src="scooterland_wm_film.svg" alt="Scooterland" width="571" height="174"></h1>
-</header>
+<div class="head" aria-hidden="true"></div>
 
 <div class="reel">
   <div class="sprockets" aria-hidden="true"></div>
+
+  <!-- 0. The title. In the live page this is a hero standing above the reel;
+       here it is the reel's first frame, so the sprocket rail runs up beside
+       it like it does beside every other panel. Open frame: the photograph
+       shows through and the wordmark is peach on it, which keeps the strip's
+       open/film alternation intact all the way down. -->
+  <header class="band band-open band-title">
+    <div class="inner">
+      <h1 class="wordmark"><img src="scooterland_wm_film.svg" alt="Scooterland" width="571" height="174"></h1>
+    </div>
+  </header>
 
   <!-- 1. Casting. Film panel, copy left. "35mm stills" jumps down to the
        method panel, which is where that sentence gets answered. -->
@@ -60,21 +69,14 @@
   <section class="band band-open" id="sayhi">
     <div class="inner inner-split">
       <div class="col-art" aria-hidden="true"></div>
-      <div class="col-text" id="sayhi-panel">
-        <h2 id="sayhi-title">Say hi</h2>
+      <div class="col-text">
+        <h2>Say hi</h2>
 
         <!-- Netlify Forms, carried over from version B unchanged. Does nothing
              when the file is opened locally; it only works once deployed.
              Leave the attributes, the hidden form-name and the honeypot alone —
-             this has never been tested end to end.
-
-             2026-08-26: the page now posts this itself and swaps the thank-you
-             into this panel, so nobody leaves the site to be thanked. The
-             markup is untouched, because Netlify reads it at deploy time and
-             does not care how the browser sends the data. action="/thanks.html"
-             stays for the case where the script never runs. Script at the foot
-             of the file. -->
-        <form id="sayhi-form" name="scooterland" method="POST" action="/thanks.html"
+             this has never been tested end to end. -->
+        <form name="scooterland" method="POST" action="/thanks.html"
               data-netlify="true" data-netlify-honeypot="bot-field">
 
           <input type="hidden" name="form-name" value="scooterland">
@@ -91,22 +93,10 @@
             <input id="email" name="email" type="email" autocomplete="email" required>
           </div>
 
-          <p class="form-error" id="sayhi-error" role="alert" hidden>That didn't send — it may be the connection. Nothing you typed is lost, so try again, or write to <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a>.</p>
-
           <button type="submit">Send</button>
 
           <p class="privacy">This comes straight to us. Not shared, not a mailing list, not used for anything else.</p>
         </form>
-
-        <!-- Where the send lands. The same words as thanks.html, which is now
-             only the fallback for a browser with JS off. Two copies of one
-             message: an edit here wants the same edit there, and this is the
-             one almost everybody reads. -->
-        <div id="sayhi-done" hidden>
-          <h2 tabindex="-1">Got it. Thanks.</h2>
-          <p>We read everything that comes in and we'll write back. It might take a bit — there's a grant application with an October deadline eating most of our time right now — so silence isn't disinterest.</p>
-          <p class="privacy">Need to add something, or want your note deleted? <a href="mailto:hello@scooterland.ca">hello@scooterland.ca</a></p>
-        </div>
       </div>
     </div>
   </section>
@@ -151,10 +141,6 @@
 
       <ol class="credits">
         <li>
-          <span class="credit-role">Nate and Floria</span>
-          <span class="credit-note">Parker's parents. Two adult leads.</span>
-        </li>
-        <li>
           <span class="credit-role">Cinematographer / Photographer</span>
           <span class="credit-note">The film is photographed, not shot.</span>
         </li>
@@ -169,6 +155,10 @@
         <li>
           <span class="credit-role">Producer</span>
           <span class="credit-note">Small production, real stake, ownership open.</span>
+        </li>
+        <li>
+          <span class="credit-role">Nate and Floria</span>
+          <span class="credit-note">Parker's parents. Two adult leads.</span>
         </li>
       </ol>
 
@@ -232,89 +222,6 @@
          moment later by the browser — measured, not guessed. */
       setTimeout(function () { box.focus({ preventScroll: true }); }, 0);
     });
-  }
-})();
-
-/* Sending the form without leaving the page.
-
-   Netlify finds a form by parsing this file when the site deploys — that is
-   the whole of what data-netlify does — and it has no interest in how the
-   browser eventually sends the data. So the markup above is untouched and
-   this posts the same fields itself. Three things in the body are
-   load-bearing: form-name, which is what routes the submission to the right
-   form; the empty bot-field honeypot; and the urlencoded content type. The
-   POST goes to "/" by convention; any path on the site is handled the same.
-
-   With JS off none of this runs, the browser submits the ordinary way, and
-   action="/thanks.html" catches it. That page is the fallback, not the path.
-
-   This cannot be tested from disk. There is no Netlify to POST to when the
-   file is opened locally, so the fetch fails and what you see is the error
-   line. Test it on a deploy preview, then delete the test submissions. */
-(function () {
-  var form  = document.getElementById('sayhi-form');
-  var panel = document.getElementById('sayhi-panel');
-  var title = document.getElementById('sayhi-title');
-  var done  = document.getElementById('sayhi-done');
-  var oops  = document.getElementById('sayhi-error');
-  if (!form || !panel || !done) return;
-
-  var button = form.querySelector('button[type="submit"]');
-  var label  = button ? button.textContent : '';
-  var calm   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fade   = calm ? 0 : 180;
-
-  /* Nothing here fires until the fields are valid: the browser's own
-     validation runs first and blocks the submit event entirely, so required
-     and type="email" still do their own telling off. */
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (oops) oops.hidden = true;
-    if (button) { button.disabled = true; button.textContent = 'Sending…'; }
-
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
-    }).then(function (r) {
-      if (!r.ok) throw new Error(r.status);
-      swap();
-    }).catch(function () {
-      /* Everything typed stays in the boxes. Losing a paragraph somebody
-         wrote about their child to a dropped connection is the one failure
-         this form cannot afford. */
-      if (button) { button.disabled = false; button.textContent = label; }
-      if (oops) oops.hidden = false;
-    });
-  });
-
-  function swap() {
-    /* Freeze the height first. The form stands about 450px taller than three
-       lines of thanks, and letting the panel collapse by that much hauls the
-       whole page up past the message it just printed. */
-    panel.style.minHeight = panel.offsetHeight + 'px';
-    if (title) title.classList.add('is-out');
-    form.classList.add('is-out');
-
-    setTimeout(function () {
-      if (title) title.hidden = true;
-      form.hidden = true;
-      panel.classList.add('is-done');
-
-      done.hidden = false;
-      done.classList.add('is-out');
-      void done.offsetWidth;          /* commit the invisible state, then fade */
-      done.classList.remove('is-out');
-
-      /* Focus, because a screen reader is otherwise told nothing at all, and
-         a scroll, because the form may have been taller than the window and
-         its heading long since above it. */
-      var head = done.querySelector('h2');
-      if (head) {
-        head.focus({ preventScroll: true });
-        head.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'center' });
-      }
-    }, fade);
   }
 })();
 </script>

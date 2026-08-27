@@ -100,25 +100,69 @@ body, .article {
   transition: opacity 120ms linear;
 }
 
-/* ---- hero --------------------------------------------------------------
-   Shorter than a full screen on purpose: the first panel breaks the bottom
-   edge, so the page reads as a strip of frames before anyone scrolls, and
-   less empty picture elapses before the copy starts.
+/* ---- the title frame ----------------------------------------------------
+   G's one difference from the live page. There the title is a hero: a screen
+   of bare photograph standing above the reel, outside it, with no sprockets
+   beside it. Here it is the reel's FIRST FRAME — a band like any other, so
+   the rail runs up its side the way it runs up everything else, and the strip
+   starts at the top of the window instead of a screen down.
+
+   It is an OPEN frame, not a peach one: the photograph shows through and the
+   wordmark stays peach on it. That keeps the open/film alternation unbroken
+   down the whole reel (title open, casting film, form open, story film,
+   method open, credits film, sign-off navy) and needs no second wordmark
+   file. scooterland_wm_black.svg exists but is pure #000000, off this
+   palette, and appears to belong to the print flyer rather than here.
+
+   HEIGHT was matched to the panel below it: the casting panel measures
+   exactly 720px at every width above 900 — measured, not guessed — and the
+   title frame took the same 36rem, which is 720px on this 20px root.
+
+   Aaron asked for it 40% taller on 2026-08-26, then 30% shorter than that an
+   hour later — too tall, and unsure the 40% had been right. The two moves
+   very nearly cancel: 34.8rem of content is 888px with its own padding,
+   against 1272px after the first move and 912px before either, so the frame
+   now sits 2.6% under where it started. Both figures land on the 12px
+   baseline, which is why they read 34.8 and not 34.92. Below 900 the casting
+   panel varies with how the copy wraps (591px at 768, 867px at 390), so the
+   title frame takes a flat 29.4rem there — 732px, the same 30% down from
+   1044px.
    ---------------------------------------------------------------------- */
 
-.hero {
-  min-height: 74vh;
-  min-height: 74svh;
+.band-title {
+  min-height: 34.8rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0 5vw;
-  box-sizing: border-box;
 }
 
+.band-title .inner { width: 100%; }
+
+/* Centred in the frame, across the panel's own measure rather than the
+   window's — the mark belongs to the frame now, not to the screen.
+
+   THREE CAPS, SMALLEST WINS, and the last two are the collision guard: the
+   mark gives up width rather than reach the sprocket rail, which stands hard
+   against the panel's right edge with nothing between them.
+
+     44rem            the size on a wide window. Unchanged.
+     100% - 5.6rem    100% here is the panel measure, which already excludes
+                      the rail; the 5.6rem is a gutter on top of .inner's own
+                      2.8rem padding. Measured at 1000px wide, the mark ran to
+                      783 and the rail began at 839 — 56px, and the leaning d
+                      of "Scooterland" spends most of it. This makes the clear
+                      space 84px a side and the d visibly free of the holes.
+     the viewport     the same promise stated in window terms: window, less
+                      both edges, less the rail, less those gutters. It works
+                      out identical to the line above at every width where
+                      .inner is not capped, and smaller nowhere — it is here
+                      so the guarantee survives a change to .inner's padding
+                      or to the panel insets, which is how the two got close
+                      in the first place. */
 .wordmark {
-  margin: 0;
-  width: min(89vw, 50.6rem);   /* draft 4: up 15% on Aaron's note */
+  margin: 0 auto;
+  width: min(44rem,
+             100% - 5.6rem,
+             calc(100vw - 2 * var(--edge) - var(--rail-w) - 8.4rem));
 }
 
 .wordmark img {
@@ -185,9 +229,14 @@ body, .article {
   padding: 3.6em 0;
 }
 
-/* Below the reel: no panel, no rail, just the photograph. The strip has to
-   end somewhere visible, so it ends here, with more than one sprocket and one
-   gap of clear picture under it. */
+/* Above and below the reel: no panel, no rail, just the photograph. The strip
+   has to begin and end somewhere visible, so it does it here, with more than
+   one sprocket and one gap of clear picture past each end. The two are the
+   same height on purpose — the strip is laid on the photograph, not hung from
+   the top of the window. The head has to sit outside .reel: the rail is
+   absolutely positioned to that box and top:0 is its padding edge, so padding
+   on the reel would take the sprockets up with it. */
+.head,
 .tail {
   height: 7rem;
 }
@@ -496,65 +545,6 @@ button[type="submit"]:focus-visible {
   opacity: 0.85;
 }
 
-/* ---- the thank-you, in place -------------------------------------------
-   2026-08-26. The form posts over fetch and this panel becomes the thank-you
-   rather than sending anyone to thanks.html. That page still exists and still
-   works; it is now the no-JS fallback.
-
-   The height is frozen in the script at the moment of the swap, not guessed
-   here, because it depends on how the two fields have wrapped. The panel
-   keeps the size it had and centres the message in it — this is the open
-   panel, so the room it keeps on holding is photograph, which is the one
-   place on the page where leftover space costs nothing. Column flex rather
-   than row: a single flex item in a row shrinks to its own text and the
-   measure would jump narrower than the form's. */
-#sayhi-panel.is-done {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#sayhi-done h2:focus { outline: none; }
-
-#sayhi-title,
-#sayhi-form,
-#sayhi-done { transition: opacity 180ms linear; }
-
-#sayhi-title.is-out,
-#sayhi-form.is-out,
-#sayhi-done.is-out { opacity: 0; }
-
-@media (prefers-reduced-motion: reduce) {
-  #sayhi-title,
-  #sayhi-form,
-  #sayhi-done { transition: none; }
-}
-
-/* Sending. The button is the only thing on the page that can report a request
-   in flight, so it says so and stops taking clicks. The hover is held down
-   too, or a disabled button still lights up under the cursor. */
-button[type="submit"][disabled] {
-  opacity: 0.6;
-  cursor: default;
-}
-
-button[type="submit"][disabled]:hover {
-  background: rgba(237, 192, 173, 0.35);
-  color: var(--peach);
-}
-
-/* The failure. Cut out of the photograph like the fields are, so it reads as
-   part of the form rather than as the page coming apart. */
-.form-error {
-  font-size: 0.9em;
-  line-height: 1.33333333em;
-  margin: 0 0 1.2em;
-  padding: 0.6em 0.7em;
-  color: var(--peach);
-  background: rgba(11, 17, 25, 0.55);
-  border: 2px solid var(--peach);
-}
-
 /* ---- sign-off ----------------------------------------------------------- */
 
 .sign { margin-top: 2.4em; }
@@ -576,6 +566,7 @@ button[type="submit"][disabled]:hover {
 
   .band { padding: 3.6em 0; }
   .band-close { padding: 2.8em 0; }
+  .head,
   .tail { height: 5rem; }
 
   .inner { padding: 0 1.4rem; }
@@ -597,14 +588,11 @@ button[type="submit"][disabled]:hover {
   .art-scooter { height: 10.5rem; width: auto; }
   .art-camera  { width: min(100%, 10.5rem); height: auto; }
 
-  /* The 15% is honoured here too, which means the hero's side padding has to
-     give: at 86vw the mark already sat inside a 5vw gutter, and 15% more than
-     that does not fit one. The gutter drops to 2vw and the mark takes 92 —
-     96 was tried and the tail of the "d" kissed the right edge, which reads as
-     a clipped image rather than a bleed. So the phone gets about 7%, not 15;
-     there is no more room on a 390px screen. */
-  .hero { padding: 0 2vw; }
-  .wordmark { width: 92vw; }
+  /* No hero here, so no vw sizing and no gutter to fight over: the mark is
+     centred inside the title frame's own measure, which the panels already
+     inset. It fills that measure, and .inner's 1.4rem padding is the air. */
+  .band-title { min-height: 29.4rem; }
+  .wordmark { width: 100%; }
 
   /* Cover on a tall narrow window samples a thin vertical slice of the
      photograph. At 62% the child sits half off the right edge, so the crop
